@@ -1,6 +1,7 @@
 <template>
   <span>
-    {{ char }}
+<!--    {{ char }}-->
+    !
   </span>
 </template>
 
@@ -20,13 +21,13 @@ export default {
     }
   },
   created () {
-    setInterval(() => {
-      this.charIndex++
-      if (this.charIndex > this.chars.length) {
-        this.charIndex = 0
-      }
-      this.char = this.chars[this.charIndex]
-    }, 200)
+    // setInterval(() => {
+    //   this.charIndex++
+    //   if (this.charIndex > this.chars.length) {
+    //     this.charIndex = 0
+    //   }
+    //   this.char = this.chars[this.charIndex]
+    // }, 200)
   }
 }
 </script>
