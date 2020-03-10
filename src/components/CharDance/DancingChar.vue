@@ -26,7 +26,7 @@ export default {
         this.charIndex = 0
       }
       this.char = this.chars[this.charIndex]
-    }, 50)
+    }, 200)
   }
 }
 </script>

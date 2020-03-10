@@ -2,7 +2,8 @@
   <div class="home">
 <!--    <img alt="Vue logo" src="../assets/logo.png">-->
 <!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
-    <char-dance :rect="[[' ', ' ', '3', ' ', ' ', ' ', ' ', ' ', ' '], [' ', '6', '7', '8', 'a', 'b', 'c', 'd', 'e'], [' ', '0', '1', '2', 'a', 'b', 'c', 'd', 'e'], [' ', ' ', '5', ' ', ' ', ' ', ' ', ' ', ' ']]"
+    <char-dance :rect="chars[charsIndex].map(item => item.split(''))"
+                @finish="changeCharsIndex"
                 :trans-char="['!', '@', '#', '$', '%']"
                 animate-on-init></char-dance>
   </div>
@@ -11,9 +12,25 @@
 <script>
 // @ is an alias to /src
 import CharDance from '@/components/CharDance/Index'
+import chars from '@/assets/chars.json'
 
 export default {
   name: 'Home',
+  data () {
+    return {
+      chars,
+      charsIndex: 0
+    }
+  },
+  methods: {
+    changeCharsIndex () {
+      // if (this.charsIndex + 1 >= this.chars.length) {
+      //   this.charsIndex = 0
+      // } else {
+      //   this.charsIndex++
+      // }
+    }
+  },
   components: {
     CharDance
   }

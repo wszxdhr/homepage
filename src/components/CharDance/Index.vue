@@ -76,7 +76,7 @@ export default {
           this.timers.push(setTimeout(() => {
             this.danceList.push(indexArr.join(','))
           }, time))
-          time += this.getRandomInt(10, 50)
+          time += this.getRandomInt(17, 20)
         }
         this.timers.push(setTimeout(() => {
           this.stop()
@@ -94,9 +94,10 @@ export default {
         // console.log(copiedDanceList.length)
         while (this.danceList.length) {
           const deleteItem = copiedDanceList.pop()
-          await this.sleep(this.getRandomInt(10, 50))
+          await this.sleep(this.getRandomInt(17, 20))
           this.danceList.splice(this.danceList.indexOf(deleteItem), 1)
         }
+        this.$emit('finish')
       }
     }
   },
@@ -117,6 +118,7 @@ export default {
   watch: {
     rect (val, oldVal) {
       this.oldChars = oldVal
+      // this.play()
     }
   }
 }
@@ -132,7 +134,7 @@ export default {
     &-item {
       margin: 0;
       white-space: normal;
-      width: 20px;
+      width: 8px;
     }
   }
 </style>
