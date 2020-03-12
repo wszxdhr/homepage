@@ -3,7 +3,8 @@
 </template>
 
 <script>
-// const RENDER_ONCE = 100
+import Char from './char'
+const RENDER_ONCE = 100
 export default {
   name: 'CharDance',
   props: {
@@ -58,28 +59,41 @@ export default {
       this.render()
     },
     initDisplay () {
-      this.display = this.rect.map(row => {
-        return (row instanceof Array) ? row : row.split('')
+      this.display = this.rect.map((rowItem, rowIndex) => {
+        const row = (rowItem instanceof Array) ? rowItem : rowItem.split('')
+        const result = []
+        row.map((char, charIndex) => {
+          result.push(new Char({ x: charIndex * 8, y: rowIndex * 14, w: 8, h: 14, char, ctx: this.ctx }))
+        })
+        return result
       })
+      this.queue.push(...this.display.reduce((result, row, rowIndex) => {
+        row.map((char, charIndex) => {
+          result.push([rowIndex, charIndex])
+        })
+        return result
+      }, []))
+      console.log([...this.queue])
     },
     play () {},
     render () {
-      this.ctx.clearRect(0, 0, this.width, this.height)
+      // this.ctx.clearRect(0, 0, this.width, this.height)
       // this.ctx.fillStyle = '#000'
       this.ctx.save()
-      this.ctx.font = 'bold 10px arial'
-      for (const rowIndex in this.display) {
-        const row = this.display[rowIndex]
-        for (const charIndex in row) {
-          const char = row[charIndex]
-          this.ctx.fillText(char, charIndex * 8, rowIndex * 14)
-        }
+      this.ctx.font = 'bold 8px arial'
+      this.ctx.textAlign = 'center'
+      const renderList = this.queue.splice(0, RENDER_ONCE)
+      if (renderList && renderList.length) {
+        renderList.map(([rowIndex = 0, charIndex = 0]) => {
+          this.display[rowIndex][charIndex].render()
+        })
       }
       this.ctx.restore()
-      // const renderList = this.queue.splice(0, RENDER_ONCE)
-      // if (renderList && renderList.length) {
-      //
-      // }
+    }
+  },
+  watch: {
+    rect () {
+      this.initDisplay()
     }
   }
 }
