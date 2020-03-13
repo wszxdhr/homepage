@@ -24,11 +24,11 @@ export default {
   },
   methods: {
     changeCharsIndex () {
-      // if (this.charsIndex + 1 >= this.chars.length) {
-      //   this.charsIndex = 0
-      // } else {
-      //   this.charsIndex++
-      // }
+      if (this.charsIndex + 1 >= this.chars.length) {
+        this.charsIndex = 0
+      } else {
+        this.charsIndex++
+      }
     }
   },
   components: {
