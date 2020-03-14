@@ -74,10 +74,10 @@ export default {
           const charY = rowIndex * 14
           const charW = 8
           const charH = 14
-          const charText = 14
+          const charText = char
           const isDancing = this.isDancing
-          const charItem = (this.display[rowIndex] || [])[charIndex] ? this.display[rowIndex][charIndex] : new Char({ x: charX, y: charY, w: charW, h: charH, char: charText, ctx: this.ctx, index: [rowIndex, charIndex], isDancing: isDancing })
-          charItem.setRect(charX, charY, charW, charH)
+          const charItem = new Char({ x: charX + charW / 2, y: charY, w: charW, h: charH, char: charText, ctx: this.ctx, index: [rowIndex, charIndex], isDancing: isDancing })
+          charItem.setRect(charX + charW / 2, charY, charW, charH)
           charItem.setChar(charText)
           charItem.isDancing = isDancing
           result.push(charItem)
