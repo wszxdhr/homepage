@@ -4,8 +4,8 @@
 
 <script>
 import Char from './char'
-const RENDER_ONCE = 100
-const DISPLAY_DELAY = 2000
+const RENDER_ONCE = 200
+const DISPLAY_DELAY = 1000
 const HANDLE_ANIMATE_LIST_DELAY = 10
 export default {
   name: 'CharDance',
@@ -65,7 +65,7 @@ export default {
       }
       this.render()
     },
-    initDisplay (rect = []) {
+    resetCharItem (rect = []) {
       this.display = rect.map((rowItem, rowIndex) => {
         const row = (rowItem instanceof Array) ? rowItem : rowItem.split('')
         const result = []
@@ -75,16 +75,17 @@ export default {
           const charW = 8
           const charH = 14
           const charText = char
-          const isDancing = this.isDancing
-          const charItem = new Char({ x: charX + charW / 2, y: charY, w: charW, h: charH, char: charText, ctx: this.ctx, index: [rowIndex, charIndex], isDancing: isDancing })
+          const charItem = new Char({ x: charX + charW / 2, y: charY, w: charW, h: charH, char: charText, ctx: this.ctx, index: [rowIndex, charIndex], isDancing: true })
           charItem.setRect(charX + charW / 2, charY, charW, charH)
           charItem.setChar(charText)
-          charItem.isDancing = isDancing
+          charItem.isDancing = true
           result.push(charItem)
         })
-        console.log(result)
         return result
       })
+    },
+    initDisplay (rect = this.rect) {
+      this.resetCharItem(rect)
       this.queue.push(...this.display.reduce((result, row, rowIndex) => {
         row.map((char, charIndex) => {
           result.push([rowIndex, charIndex])
@@ -110,7 +111,7 @@ export default {
       const timer = setInterval(() => {
         const danceChar = randomDisplayList.splice(0, 20)
         danceChar.map(char => {
-          char.startDance()
+          char.stopDance()
         })
         this.dancingList.push(...danceChar)
         this.queue.push(...danceChar.map(item => item.index))
@@ -127,7 +128,7 @@ export default {
       const timer = setInterval(() => {
         const danceChar = randomDisplayList.splice(0, 20)
         danceChar.map(char => {
-          char.stopDance()
+          char.startDance()
         })
         this.queue.push(...danceChar.map(item => item.index))
         if (!randomDisplayList.length) {
@@ -156,10 +157,9 @@ export default {
     }
   },
   watch: {
-    rect (val, oldVal) {
-      this.oldRect = oldVal || val
-      console.log(oldVal || val)
-      this.initDisplay(this.oldRect)
+    rect (val) {
+      this.resetCharItem(val)
+      this.play()
     },
     dancingList (val) {
       // if (val.length >= ) {
