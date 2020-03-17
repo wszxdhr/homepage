@@ -71,7 +71,7 @@ export default {
         const result = []
         row.map((char, charIndex) => {
           const charX = charIndex * 8
-          const charY = rowIndex * 14
+          const charY = (rowIndex + 1) * 14
           const charW = 8
           const charH = 14
           const charText = char
