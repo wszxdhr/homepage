@@ -6,7 +6,7 @@
                 @finish="changeCharsIndex"
                 :trans-char="['!', '@', '#', '$', '%']"
                 animate-on-init></char-dance>
-    <home-dialog></home-dialog>
+    <hp-dialog></hp-dialog>
   </div>
 </template>
 

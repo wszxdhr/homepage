@@ -1,0 +1,22 @@
+$base-color: rgb(218, 178, 26);
+$base-gray-light: rgb(76, 78, 85);
+$base-gray: rgb(49, 51, 58);
+$base-gray-dark: rgb(34, 37, 39);
+$base-gray-very-dark: rgb(29, 29, 31);
+$base-white: #fff;
+
+// 按钮
+$button-padding-top: 10px;
+$button-padding-bottom: 10px;
+$button-padding-left: 30px;
+$button-padding-right: 30px;
+$button-font-size: 22px;
+$button-line-height: 42px;
+
+$button-color-primary: $base-color;
+$button-font-color-primary: $base-gray-very-dark;
+
+$button-color-default: $base-gray-light;
+$button-font-color-primary: $base-white;
+
+// 模态框

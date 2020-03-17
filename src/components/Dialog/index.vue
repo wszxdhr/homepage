@@ -1,5 +1,5 @@
 <template>
-  <div class="dialog">
+  <div class="hp-dialog">
     dialog
   </div>
 </template>
