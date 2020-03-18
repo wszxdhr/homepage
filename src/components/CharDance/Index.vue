@@ -1,11 +1,12 @@
 <template>
-  <canvas :style="{width: width + 'px', height: height + 'px'}"/>
+  <canvas :style="{width: width + 'px', height: height + 'px'}" @mousemove="focusMove"/>
 </template>
 
 <script>
 import Char from './char'
 const RENDER_ONCE = 200
-const DISPLAY_DELAY = 1000
+const DISPLAY_IMAGE_DELAY = 5000
+const DISPLAY_EMPTY_DELAY = 0
 const HANDLE_ANIMATE_LIST_DELAY = 10
 export default {
   name: 'CharDance',
@@ -35,6 +36,7 @@ export default {
       queue: [],
       oldRect: this.rect,
       dancingList: [],
+      focusList: [],
       isDancing: false,
       ctx: null
     }
@@ -44,7 +46,7 @@ export default {
     if (this.animateOnInit) {
       setTimeout(() => {
         this.play()
-      }, DISPLAY_DELAY)
+      }, DISPLAY_EMPTY_DELAY)
     }
   },
   methods: {
@@ -93,6 +95,9 @@ export default {
         return result
       }, []))
     },
+    focusMove (evt) {
+      // console.log(evt.offsetX, evt.offsetY)
+    },
     getRandomInt (start, end) {
       return Math.round(start + (end - start) * Math.random())
     },
@@ -119,7 +124,7 @@ export default {
           clearInterval(timer)
           setTimeout(() => {
             this.stop()
-          }, DISPLAY_DELAY)
+          }, DISPLAY_IMAGE_DELAY)
         }
       }, HANDLE_ANIMATE_LIST_DELAY)
     },
@@ -137,7 +142,7 @@ export default {
           clearInterval(timer)
           setTimeout(() => {
             this.$emit('finish')
-          }, DISPLAY_DELAY)
+          }, DISPLAY_EMPTY_DELAY)
         }
       }, HANDLE_ANIMATE_LIST_DELAY)
     },

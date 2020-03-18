@@ -1,1 +1,29 @@
 @import './base.scss';
+
+:export {
+  header-background-color: $dialog-header-background-color;
+  header-title-font-color: $dialog-header-title-font-color;
+  content-background-color: $dialog-content-background-color;
+  border-color: $dialog-border-color;
+  border-radius: $dialog-border-radius;
+  header-line-height: $dialog-header-line-height;
+  header-stand-out-height: $dialog-header-stand-out-height;
+  header-stand-out-outer-min-width: $dialog-header-stand-out-outer-min-width;
+  header-stand-out-outer-and-inner-subtract: $dialog-header-stand-out-outer-and-inner-subtract;
+  header-stand-out-padding-left-right: $dialog-header-stand-out-padding-left-right;
+  header-stand-out-offset-x: $dialog-header-stand-out-offset-x;
+  header-stand-out-sub-block-background-color-active: $dialog-header-stand-out-sub-block-background-color-active;
+  header-stand-out-sub-block-background-color-normal: $dialog-header-stand-out-sub-block-background-color-normal;
+  header-stand-out-sub-block-width: $dialog-header-stand-out-sub-block-width;
+  header-stand-out-sub-block-height: $dialog-header-stand-out-sub-block-height;
+}
+
+.hp-dialog {
+  &_background {
+    width: 100%;
+    height: 100%;
+  }
+  &_content {
+    padding: $dialog-content-padding;
+  }
+}
