@@ -21,20 +21,21 @@ $button-font-color-primary: $base-white;
 
 // 模态框
 $dialog-header-background-color: $base-gray-dark;
-$dialog-header-title-font-color: $base-gray;
+$dialog-header-title-font-color: $base-gray-light;
 $dialog-content-background-color: $base-gray;
 $dialog-border-color: $base-gray-light;
 
 $dialog-border-radius: 3px;
-$dialog-header-line-height: 50px;
+$dialog-header-line-height: 30px;
+$dialog-header-font-size: 12px;
 // stand-out: 凸起部分
 $dialog-header-stand-out-height: 20px;
-$dialog-header-stand-out-outer-min-width: 200px;
+$dialog-header-stand-out-outer-min-width: 80px;
 $dialog-header-stand-out-padding-left-right: 30px;
 $dialog-header-stand-out-offset-x: 40px;
 $dialog-header-stand-out-outer-and-inner-subtract: 40px;
 $dialog-header-stand-out-sub-block-background-color-active: $base-color;
 $dialog-header-stand-out-sub-block-background-color-normal: $base-gray-light;
-$dialog-header-stand-out-sub-block-width: 60px;
+$dialog-header-stand-out-sub-block-width: 40px;
 $dialog-header-stand-out-sub-block-height: 12px;
 $dialog-content-padding: 20px;

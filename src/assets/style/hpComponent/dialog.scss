@@ -6,6 +6,7 @@
   content-background-color: $dialog-content-background-color;
   border-color: $dialog-border-color;
   border-radius: $dialog-border-radius;
+  header-font-size: $dialog-header-font-size;
   header-line-height: $dialog-header-line-height;
   header-stand-out-height: $dialog-header-stand-out-height;
   header-stand-out-outer-min-width: $dialog-header-stand-out-outer-min-width;
@@ -19,9 +20,27 @@
 }
 
 .hp-dialog {
+  position: relative;
   &_background {
     width: 100%;
     height: 100%;
+  }
+  &_header {
+    height: $dialog-header-line-height;
+    min-width: $dialog-header-stand-out-outer-min-width;
+    line-height: $dialog-header-line-height;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-left: $dialog-header-stand-out-offset-x + ($dialog-header-stand-out-outer-and-inner-subtract / 2);
+    padding-right: $dialog-header-stand-out-sub-block-width + ($dialog-header-stand-out-outer-and-inner-subtract / 2);
+    font-size: $dialog-header-font-size;
+    text-align: left;
+    & > * {
+      font-size: $dialog-header-font-size;
+      color: $dialog-header-title-font-color;
+    }
   }
   &_content {
     padding: $dialog-content-padding;
