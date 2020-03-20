@@ -6,7 +6,8 @@
                 @finish="changeCharsIndex"
                 :trans-char="['!', '@', '#', '$', '%']"
                 animate-on-init></char-dance>
-    <hp-dialog top="20px" left="20px" width="calc(100vw - 40px)" height="calc(100vh - 40px)" title="啊啊啊啊啊"></hp-dialog>
+    <hp-dialog default-active header-position="left" top="20px" left="40%" width="calc(50vw - 40px)" height="calc(100vh - 40px)" title="啊啊啊啊啊"></hp-dialog>
+    <hp-dialog top="20px" left="20px" width="calc(50vw - 40px)" height="calc(100vh - 40px)" title="啊啊啊啊啊"></hp-dialog>
   </div>
 </template>
 

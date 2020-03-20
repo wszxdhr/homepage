@@ -1,9 +1,16 @@
 <template>
-  <div class="hp-dialog" :style="{top, left, width, height, position: (isStatic ? 'static' : 'fixed')}">
+  <div :class="['hp-dialog', `header-position-${headerPosition}`]" :style="{
+    top: moveInfo && typeof moveInfo.y === 'number' ? moveInfo.y + 'px' : top,
+    left: moveInfo && typeof moveInfo.x === 'number' ? moveInfo.x + 'px' : left,
+    width, height,
+    position: (isStatic ? 'static' : 'fixed'), zIndex
+  }" @mousedown="setActive(true, $event)" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <canvas class="hp-dialog_background" ref="background"></canvas>
-    <div class="hp-dialog_header" ref="header">
-      <h2>{{title}}</h2>
-      <slot name="title"></slot>
+    <div class="hp-dialog_header-wrapper" ref="header">
+      <div class="hp-dialog_header">
+        <h2>{{title}}</h2>
+        <slot name="title"></slot>
+      </div>
     </div>
     <div class="hp-dialog_content">
       <slot></slot>
@@ -14,6 +21,7 @@
 <script>
 import cssVariables from '@/assets/style/hpComponent/dialog.scss'
 import resizeDetector from 'element-resize-detector'
+import activeManage from './activeManage'
 export default {
   name: 'HpDialog',
   props: {
@@ -40,12 +48,28 @@ export default {
     isStatic: {
       type: Boolean,
       default: false
+    },
+    movable: {
+      type: Boolean,
+      default: true
+    },
+    defaultActive: {
+      type: Boolean,
+      default: false
+    },
+    headerPosition: {
+      type: String,
+      default: 'top'
     }
   },
   data () {
     return {
       cssVariables,
-      backgroundCtx: null
+      backgroundCtx: null,
+      isActive: this.defaultActive,
+      zIndex: ++activeManage.maxZIndex,
+      moveInfo: null,
+      isHover: false
     }
   },
   methods: {
@@ -60,15 +84,16 @@ export default {
       erd.listenTo(this.$refs.header, (el) => {
         this.refreshBackground()
       })
-      this.refreshBackground()
     },
     refreshBackground () {
       const canvas = this.$refs.background
       const ctx = this.backgroundCtx
-      canvas.width = canvas.offsetWidth
-      canvas.height = canvas.offsetHeight
-      const width = canvas.width
-      const height = canvas.height
+      const width = this.headerPosition === 'top' || this.headerPosition === 'bottom' ? this.$el.offsetWidth : this.$el.offsetHeight
+      const height = this.headerPosition === 'top' || this.headerPosition === 'bottom' ? this.$el.offsetHeight : this.$el.offsetWidth
+      canvas.style.width = width + 'px'
+      canvas.style.height = height + 'px'
+      canvas.width = width
+      canvas.height = height
       const titleWidth = this.$refs.header.offsetWidth
       const headerStandOutRealWidth = titleWidth - parseInt(this.cssVariables['header-stand-out-offset-x']) - parseInt(this.cssVariables['header-stand-out-sub-block-width'])
       const ratio = parseInt(this.cssVariables['header-stand-out-height']) / (parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2)
@@ -92,8 +117,9 @@ export default {
       ctx.clearRect(0, 0, width, height)
       // const borderWidth = 1
       // const borderRadius = this.cssVariables['border-radius']
+      // 最后面的黄色装饰
       ctx.save()
-      ctx.fillStyle = this.cssVariables['header-stand-out-sub-block-background-color-active']
+      ctx.fillStyle = this.isActive ? this.cssVariables[`header-stand-out-sub-block-background-color-active${this.isHover ? '-hover' : ''}`] : this.cssVariables[`header-stand-out-sub-block-background-color-normal${this.isHover ? '-hover' : ''}`]
       ctx.beginPath()
       ctx.moveTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2, parseInt(this.cssVariables['header-stand-out-height']) - parseInt(this.cssVariables['header-stand-out-sub-block-height']))
       ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2, parseInt(this.cssVariables['header-stand-out-height']))
@@ -104,12 +130,14 @@ export default {
       ctx.restore()
 
       // 先画内容再画框，不然框线会被挡住
+      // 整体背景，包含content
       ctx.save()
       ctx.fillStyle = this.cssVariables['content-background-color']
       lineDialog()
       ctx.fill()
       ctx.restore()
 
+      // 顶部header
       ctx.save()
       ctx.fillStyle = this.cssVariables['header-background-color']
       ctx.beginPath()
@@ -120,15 +148,81 @@ export default {
       ctx.fill()
       ctx.restore()
 
+      // 外部边框
       ctx.save()
       ctx.strokeStyle = this.cssVariables['border-color']
       lineDialog()
       ctx.stroke()
       ctx.restore()
+    },
+    startMove (evt) {
+      this.moveInfo = {
+        startX: this.$el.offsetLeft,
+        startY: this.$el.offsetTop,
+        startMouseX: evt.pageX,
+        startMouseY: evt.pageY,
+        x: this.$el.offsetLeft,
+        y: this.$el.offsetTop
+      }
+      const move = (evt) => {
+        // moveInfo.startMouseX - moveInfo.startX === evt.pageX - moveInfo.x
+        this.moveInfo.x = evt.pageX - (this.moveInfo.startMouseX - this.moveInfo.startX)
+        this.moveInfo.y = evt.pageY - (this.moveInfo.startMouseY - this.moveInfo.startY)
+      }
+      const moveEnd = (evt) => {
+        this.endMove(evt)
+        document.removeEventListener('mouseup', moveEnd)
+        document.removeEventListener('mousemove', move)
+      }
+      document.addEventListener('mousemove', move)
+      document.addEventListener('mouseup', moveEnd)
+    },
+    endMove (evt) {
+      const dialogWidth = this.$el.offsetWidth
+      if (this.moveInfo.x + 50 > window.innerWidth) {
+        this.moveInfo.x = window.innerWidth - 50
+      }
+      if (this.moveInfo.x + dialogWidth < 50) {
+        this.moveInfo.x = -(dialogWidth - 50)
+      }
+      if (this.moveInfo.y + 50 > window.innerHeight) {
+        this.moveInfo.y = window.innerHeight - 50
+      }
+      if (this.moveInfo.y < 0) {
+        this.moveInfo.y = 0
+      }
+    },
+    onMouseEnter () {
+      this.isHover = true
+      this.refreshBackground()
+    },
+    onMouseLeave () {
+      this.isHover = false
+      this.refreshBackground()
+    },
+    setActive (value, evt) {
+      this.isActive = value
+      if (value) {
+        if (activeManage.currentActive && activeManage.currentActive !== this) {
+          activeManage.currentActive.setActive(false)
+        }
+        activeManage.currentActive = this
+        this.zIndex = ++activeManage.maxZIndex
+        if (evt && this.movable) {
+          this.startMove(evt)
+        }
+      }
+      this.refreshBackground()
     }
   },
   mounted () {
     this.initBackground()
+    if (this.defaultActive) {
+      this.setActive(true)
+    } else {
+      // 避免重复绘制
+      this.refreshBackground()
+    }
   }
 }
 </script>
