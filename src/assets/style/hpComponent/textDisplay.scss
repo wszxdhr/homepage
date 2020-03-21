@@ -1,0 +1,40 @@
+@import '~@/assets/style/hpComponent/base.scss';
+
+.hp-text-display {
+  font-weight: 400;
+  padding: 2px 20px 2px 10px;
+  &.text-display_size-default {
+    font-size: 28px;
+    line-height: 28px;
+    & > * {
+      line-height: 28px;
+    }
+  }
+  &.text-display_size-large {
+    font-size: 40px;
+    line-height: 40px;
+    & > * {
+      line-height: 40px;
+    }}
+  &.text-display_size-small {
+    font-size: 20px;
+    line-height: 20px;
+    & > * {
+      line-height: 20px;
+    }
+  }
+  &.text-display_primary {
+    background-color: $base-color;
+    color: $base-gray-very-dark;
+    & > * {
+      color: $base-gray-very-dark;
+    }
+  }
+  &.text-display_black {
+    background-color: $base-black;
+    color: $base-white;
+    & > * {
+      color: $base-white;
+    }
+  }
+}

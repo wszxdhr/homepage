@@ -1,29 +1,33 @@
 <template>
   <div class="home">
-<!--    <img alt="Vue logo" src="../assets/logo.png">-->
-<!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
     <hp-dialog class="main-dialog" content-wrapper-class="main-dialog_content-wrapper" is-static width="calc(100vw - 40px)" height="calc(100vh - 40px)" title="张潇的个人主页">
       <char-dance :rect="chars[charsIndex].map(item => item.split(''))"
                   :color="cssBase['base-font-color']"
                   @finish="changeCharsIndex"
                   :trans-char="['!', '@', '#', '$', '%']"
                   class="char-dance"
+                  :width="600"
+                  :height="600"
                   animate-on-init></char-dance>
+      <hp-text-display text="哈呵吼呼" type="primary" size="small" class="title"></hp-text-display>
+      <hp-text-display type="black" size="large" text="HAHAHEHEHOHO" class="sub-title"></hp-text-display>
     </hp-dialog>
-    <hp-dialog class="time-dialog" content-class="time-dialog_content" :left="`${window.innerWidth - 400 - 40}px`" top="70px" width="400px" title="TIME" header-min-width="80px" header-sub-block-width="50">
+    <hp-dialog class="time-dialog" content-class="time-dialog_content" left="calc(100vw - 400px - 40px)" top="70px" width="400px" title="TIME" header-min-width="80px" header-sub-block-width="50">
       <hp-sub-dialog title="TIME IN CURRENT TIME ZONE">
         <hp-block transparent>
-          123
+          <hp-radio-group v-model="timeType">
+            <hp-radio value="24">24 HOURS DISPLAY</hp-radio>
+            <hp-radio value="12">12 HOURS DISPLAY</hp-radio>
+          </hp-radio-group>
         </hp-block>
         <hp-block class="time-display-block">
-          <time-display></time-display>
+          <time-display :time-type="timeType"></time-display>
         </hp-block>
         <p class="time-display-desc"><span class="time-display-desc_label">CURRENT TIME ZONE: </span><span class="time-display-desc_value">{{Intl ? Intl.DateTimeFormat().resolvedOptions().timeZone : 'Unknown'}}</span></p>
       </hp-sub-dialog>
     </hp-dialog>
-<!--    <hp-dialog default-active header-position="right" top="20px" left="40%" width="calc(50vw - 40px)" height="calc(100vh - 40px)" title="啊啊啊啊啊">-->
-<!--      <p v-for="(a, $index) in new Array(100)" :key="$index">{{$index}}</p>-->
-<!--    </hp-dialog>-->
+    <!--<hp-dialog>-->
+    <!--</hp-dialog>-->
   </div>
 </template>
 
@@ -41,7 +45,8 @@ export default {
       cssBase,
       chars,
       window,
-      charsIndex: 0
+      charsIndex: 0,
+      timeType: '24'
     }
   },
   methods: {
@@ -65,6 +70,16 @@ export default {
   .home {
     display: flex;
     justify-content: center;
+    .title {
+      position: fixed;
+      top: 77px;
+      left: 40px;
+    }
+    .sub-title {
+      position: fixed;
+      top: 101px;
+      left: 40px;
+    }
     .main-dialog {
       margin: 20px;
       min-width: 800px;

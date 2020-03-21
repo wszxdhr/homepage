@@ -76,10 +76,10 @@ export default {
         const row = (rowItem instanceof Array) ? rowItem : rowItem.split('')
         const result = []
         row.map((char, charIndex) => {
-          const charX = charIndex * 8
-          const charY = (rowIndex + 1) * 14
-          const charW = 8
-          const charH = 14
+          const charW = this.width / 100
+          const charH = this.width / 57
+          const charX = charIndex * charW
+          const charY = (rowIndex + 1) * charH
           const charText = char
           const charItem = new Char({ x: charX + charW / 2, y: charY, w: charW, h: charH, char: charText, ctx: this.ctx, index: [rowIndex, charIndex], isDancing: true, charset: ' ' })
           charItem.setRect(charX + charW / 2, charY, charW, charH)
@@ -154,7 +154,7 @@ export default {
       // this.ctx.clearRect(0, 0, this.width, this.height)
       // this.ctx.fillStyle = '#000'
       this.ctx.save()
-      this.ctx.font = 'bold 8px arial'
+      this.ctx.font = `bold ${this.width / 100}px arial`
       this.ctx.fillStyle = this.color
       this.ctx.textAlign = 'center'
       const renderList = this.queue.splice(0, RENDER_ONCE)
