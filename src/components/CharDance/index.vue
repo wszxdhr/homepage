@@ -28,6 +28,10 @@ export default {
     },
     height: {
       default: 800
+    },
+    color: {
+      type: String,
+      default: '#000'
     }
   },
   data () {
@@ -77,7 +81,7 @@ export default {
           const charW = 8
           const charH = 14
           const charText = char
-          const charItem = new Char({ x: charX + charW / 2, y: charY, w: charW, h: charH, char: charText, ctx: this.ctx, index: [rowIndex, charIndex], isDancing: true })
+          const charItem = new Char({ x: charX + charW / 2, y: charY, w: charW, h: charH, char: charText, ctx: this.ctx, index: [rowIndex, charIndex], isDancing: true, charset: ' ' })
           charItem.setRect(charX + charW / 2, charY, charW, charH)
           charItem.setChar(charText)
           charItem.isDancing = true
@@ -151,6 +155,7 @@ export default {
       // this.ctx.fillStyle = '#000'
       this.ctx.save()
       this.ctx.font = 'bold 8px arial'
+      this.ctx.fillStyle = this.color
       this.ctx.textAlign = 'center'
       const renderList = this.queue.splice(0, RENDER_ONCE)
       if (renderList && renderList.length) {

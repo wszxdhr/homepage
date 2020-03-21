@@ -1,1 +1,8 @@
-$base-background-color: rgb(23, 23, 23);
+@import './hpComponent/base';
+
+$base-background-color: $base-gray-very-dark;
+$base-font-color: $base-gray-light;
+
+:export {
+  base-font-color: $base-font-color;
+}

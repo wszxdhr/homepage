@@ -1,6 +1,13 @@
+@import './base';
+@import './hpComponent/base';
+
 * {
   margin: 0;
   padding: 0;
+  color: $base-font-color;
+}
+
+html {
 }
 
 a {
@@ -9,4 +16,20 @@ a {
 
 li {
   list-style: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $base-gray-light;
+}
+::-webkit-scrollbar-track {
+  border: 1px solid $base-gray-light;
+  width: 10px;
+}
+
+::-webkit-scrollbar-corner {
+  width: 0;
+  display: none;
 }

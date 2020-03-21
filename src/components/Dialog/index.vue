@@ -6,14 +6,16 @@
     position: (isStatic ? 'static' : 'fixed'), zIndex
   }" @mousedown="setActive(true, $event)" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <canvas class="hp-dialog_background" ref="background"></canvas>
-    <div class="hp-dialog_header-wrapper" ref="header">
+    <div class="hp-dialog_header-wrapper" ref="header" :style="{width: headerWidth, minWidth: headerMinWidth, paddingRight: this.headerSubBlockWidth ? parseInt(headerSubBlockWidth) + parseInt(cssVariables['header-stand-out-outer-and-inner-subtract']) / 2 + 'px' : ''}">
       <div class="hp-dialog_header">
         <h2>{{title}}</h2>
         <slot name="title"></slot>
       </div>
     </div>
-    <div class="hp-dialog_content">
-      <slot></slot>
+    <div :class="['hp-dialog_content-wrapper', contentWrapperClass]" :style="{}">
+      <div :class="['hp-dialog_content', contentClass]">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -60,6 +62,26 @@ export default {
     headerPosition: {
       type: String,
       default: 'top'
+    },
+    contentClass: {
+      type: String,
+      default: ''
+    },
+    contentWrapperClass: {
+      type: String,
+      default: ''
+    },
+    headerWidth: {
+      type: String,
+      default: ''
+    },
+    headerMinWidth: {
+      type: String,
+      default: ''
+    },
+    headerSubBlockWidth: {
+      type: [String, Number],
+      default: ''
     }
   },
   data () {
@@ -69,7 +91,8 @@ export default {
       isActive: this.defaultActive,
       zIndex: ++activeManage.maxZIndex,
       moveInfo: null,
-      isHover: false
+      isHover: false,
+      callbackOnResize: null
     }
   },
   methods: {
@@ -94,8 +117,9 @@ export default {
       canvas.style.height = height + 'px'
       canvas.width = width
       canvas.height = height
+      console.log(parseInt(this.headerWidth))
       const titleWidth = this.$refs.header.offsetWidth
-      const headerStandOutRealWidth = titleWidth - parseInt(this.cssVariables['header-stand-out-offset-x']) - parseInt(this.cssVariables['header-stand-out-sub-block-width'])
+      const headerStandOutRealWidth = titleWidth - parseInt(this.cssVariables['header-stand-out-offset-x']) - (parseInt(this.headerSubBlockWidth) || parseInt(this.cssVariables['header-stand-out-sub-block-width']))
       const ratio = parseInt(this.cssVariables['header-stand-out-height']) / (parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2)
       const lineHeader = () => {
         ctx.lineTo(width, parseInt(this.cssVariables['header-stand-out-height']))
@@ -123,8 +147,8 @@ export default {
       ctx.beginPath()
       ctx.moveTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2, parseInt(this.cssVariables['header-stand-out-height']) - parseInt(this.cssVariables['header-stand-out-sub-block-height']))
       ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2, parseInt(this.cssVariables['header-stand-out-height']))
-      ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + headerStandOutRealWidth + parseInt(this.cssVariables['header-stand-out-sub-block-width']), parseInt(this.cssVariables['header-stand-out-height']))
-      ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + headerStandOutRealWidth + parseInt(this.cssVariables['header-stand-out-sub-block-width']) - (parseInt(this.cssVariables['header-stand-out-sub-block-height']) / ratio), parseInt(this.cssVariables['header-stand-out-height']) - parseInt(this.cssVariables['header-stand-out-sub-block-height']))
+      ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + headerStandOutRealWidth + (parseInt(this.headerSubBlockWidth) || parseInt(this.cssVariables['header-stand-out-sub-block-width'])), parseInt(this.cssVariables['header-stand-out-height']))
+      ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + headerStandOutRealWidth + (parseInt(this.headerSubBlockWidth) || parseInt(this.cssVariables['header-stand-out-sub-block-width'])) - (parseInt(this.cssVariables['header-stand-out-sub-block-height']) / ratio), parseInt(this.cssVariables['header-stand-out-height']) - parseInt(this.cssVariables['header-stand-out-sub-block-height']))
       ctx.closePath()
       ctx.fill()
       ctx.restore()
@@ -178,19 +202,7 @@ export default {
       document.addEventListener('mouseup', moveEnd)
     },
     endMove (evt) {
-      const dialogWidth = this.$el.offsetWidth
-      if (this.moveInfo.x + 50 > window.innerWidth) {
-        this.moveInfo.x = window.innerWidth - 50
-      }
-      if (this.moveInfo.x + dialogWidth < 50) {
-        this.moveInfo.x = -(dialogWidth - 50)
-      }
-      if (this.moveInfo.y + 50 > window.innerHeight) {
-        this.moveInfo.y = window.innerHeight - 50
-      }
-      if (this.moveInfo.y < 0) {
-        this.moveInfo.y = 0
-      }
+      this.fixDialogPos()
     },
     onMouseEnter () {
       this.isHover = true
@@ -200,29 +212,59 @@ export default {
       this.isHover = false
       this.refreshBackground()
     },
-    setActive (value, evt) {
-      this.isActive = value
-      if (value) {
-        if (activeManage.currentActive && activeManage.currentActive !== this) {
-          activeManage.currentActive.setActive(false)
+    fixDialogPos () {
+      if (!this.isStatic) {
+        const dialogWidth = this.$el.offsetWidth
+        this.moveInfo = {
+          x: this.$el.offsetLeft,
+          y: this.$el.offsetTop
         }
-        activeManage.currentActive = this
-        this.zIndex = ++activeManage.maxZIndex
-        if (evt && this.movable) {
-          this.startMove(evt)
+        if (this.$el.offsetLeft + 50 > window.innerWidth) {
+          this.moveInfo.x = window.innerWidth - 50
+        }
+        if (this.$el.offsetLeft + dialogWidth < 50) {
+          this.moveInfo.x = -(dialogWidth - 50)
+        }
+        if (this.$el.offsetTop + 50 > window.innerHeight) {
+          this.moveInfo.y = window.innerHeight - 50
+        }
+        if (this.$el.offsetTop < 0) {
+          this.moveInfo.y = 0
         }
       }
-      this.refreshBackground()
+    },
+    setActive (value, evt) {
+      if (!this.isStatic) {
+        this.isActive = value
+        if (value) {
+          if (activeManage.currentActive && activeManage.currentActive !== this) {
+            activeManage.currentActive.setActive(false)
+          }
+          activeManage.currentActive = this
+          this.zIndex = ++activeManage.maxZIndex
+          if (evt && this.movable) {
+            this.startMove(evt)
+          }
+        }
+        this.refreshBackground()
+      }
     }
   },
   mounted () {
     this.initBackground()
-    if (this.defaultActive) {
+    if (this.defaultActive && this.isStatic) {
       this.setActive(true)
     } else {
       // 避免重复绘制
       this.refreshBackground()
     }
+    this.callbackOnResize = () => {
+      this.fixDialogPos()
+    }
+    window.addEventListener('resize', this.callbackOnResize)
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.callbackOnResize)
   }
 }
 </script>
