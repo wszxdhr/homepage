@@ -38,6 +38,27 @@
       color: $base-white;
     }
   }
+  &.text-display_gray {
+    background-color: $base-gray;
+    color: $base-white;
+    & > * {
+      color: $base-white;
+    }
+  }
+  &.text-display_gray-light {
+    background-color: $base-gray-light;
+    color: $base-white;
+    & > * {
+      color: $base-white;
+    }
+  }
+  &.text-display_gray-dark {
+    background-color: $base-gray-dark;
+    color: $base-white;
+    & > * {
+      color: $base-white;
+    }
+  }
   &.text-display_transparent {
     background-color: transparent;
     color: $base-gray-light;

@@ -1,7 +1,7 @@
 <template>
   <hp-block class="hp-menu-item" transparent>
     <div class="hp-menu-item_icon">
-      <i class="icon-github"></i>
+      <slot name="icon"></slot>
     </div>
     <div class="hp-menu-item_inner">
       <slot></slot>

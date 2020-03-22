@@ -3,9 +3,32 @@
 .hp-menu {}
 
 .hp-menu-item {
+  border: 1px solid $base-gray-light;
+  display: flex;
+  .hp-menu-item_icon {
+    align-self: center;
+    width: 62px;
+    text-align: center;
+    & > * {
+      color: $base-color;
+      font-size: 28px;
+    }
+    & + .hp-menu-item_inner {
+      position: relative;
+      &:after {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: 0;
+        bottom: 10px;
+        background-color: $base-gray-light;
+        width: 1px;
+      }
+    }
+  }
   .hp-menu-item_inner {
-    border: 1px solid $base-gray-light;
     padding: 15px;
+    flex: 1;
   }
   .hp-menu-item_content {
     margin-top: 10px;
