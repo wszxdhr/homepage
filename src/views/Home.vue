@@ -1,6 +1,10 @@
 <template>
   <div class="home">
     <hp-dialog class="main-dialog" content-wrapper-class="main-dialog_content-wrapper" is-static width="calc(100vw - 40px)" height="calc(100vh - 40px)" title="张潇的个人主页">
+      <div class="icp-info">
+        <p>Copyright © 2020-2020 张潇</p>
+        <p>黑ICP备 22222222号-2   浙公网安备 2323232323232323号</p>
+      </div>
       <char-dance :rect="chars[charsIndex].map(item => item.split(''))"
                   :color="cssBase['base-font-color']"
                   @finish="changeCharsIndex"
@@ -131,6 +135,15 @@ export default {
           color: $base-white;
         }
       }
+    }
+    .icp-info {
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 12px;
+      color: $base-gray-light;
     }
   }
 </style>
