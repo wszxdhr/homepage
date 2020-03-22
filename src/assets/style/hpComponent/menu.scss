@@ -1,0 +1,14 @@
+@import './base';
+
+.hp-menu {}
+
+.hp-menu-item {
+  .hp-menu-item_inner {
+    border: 1px solid $base-gray-light;
+    padding: 15px;
+  }
+  .hp-menu-item_content {
+    margin-top: 10px;
+    margin-bottom: -6px;
+  }
+}

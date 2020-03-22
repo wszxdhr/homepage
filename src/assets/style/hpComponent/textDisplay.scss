@@ -15,7 +15,8 @@
     line-height: 40px;
     & > * {
       line-height: 40px;
-    }}
+    }
+  }
   &.text-display_size-small {
     font-size: 20px;
     line-height: 20px;
@@ -33,6 +34,13 @@
   &.text-display_black {
     background-color: $base-black;
     color: $base-white;
+    & > * {
+      color: $base-white;
+    }
+  }
+  &.text-display_transparent {
+    background-color: transparent;
+    color: $base-gray-light;
     & > * {
       color: $base-white;
     }

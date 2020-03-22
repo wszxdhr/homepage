@@ -5,7 +5,7 @@
 <script>
 import Char from './char'
 const RENDER_ONCE = 200
-const DISPLAY_IMAGE_DELAY = 5000
+const DISPLAY_IMAGE_DELAY = 20000
 const DISPLAY_EMPTY_DELAY = 0
 const HANDLE_ANIMATE_LIST_DELAY = 10
 export default {

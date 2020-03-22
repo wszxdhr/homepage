@@ -26,6 +26,16 @@
         <p class="time-display-desc"><span class="time-display-desc_label">CURRENT TIME ZONE: </span><span class="time-display-desc_value">{{Intl ? Intl.DateTimeFormat().resolvedOptions().timeZone : 'Unknown'}}</span></p>
       </hp-sub-dialog>
     </hp-dialog>
+    <hp-dialog class="menu-dialog" left="40px" top="160px" width="400px" title="MENU" header-min-width="80px" header-sub-block-width="50">
+      <hp-sub-dialog title="CHOOSE A INTRO">
+        <hp-menu>
+          <hp-menu-item title="吃喝拉撒" content="吃喝拉撒吃喝拉撒"></hp-menu-item>
+          <hp-menu-item title="吃喝嫖赌" content="吃喝嫖赌吃喝嫖赌吃喝嫖赌"></hp-menu-item>
+          <hp-menu-item title="喝西北风" content="喝西北风喝西北风喝西北风"></hp-menu-item>
+          <hp-menu-item title="玩物丧志" content="玩物丧志玩物丧志玩物丧志"></hp-menu-item>
+        </hp-menu>
+      </hp-sub-dialog>
+    </hp-dialog>
     <!--<hp-dialog>-->
     <!--</hp-dialog>-->
   </div>
