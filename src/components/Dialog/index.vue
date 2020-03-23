@@ -100,7 +100,6 @@ export default {
       const canvas = this.$refs.background
       this.backgroundCtx = canvas.getContext('2d')
       const erd = resizeDetector()
-      console.log(erd, canvas)
       erd.listenTo(this.$el, (el) => {
         this.refreshBackground()
       })
@@ -117,7 +116,6 @@ export default {
       canvas.style.height = height + 'px'
       canvas.width = width
       canvas.height = height
-      console.log(parseInt(this.headerWidth))
       const titleWidth = this.$refs.header.offsetWidth
       const headerStandOutRealWidth = titleWidth - parseInt(this.cssVariables['header-stand-out-offset-x']) - (parseInt(this.headerSubBlockWidth) || parseInt(this.cssVariables['header-stand-out-sub-block-width']))
       const ratio = parseInt(this.cssVariables['header-stand-out-height']) / (parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2)
