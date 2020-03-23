@@ -1,0 +1,22 @@
+{
+  "apps" : [{
+    "name" : "HOMEPAGE",
+    "script" : "npm run build",
+    "env": {
+      "COMMON_VARIABLE": "true"
+    },
+    "env_production" : {
+      "NODE_ENV": "production"
+    }
+  }],
+  "deploy" : {
+    "production" : {
+      "user" : "www",
+      "host" : ["anymelon.com"],
+      "ref"  : "origin/master",
+      "repo" : "git@github.com:wszxdhr/homepage.git",
+      "path" : "/www/wwwroot/xn--e1tn37a.com",
+      "post-deploy" : "npm install && npm run build"
+    }
+  }
+}
