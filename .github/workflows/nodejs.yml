@@ -25,14 +25,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run build --if-present
-      - run: npm test
+     # - run: npm test
         env:
           CI: true
      # Deploy
-      - uses: webfactory/ssh-agent@v0.1.1
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Setup knownhosts
-        run: ssh-keyscan ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-      - name: Run SSH Command
-        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.SSH_TARGET_DIR }} && git clone https://github.com/wszxdhr/homepage.git && cnpm i && npm run build"
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: dist
