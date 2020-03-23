@@ -1,0 +1,22 @@
+{
+  "apps" : [{
+    "name" : "HOMEPAGE",
+    "script" : "npm run build",
+    "env": {
+      "COMMON_VARIABLE": "true"
+    },
+    "env_production" : {
+      "NODE_ENV": "production"
+    }
+  }],
+  "deploy" : {
+    "production" : {
+      "user" : "webupload",
+      "host" : ["anymelon.com"],
+      "ref"  : "origin/master",
+      "repo" : "https://github.com/wszxdhr/homepage",
+      "path" : "/www/wwwroot/xn--e1tn37a.com",
+      "post-deploy" : "cd ../ && cnpm install && npm run build"
+    }
+  }
+}
