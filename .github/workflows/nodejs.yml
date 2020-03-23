@@ -29,12 +29,10 @@ jobs:
         env:
           CI: true
      # Deploy
-      - name: Deploy
-        uses: easingthemes/ssh-deploy@v2.0.7
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-avz --delete"
-          SOURCE: "./dist"
-          REMOTE_HOST: ${{ secrets.SSH_HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USER }}
-          TARGET: ${{ secrets.SSH_TARGET_DIR }}
+      - uses: webfactory/ssh-agent@v0.1.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Setup knownhosts
+        run: ssh-keyscan ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: Run SSH Command
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.SSH_TARGET_DIR }} && git clone https://github.com/wszxdhr/homepage.git && cnpm i && npm run build"
