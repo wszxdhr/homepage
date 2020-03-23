@@ -16,7 +16,7 @@
       "ref"  : "origin/master",
       "repo" : "https://github.com/wszxdhr/homepage.git",
       "path" : "/www/wwwroot/xn--e1tn37a.com",
-      "post-deploy" : "npm install && npm run build"
+      "post-deploy" : "cd homepage && npm install && npm run build"
     }
   }
 }
