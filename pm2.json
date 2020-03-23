@@ -14,7 +14,7 @@
       "user" : "webupload",
       "host" : ["anymelon.com"],
       "ref"  : "origin/master",
-      "repo" : "git@github.com:wszxdhr/homepage.git",
+      "repo" : "https://github.com/wszxdhr/homepage.git",
       "path" : "/www/wwwroot/xn--e1tn37a.com",
       "post-deploy" : "npm install && npm run build"
     }
