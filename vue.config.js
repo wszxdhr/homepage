@@ -2,5 +2,5 @@ module.exports = {
   devServer: {
     port: 8822
   },
-  publicPath: '/homepage'
+  publicPath: 'https://wszxdhr.github.io/homepage'
 }
