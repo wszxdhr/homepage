@@ -1,5 +1,5 @@
 <template>
-  <div :class="['hp-dialog', `header-position-${headerPosition}`]" :style="{
+  <div :class="['hp-dialog', `header-position-${headerPosition}`]" v-show="visible" :style="{
     top: moveInfo && typeof moveInfo.y === 'number' ? moveInfo.y + 'px' : top,
     left: moveInfo && typeof moveInfo.x === 'number' ? moveInfo.x + 'px' : left,
     width, height,
@@ -82,6 +82,10 @@ export default {
     headerSubBlockWidth: {
       type: [String, Number],
       default: ''
+    },
+    visible: {
+      type: Boolean,
+      default: true
     }
   },
   data () {

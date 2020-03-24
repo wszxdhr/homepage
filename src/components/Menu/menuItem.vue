@@ -1,5 +1,5 @@
 <template>
-  <hp-block class="hp-menu-item" transparent>
+  <hp-block class="hp-menu-item" transparent @click.native="$emit('click', $event)">
     <div class="hp-menu-item_icon">
       <slot name="icon"></slot>
     </div>

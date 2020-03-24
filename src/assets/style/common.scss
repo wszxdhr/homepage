@@ -5,3 +5,50 @@ html {
     color: $base-background-color;
   };
 }
+
+.text {
+  &-color {
+    &-primary {
+      color: $base-color;
+    }
+    &-gray {
+      color: $base-gray;
+    }
+    &-gray-light {
+      color: $base-gray-light;
+    }
+    &-gray-dark {
+      color: $base-gray-dark;
+    }
+    &-gray-very-dark {
+      color: $base-gray-very-dark;
+    }
+    &-gray-common-dark {
+      color: $base-gray-common-dark;
+    }
+    &-white {
+      color: $base-white;
+    }
+    &-black {
+      color: $base-black;
+    }
+  }
+
+  &-size {
+    &-huge {
+      font-size: 50px;
+    }
+    &-large {
+      font-size: 40px;
+    }
+    &-common {
+      font-size: 28px;
+    }
+    &-small {
+      font-size: 16px;
+    }
+    &-tiny {
+      font-size: 12px;
+    }
+  }
+}

@@ -3,7 +3,7 @@
     <hp-dialog class="main-dialog" content-wrapper-class="main-dialog_content-wrapper" is-static width="calc(100vw - 40px)" height="calc(100vh - 40px)" title="张潇的个人主页">
       <div class="icp-info">
         <p>Copyright © 2020-2020 张潇</p>
-        <p>黑ICP备 22222222号-2   浙公网安备 2323232323232323号</p>
+        <p><a href="http://beian.miit.gov.cn/">黑ICP备17005381号-2</a> <a href="http://www.beian.gov.cn/portal/registerSystemInfo">浙公网安备 2323232323232323号</a></p>
       </div>
       <char-dance :rect="chars[charsIndex].map(item => item.split(''))"
                   :color="cssBase['base-font-color']"
@@ -33,7 +33,7 @@
     <hp-dialog class="menu-dialog" left="40px" top="164px" width="400px" title="MENU" header-min-width="80px" header-sub-block-width="50">
       <hp-sub-dialog title="CHOOSE A INTRO">
         <hp-menu>
-          <hp-menu-item title="吃喝拉撒" content="吃喝拉撒吃喝拉撒">
+          <hp-menu-item title="吃喝拉撒" content="吃喝拉撒吃喝拉撒" @click="introVisible = true">
             <i class="iconfont icon-github" slot="icon"></i>
           </hp-menu-item>
           <hp-menu-item title="吃喝嫖赌" content="吃喝嫖赌吃喝嫖赌吃喝嫖赌">
@@ -50,6 +50,7 @@
     </hp-dialog>
     <!--<hp-dialog>-->
     <!--</hp-dialog>-->
+    <intro-dialog :visible.sync="introVisible"></intro-dialog>
   </div>
 </template>
 
@@ -58,6 +59,7 @@
 import cssBase from '@/assets/style/base.scss'
 import CharDance from '@/components/CharDance/index'
 import TimeDisplay from '@/components/Time/index'
+import IntroDialog from '@/components/SubDialogs/Intro/index'
 import chars from '@/assets/chars.json'
 
 export default {
@@ -68,7 +70,8 @@ export default {
       chars,
       window,
       charsIndex: 0,
-      timeType: '24'
+      timeType: '24',
+      introVisible: false
     }
   },
   methods: {
@@ -82,7 +85,8 @@ export default {
   },
   components: {
     CharDance,
-    TimeDisplay
+    TimeDisplay,
+    IntroDialog
   }
 }
 </script>
