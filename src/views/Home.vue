@@ -3,7 +3,7 @@
     <hp-dialog class="main-dialog" content-wrapper-class="main-dialog_content-wrapper" is-static width="calc(100vw - 40px)" height="calc(100vh - 40px)" title="张潇的个人主页">
       <div class="icp-info">
         <p>Copyright © 2020-2020 张潇</p>
-        <p><a href="http://beian.miit.gov.cn/">黑ICP备17005381号-2</a> <a href="http://www.beian.gov.cn/portal/registerSystemInfo">浙公网安备 2323232323232323号</a></p>
+        <p><a href="http://beian.miit.gov.cn/">黑ICP备17005381号-2</a> <a href="http://www.beian.gov.cn/portal/registerSystemInfo">xxx</a></p>
       </div>
       <char-dance :rect="chars[charsIndex].map(item => item.split(''))"
                   :color="cssBase['base-font-color']"
@@ -33,16 +33,16 @@
     <hp-dialog class="menu-dialog" left="40px" top="164px" width="400px" title="MENU" header-min-width="80px" header-sub-block-width="50">
       <hp-sub-dialog title="CHOOSE A INTRO">
         <hp-menu>
-          <hp-menu-item title="吃喝拉撒" content="吃喝拉撒吃喝拉撒" @click="introVisible = true">
+          <hp-menu-item title="吃吃喝喝" content="吃吃喝喝吃吃喝喝" @click="introVisible = true">
             <i class="iconfont icon-github" slot="icon"></i>
           </hp-menu-item>
-          <hp-menu-item title="吃喝嫖赌" content="吃喝嫖赌吃喝嫖赌吃喝嫖赌">
+          <hp-menu-item title="吃吃喝喝2" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝">
             <i class="iconfont icon-work" slot="icon"></i>
           </hp-menu-item>
-          <hp-menu-item title="喝西北风" content="喝西北风喝西北风喝西北风">
+          <hp-menu-item title="吃吃喝喝3" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝">
             <i class="iconfont icon-github" slot="icon"></i>
           </hp-menu-item>
-          <hp-menu-item title="玩物丧志" content="玩物丧志玩物丧志玩物丧志">
+          <hp-menu-item title="吃吃喝喝4" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝">
             <i class="iconfont icon-github" slot="icon"></i>
           </hp-menu-item>
         </hp-menu>
