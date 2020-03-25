@@ -3,7 +3,7 @@
     <hp-dialog class="main-dialog" content-wrapper-class="main-dialog_content-wrapper" is-static width="calc(100vw - 40px)" height="calc(100vh - 40px)" title="张潇的个人主页">
       <div class="icp-info">
         <p>Copyright © 2020-2020 张潇</p>
-        <p><a href="http://beian.miit.gov.cn/">黑ICP备17005381号-2</a> <a href="http://www.beian.gov.cn/portal/registerSystemInfo">xxx</a></p>
+        <p><a href="http://beian.miit.gov.cn/" target="_blank">黑ICP备17005381号-2</a> <a href="http://www.beian.gov.cn/portal/registerSystemInfo" target="_blank">xxx</a></p>
       </div>
       <char-dance :rect="chars[charsIndex].map(item => item.split(''))"
                   :color="cssBase['base-font-color']"

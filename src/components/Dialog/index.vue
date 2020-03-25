@@ -237,6 +237,9 @@ export default {
     },
     setActive (value, evt) {
       if (!this.isStatic) {
+        if (evt) {
+          evt.preventDefault()
+        }
         this.isActive = value
         if (value) {
           if (activeManage.currentActive && activeManage.currentActive !== this) {
