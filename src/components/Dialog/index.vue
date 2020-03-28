@@ -4,11 +4,11 @@
     left: moveInfo && typeof moveInfo.x === 'number' ? moveInfo.x + 'px' : left,
     width, height,
     position: (isStatic ? 'static' : 'fixed'), zIndex
-  }" @mousedown="setActive(true, $event)" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+  }" @mousedown="setActive(true, $event)" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave" @mousemove="onMouseMove">
     <canvas class="hp-dialog_background" ref="background"></canvas>
     <div class="hp-dialog_header-wrapper" ref="header" :style="{width: headerWidth, minWidth: headerMinWidth, paddingRight: this.headerSubBlockWidth ? parseInt(headerSubBlockWidth) + parseInt(cssVariables['header-stand-out-outer-and-inner-subtract']) / 2 + 'px' : ''}">
       <div class="hp-dialog_header">
-        <h2>{{title}}</h2>
+        <h2>{{title}}{{isCloseBtnHover}}</h2>
         <slot name="title"></slot>
       </div>
     </div>
@@ -23,6 +23,7 @@
 <script>
 import cssVariables from '@/assets/style/hpComponent/dialog.scss'
 import resizeDetector from 'element-resize-detector'
+import pointInPolygon from './pointInPolygon'
 import activeManage from './activeManage'
 export default {
   name: 'HpDialog',
@@ -96,6 +97,7 @@ export default {
       zIndex: ++activeManage.maxZIndex,
       moveInfo: null,
       isHover: false,
+      isCloseBtnHover: false,
       callbackOnResize: null
     }
   },
@@ -213,6 +215,27 @@ export default {
     onMouseLeave () {
       this.isHover = false
       this.refreshBackground()
+    },
+    onMouseMove (evt) {
+      // console.log(evt)
+      this.refreshIsCloseBtnHover({ x: evt.offsetX, y: evt.offsetY })
+    },
+    refreshIsCloseBtnHover ({ x, y }) {
+      const closeBtnTop = 0
+      const closeBtnBottom = 1
+      // 从左到右4个横坐标
+      // const closeBtnX2 = parseInt(this.cssVariables['header-stand-out-offset-x']) + parseInt(this.cssVariables['header-stand-out-outer-min-width'])
+      // const closeBtnX1 = closeBtnX2 - parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2
+      // const closeBtnX3 = closeBtnX1 + parseInt(this.cssVariables['header-stand-out-sub-block-width'])
+      // const closeBtnX4 = closeBtnX2 + parseInt(this.cssVariables['header-stand-out-sub-block-width'])
+      console.log(x, y, closeBtnTop, closeBtnBottom, pointInPolygon({ x, y },
+        [
+          { x: 0, y: closeBtnTop },
+          { x: 200, y: closeBtnTop },
+          { x: 200, y: closeBtnBottom },
+          { x: 0, y: closeBtnBottom }
+        ])
+      )
     },
     fixDialogPos () {
       if (!this.isStatic) {
