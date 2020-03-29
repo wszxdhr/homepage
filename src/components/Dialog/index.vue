@@ -125,7 +125,6 @@ export default {
       })
     },
     refreshBackground () {
-      console.log('refresh', this.title)
       const canvas = this.$refs.background
       const ctx = this.backgroundCtx
       const width = this.headerPosition === 'top' || this.headerPosition === 'bottom' ? this.$el.offsetWidth : this.$el.offsetHeight
@@ -229,7 +228,6 @@ export default {
       this.refreshBackground()
     },
     onMouseMove (evt) {
-      console.log(this.closeable)
       if (this.closeable) {
         this.refreshIsCloseBtnHover({ x: evt.offsetX, y: evt.offsetY })
       }

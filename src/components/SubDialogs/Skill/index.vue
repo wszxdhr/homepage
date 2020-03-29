@@ -4,12 +4,12 @@
                @update:visible="$emit('update:visible', $event)"
                @close="$emit('update:visible', false)"
                closeable
-               title="伟大复兴"></hp-dialog>
-    <hp-dialog :visible="visible"
-               @update:visible="$emit('update:visible', $event)"
-               @close="$emit('update:visible', false)"
-               closeable
-               title="伟大复兴"></hp-dialog>
+               left="calc(50vw - 500px / 2)"
+               top="calc(50vh - 600px / 2)"
+               width="500px"
+               title="伟大复兴">
+      <hp-sub-dialog title="MY SKILLS"></hp-sub-dialog>
+    </hp-dialog>
   </div>
 </template>
 

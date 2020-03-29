@@ -84,6 +84,5 @@ export default function ({ x = null, y = null } = {}, polygon = []) {
       result++
     }
   })
-  console.log('result', result)
   return !!(result % 2)
 }
