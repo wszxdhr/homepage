@@ -4,11 +4,16 @@
     left: moveInfo && typeof moveInfo.x === 'number' ? moveInfo.x + 'px' : left,
     width, height,
     position: (isStatic ? 'static' : 'fixed'), zIndex
-  }" @mousedown="setActive(true, $event)" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave" @mousemove="onMouseMove">
+  }" @mousedown="setActive(true, $event)" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <canvas class="hp-dialog_background" ref="background"></canvas>
-    <div class="hp-dialog_header-wrapper" ref="header" :style="{width: headerWidth, minWidth: headerMinWidth, paddingRight: this.headerSubBlockWidth ? parseInt(headerSubBlockWidth) + parseInt(cssVariables['header-stand-out-outer-and-inner-subtract']) / 2 + 'px' : ''}">
+    <div class="hp-dialog_header-wrapper"
+         ref="header"
+         @mousemove="onMouseMove"
+         @mouseleave="isCloseBtnHover = false"
+         @click="onHeaderClick"
+         :style="{width: headerWidth, minWidth: headerMinWidth, paddingRight: this.headerSubBlockWidth ? parseInt(headerSubBlockWidth) + parseInt(cssVariables['header-stand-out-outer-and-inner-subtract']) / 2 + 'px' : ''}">
       <div class="hp-dialog_header">
-        <h2>{{title}}{{isCloseBtnHover}}</h2>
+        <h2>{{title}}</h2>
         <slot name="title"></slot>
       </div>
     </div>
@@ -87,6 +92,10 @@ export default {
     visible: {
       type: Boolean,
       default: true
+    },
+    closeable: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -98,7 +107,9 @@ export default {
       moveInfo: null,
       isHover: false,
       isCloseBtnHover: false,
-      callbackOnResize: null
+      callbackOnResize: null,
+      titleWidth: 0,
+      headerStandOutRealWidth: 0
     }
   },
   methods: {
@@ -114,6 +125,7 @@ export default {
       })
     },
     refreshBackground () {
+      console.log('refresh', this.title)
       const canvas = this.$refs.background
       const ctx = this.backgroundCtx
       const width = this.headerPosition === 'top' || this.headerPosition === 'bottom' ? this.$el.offsetWidth : this.$el.offsetHeight
@@ -122,13 +134,13 @@ export default {
       canvas.style.height = height + 'px'
       canvas.width = width
       canvas.height = height
-      const titleWidth = this.$refs.header.offsetWidth
-      const headerStandOutRealWidth = titleWidth - parseInt(this.cssVariables['header-stand-out-offset-x']) - (parseInt(this.headerSubBlockWidth) || parseInt(this.cssVariables['header-stand-out-sub-block-width']))
+      this.titleWidth = this.$refs.header.offsetWidth
+      this.headerStandOutRealWidth = this.titleWidth - parseInt(this.cssVariables['header-stand-out-offset-x']) - (parseInt(this.headerSubBlockWidth) || parseInt(this.cssVariables['header-stand-out-sub-block-width']))
       const ratio = parseInt(this.cssVariables['header-stand-out-height']) / (parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2)
       const lineHeader = () => {
         ctx.lineTo(width, parseInt(this.cssVariables['header-stand-out-height']))
-        ctx.lineTo(headerStandOutRealWidth + parseInt(this.cssVariables['header-stand-out-offset-x']), parseInt(this.cssVariables['header-stand-out-height']))
-        ctx.lineTo(headerStandOutRealWidth + parseInt(this.cssVariables['header-stand-out-offset-x']) - parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2, 0)
+        ctx.lineTo(this.headerStandOutRealWidth + parseInt(this.cssVariables['header-stand-out-offset-x']), parseInt(this.cssVariables['header-stand-out-height']))
+        ctx.lineTo(this.headerStandOutRealWidth + parseInt(this.cssVariables['header-stand-out-offset-x']) - parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2, 0)
         ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2, 0)
         ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']), parseInt(this.cssVariables['header-stand-out-height']))
         ctx.lineTo(0, parseInt(this.cssVariables['header-stand-out-height']))
@@ -147,12 +159,12 @@ export default {
       // const borderRadius = this.cssVariables['border-radius']
       // 最后面的黄色装饰
       ctx.save()
-      ctx.fillStyle = this.isActive ? this.cssVariables[`header-stand-out-sub-block-background-color-active${this.isHover ? '-hover' : ''}`] : this.cssVariables[`header-stand-out-sub-block-background-color-normal${this.isHover ? '-hover' : ''}`]
+      ctx.fillStyle = this.isCloseBtnHover ? this.cssVariables['header-stand-out-sub-block-background-color-hover'] : (this.isActive ? this.cssVariables[`header-stand-out-sub-block-background-color-active${this.isHover ? '-hover' : ''}`] : this.cssVariables[`header-stand-out-sub-block-background-color-normal${this.isHover ? '-hover' : ''}`])
       ctx.beginPath()
       ctx.moveTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2, parseInt(this.cssVariables['header-stand-out-height']) - parseInt(this.cssVariables['header-stand-out-sub-block-height']))
       ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2, parseInt(this.cssVariables['header-stand-out-height']))
-      ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + headerStandOutRealWidth + (parseInt(this.headerSubBlockWidth) || parseInt(this.cssVariables['header-stand-out-sub-block-width'])), parseInt(this.cssVariables['header-stand-out-height']))
-      ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + headerStandOutRealWidth + (parseInt(this.headerSubBlockWidth) || parseInt(this.cssVariables['header-stand-out-sub-block-width'])) - (parseInt(this.cssVariables['header-stand-out-sub-block-height']) / ratio), parseInt(this.cssVariables['header-stand-out-height']) - parseInt(this.cssVariables['header-stand-out-sub-block-height']))
+      ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + this.headerStandOutRealWidth + (parseInt(this.headerSubBlockWidth) || parseInt(this.cssVariables['header-stand-out-sub-block-width'])), parseInt(this.cssVariables['header-stand-out-height']))
+      ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + this.headerStandOutRealWidth + (parseInt(this.headerSubBlockWidth) || parseInt(this.cssVariables['header-stand-out-sub-block-width'])) - (parseInt(this.cssVariables['header-stand-out-sub-block-height']) / ratio), parseInt(this.cssVariables['header-stand-out-height']) - parseInt(this.cssVariables['header-stand-out-sub-block-height']))
       ctx.closePath()
       ctx.fill()
       ctx.restore()
@@ -217,25 +229,38 @@ export default {
       this.refreshBackground()
     },
     onMouseMove (evt) {
-      // console.log(evt)
-      this.refreshIsCloseBtnHover({ x: evt.offsetX, y: evt.offsetY })
+      console.log(this.closeable)
+      if (this.closeable) {
+        this.refreshIsCloseBtnHover({ x: evt.offsetX, y: evt.offsetY })
+      }
+    },
+    onHeaderClick () {
+      if (this.isCloseBtnHover) {
+        this.$emit('close')
+      }
     },
     refreshIsCloseBtnHover ({ x, y }) {
-      const closeBtnTop = 0
-      const closeBtnBottom = 1
+      const closeBtnBottom = parseInt(this.cssVariables['header-stand-out-height'])
+      const closeBtnTop = closeBtnBottom - parseInt(this.cssVariables['header-stand-out-sub-block-height'])
       // 从左到右4个横坐标
-      // const closeBtnX2 = parseInt(this.cssVariables['header-stand-out-offset-x']) + parseInt(this.cssVariables['header-stand-out-outer-min-width'])
-      // const closeBtnX1 = closeBtnX2 - parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2
-      // const closeBtnX3 = closeBtnX1 + parseInt(this.cssVariables['header-stand-out-sub-block-width'])
-      // const closeBtnX4 = closeBtnX2 + parseInt(this.cssVariables['header-stand-out-sub-block-width'])
-      console.log(x, y, closeBtnTop, closeBtnBottom, pointInPolygon({ x, y },
+      /*
+      * ctx.moveTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2, parseInt(this.cssVariables['header-stand-out-height']) - parseInt(this.cssVariables['header-stand-out-sub-block-height']))
+      * ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2, parseInt(this.cssVariables['header-stand-out-height']))
+      * ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + this.headerStandOutRealWidth + (parseInt(this.headerSubBlockWidth) || parseInt(this.cssVariables['header-stand-out-sub-block-width'])), parseInt(this.cssVariables['header-stand-out-height']))
+      * ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + this.headerStandOutRealWidth + (parseInt(this.headerSubBlockWidth) || parseInt(this.cssVariables['header-stand-out-sub-block-width'])) - (parseInt(this.cssVariables['header-stand-out-sub-block-height']) / ratio), parseInt(this.cssVariables['header-stand-out-height']) - parseInt(this.cssVariables['header-stand-out-sub-block-height']))
+      * */
+      const ratio = parseInt(this.cssVariables['header-stand-out-height']) / (parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2)
+      const closeBtnX3 = parseInt(this.cssVariables['header-stand-out-offset-x']) + this.headerStandOutRealWidth + (parseInt(this.headerSubBlockWidth) || parseInt(this.cssVariables['header-stand-out-sub-block-width'])) - (parseInt(this.cssVariables['header-stand-out-sub-block-height']) / ratio)
+      const closeBtnX4 = parseInt(this.cssVariables['header-stand-out-offset-x']) + this.headerStandOutRealWidth + (parseInt(this.headerSubBlockWidth) || parseInt(this.cssVariables['header-stand-out-sub-block-width']))
+      const closeBtnX2 = closeBtnX4 - parseInt(this.cssVariables['header-stand-out-sub-block-width'])
+      const closeBtnX1 = closeBtnX3 - parseInt(this.cssVariables['header-stand-out-sub-block-width'])
+      this.isCloseBtnHover = pointInPolygon({ x, y },
         [
-          { x: 0, y: closeBtnTop },
-          { x: 200, y: closeBtnTop },
-          { x: 200, y: closeBtnBottom },
-          { x: 0, y: closeBtnBottom }
+          { x: closeBtnX1, y: closeBtnTop },
+          { x: closeBtnX3, y: closeBtnTop },
+          { x: closeBtnX4, y: closeBtnBottom },
+          { x: closeBtnX2, y: closeBtnBottom }
         ])
-      )
     },
     fixDialogPos () {
       if (!this.isStatic) {
@@ -293,6 +318,17 @@ export default {
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.callbackOnResize)
+  },
+  watch: {
+    isCloseBtnHover () {
+      this.refreshBackground()
+    },
+    visible () {
+      this.isCloseBtnHover = false
+      this.$nextTick(() => {
+        this.refreshBackground()
+      })
+    }
   }
 }
 </script>

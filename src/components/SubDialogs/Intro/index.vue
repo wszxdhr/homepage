@@ -2,7 +2,9 @@
   <div class="intro-dialog-wrap">
     <hp-dialog :visible="visible"
                @update:visible="$emit('update:visible', $event)"
+               @close="$emit('update:visible', false)"
                ref="mainDialog"
+               closeable
                class="intro-dialog"
                :left="`calc(50vw - (${mainDialogWidth}px + ${detailDialogWidth}px) / 2)`" top="calc((50vh - 160px) / 2)" :width="`${mainDialogWidth}px`"
                title="爱我中华">
@@ -28,8 +30,10 @@
     </hp-dialog>
     <hp-dialog :visible="visible"
                @update:visible="$emit('update:visible', $event)"
+               @close="$emit('update:visible', false)"
                ref="detailDialog"
                class="intro-dialog-detail"
+               closeable
                :left="`calc(50vw - (${mainDialogWidth}px + ${detailDialogWidth}px) / 2 + ${mainDialogWidth}px + 20px)`" top="calc((50vh - 160px) / 2)" :width="`${detailDialogWidth}px`"
                title="爱我中华">
       <hp-sub-dialog title="PERSONAL INFORMATION">

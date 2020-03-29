@@ -36,7 +36,7 @@
           <hp-menu-item title="吃吃喝喝" content="吃吃喝喝吃吃喝喝" @click="introVisible = true">
             <i class="iconfont icon-github" slot="icon"></i>
           </hp-menu-item>
-          <hp-menu-item title="吃吃喝喝2" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝">
+          <hp-menu-item title="吃吃喝喝2" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝" @click="skillVisible = true">
             <i class="iconfont icon-work" slot="icon"></i>
           </hp-menu-item>
           <hp-menu-item title="吃吃喝喝3" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝">
@@ -51,6 +51,7 @@
     <!--<hp-dialog>-->
     <!--</hp-dialog>-->
     <intro-dialog :visible.sync="introVisible"></intro-dialog>
+    <skill-dialog :visible.sync="skillVisible"></skill-dialog>
   </div>
 </template>
 
@@ -60,6 +61,7 @@ import cssBase from '@/assets/style/base.scss'
 import CharDance from '@/components/CharDance/index'
 import TimeDisplay from '@/components/Time/index'
 import IntroDialog from '@/components/SubDialogs/Intro/index'
+import SkillDialog from '@/components/SubDialogs/Skill/index'
 import chars from '@/assets/chars.json'
 
 export default {
@@ -71,7 +73,8 @@ export default {
       window,
       charsIndex: 0,
       timeType: '24',
-      introVisible: false
+      introVisible: false,
+      skillVisible: false
     }
   },
   methods: {
@@ -86,7 +89,8 @@ export default {
   components: {
     CharDance,
     TimeDisplay,
-    IntroDialog
+    IntroDialog,
+    SkillDialog
   }
 }
 </script>

@@ -7,6 +7,7 @@ $base-gray-dark: rgb(34, 37, 39);
 $base-gray-very-dark: rgb(29, 29, 31);
 $base-white: #fff;
 $base-black: #111111;
+$base-danger: rgb(179, 78, 74);
 
 // 按钮
 $button-padding-top: 10px;
@@ -39,6 +40,7 @@ $dialog-header-stand-out-offset-x: 30px;
 $dialog-header-stand-out-outer-and-inner-subtract: 40px;
 $dialog-header-stand-out-sub-block-background-color-active: $base-color;
 $dialog-header-stand-out-sub-block-background-color-normal: $base-gray-light;
+$dialog-header-stand-out-sub-block-background-color-hover: $base-danger;
 $dialog-header-stand-out-sub-block-width: 60px;
 $dialog-header-stand-out-sub-block-height: 10px;
 $dialog-content-padding: 20px;

@@ -7,6 +7,14 @@
 * 2. 刚好和某一条线段重叠
 * */
 
+// function isBetween (x1, x2, xTest) {
+//   return (xTest >= x1 && xTest <= x2) || (xTest >= x2 && xTest <= x1)
+// }
+
+function crossMul (v1, v2) {
+  return v1.x * v2.y - v1.y * v2.x
+}
+
 class Line {
   constructor (x1, y1, x2, y2) {
     this.x1 = x1
@@ -16,19 +24,48 @@ class Line {
   }
 
   getIsCross (line) {
-    /*
-    * (x - this.x1) * (this.y2 - this.y1) / (this.x2 - this.x1) + this.y1 = (x - line.x1) * (line.y2 - line.y1) / (line.x2 - line.x1) + line.y1
-    * x * (this.y2 - this.y1) / (this.x2 - this.x1) - this.x1 * (this.y2 - this.y1) / (this.x2 - this.x1) + this.y1 = x * (line.y2 - line.y1) / (line.x2 - line.x1) - line.x1 * (line.y2 - line.y1) / (line.x2 - line.x1) + line.y1
-    * x = (- line.x1 * (line.y2 - line.y1) / (line.x2 - line.x1) + line.y1 + this.x1 * (this.y2 - this.y1) / (this.x2 - this.x1) - this.y1) / ((this.y2 - this.y1) / (this.x2 - this.x1) - (line.y2 - line.y1) / (line.x2 - line.x1))
-    *
-    * (y - this.y1) / (this.y2 - this.y1) = (x - this.x1) / (this.x2 -  this.x1)
-    * y = (x - this.x1) / (this.x2 -  this.x1) * (this.y2 - this.y1) + this.y1
-    * */
-    const denominator = (this.y2 - this.y1) * (line.x2 - line.x1) - (this.x1 - this.x2) * (line.y1 - line.y2)
-    const crossX = ((this.x1 - this.x1) * (line.x2 - line.x1) * (line.y1 - this.y1) + (this.y2 - this.y1) * (line.x2 - line.x1) * this.x1 - (line.y2 - line.y1) * (this.x2 - this.x1) * line.x1) / denominator
-    const crossY = -((this.y2 - this.y1) * (line.y2 - line.y1) * (line.x1 - this.x1) + (this.x2 - this.x1) * (line.y2 - line.y1) * this.y1 - (line.x2 - line.x1) * (this.y2 - this.y1) * line.y1) / denominator
-    // console.log('crossX = ', crossX, 'x1 = ', this.x1, 'x2 = ', this.x2)
-    return !isNaN(crossX) && !isNaN(crossY) && (crossX - line.x1) * (crossX - line.x2) <= 0 && (crossY - line.y1) * (crossY - line.y2) <= 0
+    const p1 = {
+      x: line.x1,
+      y: line.y1
+    }
+    const p2 = {
+      x: line.x2,
+      y: line.y2
+    }
+    const p3 = {
+      x: this.x1,
+      y: this.y1
+    }
+    const p4 = {
+      x: this.x2,
+      y: this.y2
+    }
+    let v1 = {
+      x: p1.x - p3.x,
+      y: p1.y - p3.y
+    }
+    let v2 = {
+      x: p2.x - p3.x,
+      y: p2.y - p3.y
+    }
+    let v3 = {
+      x: p4.x - p3.x,
+      y: p4.y - p3.y
+    }
+    const v = crossMul(v1, v3) * crossMul(v2, v3)
+    v1 = {
+      x: p3.x - p1.x,
+      y: p3.y - p1.y
+    }
+    v2 = {
+      x: p4.x - p1.x,
+      y: p4.y - p1.y
+    }
+    v3 = {
+      x: p2.x - p1.x,
+      y: p2.y - p1.y
+    }
+    return (v <= 0 && crossMul(v1, v3) * crossMul(v2, v3) <= 0)
   }
 }
 
@@ -47,6 +84,6 @@ export default function ({ x = null, y = null } = {}, polygon = []) {
       result++
     }
   })
-  // console.log(result)
+  console.log('result', result)
   return !!(result % 2)
 }
