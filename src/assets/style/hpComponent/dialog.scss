@@ -127,15 +127,17 @@
 .hp-block {
   background-color: $base-gray-very-dark;
   position: relative;
-  &:after {
-    content: '';
-    width: 4px;
-    height: 4px;
-    display: block;
-    background-color: $base-white;
-    position: absolute;
-    top: 0;
-    left: -8px;
+  &.has-dot {
+    &:after {
+      content: '';
+      width: 4px;
+      height: 4px;
+      display: block;
+      background-color: $base-white;
+      position: absolute;
+      top: 0;
+      left: -8px;
+    }
   }
   &.is-transparent {
     background-color: transparent;

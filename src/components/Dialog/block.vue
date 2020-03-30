@@ -1,5 +1,5 @@
 <template>
-  <div :class="['hp-block', {'is-transparent': transparent}]">
+  <div :class="['hp-block', {'is-transparent': transparent, 'has-dot': hasDot}]">
     <slot></slot>
   </div>
 </template>
@@ -11,6 +11,10 @@ export default {
     transparent: {
       type: Boolean,
       default: false
+    },
+    hasDot: {
+      type: Boolean,
+      default: true
     }
   }
 }

@@ -9,7 +9,20 @@
                width="500px"
                ref="mainDialog"
                title="伟大复兴">
-      <hp-sub-dialog title="MY SKILLS"></hp-sub-dialog>
+      <hp-sub-dialog title="MY SKILLS" class="skill-dialog-content">
+        <hp-block>
+          <hp-text-display text="个人技能" size="large" type="white" background="gray-dark"></hp-text-display>
+        </hp-block>
+        <hp-block>
+          <hp-text-display text="SELECT A SKILL TO VIEW DETAILS" size="mini" type="white" background="gray-light"></hp-text-display>
+        </hp-block>
+        <hp-block :has-dot="false" transparent>
+          123
+        </hp-block>
+        <hp-block>
+          <hp-text-display text="SKILL DETAILS" size="mini" type="gray" background="primary"></hp-text-display>
+        </hp-block>
+      </hp-sub-dialog>
     </hp-dialog>
   </div>
 </template>
@@ -36,3 +49,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .skill-dialog-wrap {
+    .skill-dialog-content {
+      .hp-block + .hp-block {
+        margin-top: 20px;
+      }
+    }
+  }
+</style>

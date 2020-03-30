@@ -2,68 +2,110 @@
 
 .hp-text-display {
   font-weight: 400;
-  padding: 2px 20px 2px 10px;
-  &.text-display_size-default {
-    font-size: 28px;
-    line-height: 28px;
-    & > * {
+  display: flex;
+  justify-content: space-between;
+  .hp-text-display_text {
+    padding: 2px 20px 2px 10px;
+  }
+  &_right {
+  }
+  &.text-display_size {
+    &-default {
+      font-size: 28px;
       line-height: 28px;
+      & > * {
+        line-height: 28px;
+      }
     }
-  }
-  &.text-display_size-large {
-    font-size: 40px;
-    line-height: 40px;
-    & > * {
+    &-large {
+      font-size: 40px;
       line-height: 40px;
+      & > * {
+        line-height: 40px;
+      }
     }
-  }
-  &.text-display_size-small {
-    font-size: 20px;
-    line-height: 20px;
-    & > * {
+    &-small {
+      font-size: 20px;
       line-height: 20px;
+      & > * {
+        line-height: 20px;
+      }
     }
   }
-  &.text-display_primary {
-    background-color: $base-color;
-    color: $base-gray-very-dark;
-    & > * {
-      color: $base-gray-very-dark;
+  &.text-display_background {
+    &-primary {
+      background-color: $base-color;
+    }
+    &-black {
+      background-color: $base-black;
+    }
+    &-white {
+      background-color: $base-white;
+    }
+    &-gray {
+      background-color: $base-gray;
+    }
+    &-gray-light {
+      background-color: $base-gray-light;
+    }
+    &-gray-dark {
+      background-color: $base-gray-dark;
+    }
+    &-gray-common-dark {
+      background-color: $base-gray-common-dark;
+    }
+    &-transparent {
+      background-color: transparent;
     }
   }
-  &.text-display_black {
-    background-color: $base-black;
-    color: $base-white;
-    & > * {
+  .text-display_color {
+    &-primary {
+      color: $base-color;
+      & > * {
+        color: $base-color;
+      }
+    }
+    &-black {
+      color: $base-black;
+      & > * {
+        color: $base-black;
+      }
+    }
+    &-white {
       color: $base-white;
+      & > * {
+        color: $base-white;
+      }
     }
-  }
-  &.text-display_gray {
-    background-color: $base-gray;
-    color: $base-white;
-    & > * {
-      color: $base-white;
+    &-gray {
+      color: $base-gray;
+      & > * {
+        color: $base-gray;
+      }
     }
-  }
-  &.text-display_gray-light {
-    background-color: $base-gray-light;
-    color: $base-white;
-    & > * {
-      color: $base-white;
+    &-gray-light {
+      color: $base-gray-light;
+      & > * {
+        color: $base-gray-light;
+      }
     }
-  }
-  &.text-display_gray-dark {
-    background-color: $base-gray-dark;
-    color: $base-white;
-    & > * {
-      color: $base-white;
+    &-gray-dark {
+      color: $base-gray-dark;
+      & > * {
+        color: $base-gray-dark;
+      }
     }
-  }
-  &.text-display_transparent {
-    background-color: transparent;
-    color: $base-gray-light;
-    & > * {
-      color: $base-white;
+    &-gray-common-dark {
+      color: $base-gray-common-dark;
+      & > * {
+        color: $base-gray-common-dark;
+      }
+    }
+    &-transparent {
+      color: transparent;
+      & > * {
+        color: transparent;
+      }
     }
   }
 }

@@ -13,8 +13,8 @@
                   :width="600"
                   :height="600"
                   animate-on-init></char-dance>
-      <hp-text-display text="哈呵吼呼" type="primary" size="small" class="title"></hp-text-display>
-      <hp-text-display type="black" size="large" text="HAHAHEHEHOHO" class="sub-title"></hp-text-display>
+      <hp-text-display text="哈呵吼呼" type="gray" size="small" class="title"></hp-text-display>
+      <hp-text-display type="white" size="large" text="HAHAHEHEHOHO" class="sub-title" background="gray-dark"></hp-text-display>
     </hp-dialog>
     <hp-dialog class="time-dialog" content-class="time-dialog_content" left="calc(100vw - 400px - 40px)" top="70px" width="400px" title="TIME" header-min-width="80px" header-sub-block-width="50">
       <hp-sub-dialog title="TIME IN CURRENT TIME ZONE">
