@@ -7,6 +7,7 @@
                left="calc(50vw - 500px / 2)"
                top="calc(50vh - 600px / 2)"
                width="500px"
+               ref="mainDialog"
                title="伟大复兴">
       <hp-sub-dialog title="MY SKILLS"></hp-sub-dialog>
     </hp-dialog>
@@ -24,6 +25,13 @@ export default {
   },
   data () {
     return {
+    }
+  },
+  watch: {
+    visible (val) {
+      if (val && this.$refs && this.$refs.mainDialog) {
+        this.$refs.mainDialog.setActive(true)
+      }
     }
   }
 }
