@@ -11,7 +11,7 @@
                title="伟大复兴">
       <hp-sub-dialog title="MY SKILLS" class="skill-dialog-content">
         <hp-block>
-          <hp-text-display text="个人技能" size="large" type="white" background="gray-dark"></hp-text-display>
+          <hp-text-display text="个人技能" size="large" type="white" right-type="primary" right-text="SKILLS" background="gray-dark"></hp-text-display>
         </hp-block>
         <hp-block>
           <hp-text-display text="SELECT A SKILL TO VIEW DETAILS" size="mini" type="white" background="gray-light"></hp-text-display>
