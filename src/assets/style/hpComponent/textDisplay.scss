@@ -31,6 +31,13 @@
         line-height: 20px;
       }
     }
+    &-mini {
+      font-size: 12px;
+      line-height: 12px;
+      & > * {
+        line-height: 12px;
+      }
+    }
   }
   &.text-display_background {
     &-primary {

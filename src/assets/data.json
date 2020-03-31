@@ -1,0 +1,47 @@
+{
+  "skills": [{
+    "name": "Vue.js",
+    "image": "https://cn.vuejs.org/images/logo.png",
+    "text": "作者：尤雨溪",
+    "list": [{
+      "label": "熟悉情况",
+      "value": "比较熟悉"
+    }, {
+      "label": "项目使用情况",
+      "value": "绝大多数项目"
+    }]
+  }, {
+    "name": "NodeJs",
+    "image": "https://nodejs.org/static/images/logo.svg",
+    "text": "作者：尤雨溪",
+    "list": [{
+      "label": "熟悉情况",
+      "value": "比较熟悉"
+    }, {
+      "label": "项目使用情况",
+      "value": "绝大多数项目"
+    }]
+  }, {
+    "name": "Electron.js",
+    "image": "https://cn.vuejs.org/images/logo.png",
+    "text": "作者：尤雨溪",
+    "list": [{
+      "label": "熟悉情况",
+      "value": "比较熟悉"
+    }, {
+      "label": "项目使用情况",
+      "value": "绝大多数项目"
+    }]
+  }, {
+    "name": "其他",
+    "image": "https://cn.vuejs.org/images/logo.png",
+    "text": "作者：尤雨溪",
+    "list": [{
+      "label": "熟悉情况",
+      "value": "比较熟悉"
+    }, {
+      "label": "项目使用情况",
+      "value": "绝大多数项目"
+    }]
+  }]
+}

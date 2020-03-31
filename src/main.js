@@ -3,9 +3,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import '@/assets/style/index.scss'
+import DataJson from '@/assets/data'
 import './setup.js'
 
 Vue.config.productionTip = false
+
+Vue.prototype.$dataJson = DataJson
 
 new Vue({
   router,
