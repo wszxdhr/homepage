@@ -36,7 +36,9 @@
         </hp-block>
         <ul class="skill-detail-list" v-if="activeSkill !== null">
           <li class="skill-detail-item" v-for="(skillDetail, $skillDetailIndex) in $dataJson.skills[activeSkill].list" :key="$skillDetailIndex">
-            <hp-text-display :text="skillDetail.label" size="mini" background="transparent" type="white"></hp-text-display>
+            <hp-text-display class="skill-detail-item_counter" :text="`${String.fromCharCode($skillDetailIndex + 65)}:${($skillDetailIndex + 1 + '').padStart(2, '0')}`" size="mini" background="transparent" type="white"></hp-text-display>
+            <hp-text-display class="skill-detail-item_label" :text="skillDetail.label" size="mini" background="transparent" type="white"></hp-text-display>
+            <hp-text-display class="skill-detail-item_value" :text="`<${skillDetail.value}>`" size="mini" background="transparent" type="white" align="center"></hp-text-display>
           </li>
         </ul>
       </hp-sub-dialog>
@@ -86,6 +88,7 @@ export default {
       display: flex;
       justify-content: space-between;
       .skill-item {
+        position: relative;
         &_icon {
           filter: grayscale(0.76);
           transition: .3s all;
@@ -105,12 +108,63 @@ export default {
           transform: scale(.7) translateX(-10px);
           transform-origin: left;
         }
-        &:hover, &.active {
+        &:before {
+          content: '';
+          display: block;
+          border: 1px solid rgba($base-color, .6);
+          width: 6px;
+          height: 6px;
+          position: absolute;
+          top: 155px;
+          right: 14px;
+        }
+        &:after {
+          content: '';
+          border: 1px solid rgba($base-gray-very-light, .6);
+          width: 6px;
+          height: 6px;
+          position: absolute;
+          top: 155px;
+          right: 0;
+          display: none;
+        }
+        &:hover {
+          .skill-item_icon {
+            filter: grayscale(0);
+          }
+          &:before {
+            border: 1px solid rgba($base-color, 1);
+          }
+          &:after {
+            display: block;
+          }
+        }
+        &.active {
           .skill-item_icon {
             filter: grayscale(0);
           }
           .skill-item_name-inner {
             background-color: $base-color;
+          }
+        }
+      }
+    }
+    .skill-detail-list {
+      .skill-detail-item {
+        display: flex;
+        margin: 30px 0 30px 4px;
+        &_label {
+          flex: 1;
+        }
+        &_value {
+          width: 180px;
+          & > * {
+            width: 100%;
+          }
+        }
+        &:hover {
+          * {
+            color: $base-color;
           }
         }
       }

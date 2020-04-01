@@ -4,13 +4,14 @@
     left: moveInfo && typeof moveInfo.x === 'number' ? moveInfo.x + 'px' : left,
     width, height,
     position: (isStatic ? 'static' : 'fixed'), zIndex
-  }" @mousedown="setActive(true, $event)" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+  }" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <canvas class="hp-dialog_background" ref="background"></canvas>
     <div class="hp-dialog_header-wrapper"
          ref="header"
          @mousemove="onMouseMove"
          @mouseleave="isCloseBtnHover = false"
          @click="onHeaderClick"
+         @mousedown="setActive(true, $event)"
          :style="{width: headerWidth, minWidth: headerMinWidth, paddingRight: this.headerSubBlockWidth ? parseInt(headerSubBlockWidth) + parseInt(cssVariables['header-stand-out-outer-and-inner-subtract']) / 2 + 'px' : ''}">
       <div class="hp-dialog_header">
         <h2>{{title}}</h2>
@@ -106,6 +107,7 @@ export default {
       zIndex: ++activeManage.maxZIndex,
       moveInfo: null,
       isHover: false,
+      isMoving: false,
       isCloseBtnHover: false,
       callbackOnResize: null,
       titleWidth: 0,
@@ -158,7 +160,7 @@ export default {
       // const borderRadius = this.cssVariables['border-radius']
       // 最后面的黄色装饰
       ctx.save()
-      ctx.fillStyle = this.isCloseBtnHover ? this.cssVariables['header-stand-out-sub-block-background-color-hover'] : (this.isActive ? this.cssVariables[`header-stand-out-sub-block-background-color-active${this.isHover ? '-hover' : ''}`] : this.cssVariables[`header-stand-out-sub-block-background-color-normal${this.isHover ? '-hover' : ''}`])
+      ctx.fillStyle = this.isCloseBtnHover ? this.cssVariables['header-stand-out-sub-block-background-color-hover'] : (this.isActive ? this.cssVariables[`header-stand-out-sub-block-background-color-active${this.isHover && !this.isMoving ? '-hover' : ''}`] : this.cssVariables[`header-stand-out-sub-block-background-color-normal${this.isHover && !this.isMoving ? '-hover' : ''}`])
       ctx.beginPath()
       ctx.moveTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2, parseInt(this.cssVariables['header-stand-out-height']) - parseInt(this.cssVariables['header-stand-out-sub-block-height']))
       ctx.lineTo(parseInt(this.cssVariables['header-stand-out-offset-x']) + parseInt(this.cssVariables['header-stand-out-outer-and-inner-subtract']) / 2, parseInt(this.cssVariables['header-stand-out-height']))
@@ -195,6 +197,7 @@ export default {
       ctx.restore()
     },
     startMove (evt) {
+      this.isMoving = true
       this.moveInfo = {
         startX: this.$el.offsetLeft,
         startY: this.$el.offsetTop,
@@ -217,6 +220,7 @@ export default {
       document.addEventListener('mouseup', moveEnd)
     },
     endMove (evt) {
+      this.isMoving = false
       this.fixDialogPos()
     },
     onMouseEnter () {
@@ -228,7 +232,7 @@ export default {
       this.refreshBackground()
     },
     onMouseMove (evt) {
-      if (this.closeable) {
+      if (this.closeable && !this.isMoving) {
         this.refreshIsCloseBtnHover({ x: evt.offsetX, y: evt.offsetY })
       }
     },

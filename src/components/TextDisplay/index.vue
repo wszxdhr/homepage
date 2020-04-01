@@ -1,5 +1,5 @@
 <template>
-  <div :class="['hp-text-display', `text-display_background-${background}`, `text-display_size-${size}`]">
+  <div :class="['hp-text-display', `text-display_background-${background}`, `text-display_size-${size}`]" :style="{textAlign: align}">
     <p :class="['hp-text-display_text', 'hp-text-display_left', type ? `text-display_color-${type}` : '']"
        v-if="text || ($slots.default && $slots.default.length)">
       <slot></slot>
@@ -38,6 +38,10 @@ export default {
       default: ''
     },
     rightText: {
+      type: String,
+      default: ''
+    },
+    align: {
       type: String,
       default: ''
     }
