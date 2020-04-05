@@ -33,13 +33,13 @@
     <hp-dialog class="menu-dialog" left="40px" top="164px" width="400px" title="MENU" header-min-width="80px" header-sub-block-width="50">
       <hp-sub-dialog title="CHOOSE A INTRO">
         <hp-menu>
-          <hp-menu-item title="吃吃喝喝" content="吃吃喝喝吃吃喝喝" @click="introVisible = true">
+          <hp-menu-item title="吃吃喝喝" content="吃吃喝喝吃吃喝喝" @click="$refs.introDialog.setActive()">
             <i class="iconfont icon-github" slot="icon"></i>
           </hp-menu-item>
-          <hp-menu-item title="吃吃喝喝2" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝" @click="skillVisible = true">
+          <hp-menu-item title="吃吃喝喝2" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝" @click="$refs.skillDialog.setActive()">
             <i class="iconfont icon-work" slot="icon"></i>
           </hp-menu-item>
-          <hp-menu-item title="吃吃喝喝3" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝">
+          <hp-menu-item title="吃吃喝喝3" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝" @click="$refs.workDialog.setActive()">
             <i class="iconfont icon-github" slot="icon"></i>
           </hp-menu-item>
           <hp-menu-item title="吃吃喝喝4" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝">
@@ -50,8 +50,9 @@
     </hp-dialog>
     <!--<hp-dialog>-->
     <!--</hp-dialog>-->
-    <intro-dialog :visible.sync="introVisible"></intro-dialog>
-    <skill-dialog :visible.sync="skillVisible"></skill-dialog>
+    <intro-dialog ref="introDialog"></intro-dialog>
+    <skill-dialog ref="skillDialog"></skill-dialog>
+    <work-dialog ref="workDialog"></work-dialog>
   </div>
 </template>
 
@@ -62,6 +63,7 @@ import CharDance from '@/components/CharDance/index'
 import TimeDisplay from '@/components/Time/index'
 import IntroDialog from '@/components/SubDialogs/Intro/index'
 import SkillDialog from '@/components/SubDialogs/Skill/index'
+import WorkDialog from '@/components/SubDialogs/Work/index'
 import chars from '@/assets/chars.json'
 
 export default {
@@ -72,9 +74,7 @@ export default {
       chars,
       window,
       charsIndex: 0,
-      timeType: '24',
-      introVisible: false,
-      skillVisible: false
+      timeType: '24'
     }
   },
   methods: {
@@ -90,7 +90,8 @@ export default {
     CharDance,
     TimeDisplay,
     IntroDialog,
-    SkillDialog
+    SkillDialog,
+    WorkDialog
   }
 }
 </script>

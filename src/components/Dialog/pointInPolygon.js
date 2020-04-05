@@ -15,6 +15,16 @@ function crossMul (v1, v2) {
   return v1.x * v2.y - v1.y * v2.x
 }
 
+function allEqual (...args) {
+  const value = args[0]
+  for (const item of args) {
+    if (item !== value) {
+      return false
+    }
+  }
+  return true
+}
+
 class Line {
   constructor (x1, y1, x2, y2) {
     this.x1 = x1
@@ -79,9 +89,19 @@ export default function ({ x = null, y = null } = {}, polygon = []) {
     polygonLines.push(new Line(polygon[i].x, polygon[i].y, nextPolygonPoint.x, nextPolygonPoint.y))
   }
   // console.log(polygonLines)
+  const lineList = new Set()
   polygonLines.forEach((polygonLine) => {
     if (polygonLine.getIsCross(line)) {
-      result++
+      const lineStr = `${polygonLine.x1},${polygonLine.x2},${polygonLine.y1},${polygonLine.y2}`
+      if (!lineList.has(lineStr)) {
+        // fixme:单独兼容两条线段重合的情况，重合时+2，否则+1
+        if (allEqual(line.y1, line.y2, polygonLine.y1, polygonLine.y2)) {
+          result += 2
+        } else {
+          result++
+        }
+        lineList.add(lineStr)
+      }
     }
   })
   return !!(result % 2)

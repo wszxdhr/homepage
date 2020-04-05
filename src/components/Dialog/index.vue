@@ -4,14 +4,16 @@
     left: moveInfo && typeof moveInfo.x === 'number' ? moveInfo.x + 'px' : left,
     width, height,
     position: (isStatic ? 'static' : 'fixed'), zIndex
-  }" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+  }"
+     @mousedown="setActive(true, $event)"
+     @mouseenter="onMouseEnter"
+     @mouseleave="onMouseLeave">
     <canvas class="hp-dialog_background" ref="background"></canvas>
     <div class="hp-dialog_header-wrapper"
          ref="header"
          @mousemove="onMouseMove"
          @mouseleave="isCloseBtnHover = false"
          @click="onHeaderClick"
-         @mousedown="setActive(true, $event)"
          :style="{width: headerWidth, minWidth: headerMinWidth, paddingRight: this.headerSubBlockWidth ? parseInt(headerSubBlockWidth) + parseInt(cssVariables['header-stand-out-outer-and-inner-subtract']) / 2 + 'px' : ''}">
       <div class="hp-dialog_header">
         <h2>{{title}}</h2>
@@ -233,15 +235,16 @@ export default {
     },
     onMouseMove (evt) {
       if (this.closeable && !this.isMoving) {
-        this.refreshIsCloseBtnHover({ x: evt.offsetX, y: evt.offsetY })
+        this.refreshIsCloseBtnHover({ x: evt.offsetX, y: evt.offsetY }, evt)
       }
     },
     onHeaderClick () {
       if (this.isCloseBtnHover) {
         this.$emit('close')
+        this.$emit('update:visible', false)
       }
     },
-    refreshIsCloseBtnHover ({ x, y }) {
+    refreshIsCloseBtnHover ({ x, y }, evt) {
       const closeBtnBottom = parseInt(this.cssVariables['header-stand-out-height'])
       const closeBtnTop = closeBtnBottom - parseInt(this.cssVariables['header-stand-out-sub-block-height'])
       // 从左到右4个横坐标
@@ -256,6 +259,7 @@ export default {
       const closeBtnX4 = parseInt(this.cssVariables['header-stand-out-offset-x']) + this.headerStandOutRealWidth + (parseInt(this.headerSubBlockWidth) || parseInt(this.cssVariables['header-stand-out-sub-block-width']))
       const closeBtnX2 = closeBtnX4 - parseInt(this.cssVariables['header-stand-out-sub-block-width'])
       const closeBtnX1 = closeBtnX3 - parseInt(this.cssVariables['header-stand-out-sub-block-width'])
+      console.log(evt.target)
       this.isCloseBtnHover = pointInPolygon({ x, y },
         [
           { x: closeBtnX1, y: closeBtnTop },
@@ -286,9 +290,13 @@ export default {
       }
     },
     setActive (value, evt) {
+      let isInHeader = false
       if (!this.isStatic) {
         if (evt) {
           evt.preventDefault()
+          if (evt.path.includes(this.$refs.header)) {
+            isInHeader = true
+          }
         }
         this.isActive = value
         if (value) {
@@ -297,7 +305,7 @@ export default {
           }
           activeManage.currentActive = this
           this.zIndex = ++activeManage.maxZIndex
-          if (evt && this.movable) {
+          if (this.movable && isInHeader) {
             this.startMove(evt)
           }
         }

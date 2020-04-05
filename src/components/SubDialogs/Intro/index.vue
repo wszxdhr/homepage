@@ -1,8 +1,6 @@
 <template>
   <div class="intro-dialog-wrap">
-    <hp-dialog :visible="visible"
-               @update:visible="$emit('update:visible', $event)"
-               @close="$emit('update:visible', false)"
+    <hp-dialog :visible.sync="visible"
                ref="mainDialog"
                closeable
                class="intro-dialog"
@@ -11,7 +9,7 @@
       <hp-sub-dialog title="PERSONAL INFORMATION">
         <div class="intro-dialog-inner">
           <p class="text-color-primary text-size-common tac">
-            张  潇
+            张 潇
           </p>
           <img src="@/assets/images/Person.jpg" alt="" class="person-image"/>
           <p class="gender-and-age">
@@ -28,9 +26,7 @@
         </div>
       </hp-sub-dialog>
     </hp-dialog>
-    <hp-dialog :visible="visible"
-               @update:visible="$emit('update:visible', $event)"
-               @close="$emit('update:visible', false)"
+    <hp-dialog :visible.sync="visible"
                ref="detailDialog"
                class="intro-dialog-detail"
                closeable
@@ -61,13 +57,15 @@
 </template>
 
 <script>
+import Mixin from '../mixin'
 export default {
   name: 'IntroDialog',
+  mixins: [Mixin],
   props: {
-    visible: {
-      type: Boolean,
-      default: false
-    }
+    // visible: {
+    //   type: Boolean,
+    //   default: false
+    // }
   },
   data () {
     return {
@@ -75,13 +73,19 @@ export default {
       detailDialogWidth: 600
     }
   },
-  watch: {
-    visible (val) {
-      if (val && this.$refs && this.$refs.mainDialog && this.$refs.detailDialog) {
-        this.$refs.detailDialog.setActive(true)
-        this.$refs.mainDialog.setActive(true)
-      }
+  computed: {
+    dialogs () {
+      return this.$refs ? [this.$refs.mainDialog, this.$refs.detailDialog] : []
     }
+  },
+  methods: {
+  },
+  watch: {
+    // visible (val) {
+    //   if (val) {
+    //     this.setActive()
+    //   }
+    // }
   }
 }
 </script>

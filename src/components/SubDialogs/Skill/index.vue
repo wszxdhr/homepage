@@ -1,8 +1,6 @@
 <template>
   <div class="skill-dialog-wrap">
-    <hp-dialog :visible="visible"
-               @update:visible="$emit('update:visible', $event)"
-               @close="$emit('update:visible', false)"
+    <hp-dialog :visible.sync="visible"
                closeable
                :left="`calc(50vw - ${width}px / 2)`"
                top="calc(50vh - 600px / 2)"
@@ -47,31 +45,35 @@
 </template>
 
 <script>
+import Mixin from '../mixin'
 export default {
   name: 'SkillDialogWrap',
+  mixins: [Mixin],
   props: {
-    visible: {
-      type: Boolean,
-      default: false
-    }
+    // visible: {
+    //   type: Boolean,
+    //   default: false
+    // }
   },
   data () {
     return {
       activeSkill: null
     }
   },
+  methods: {
+  },
   computed: {
+    dialogs () {
+      return this.$refs ? [this.$refs.mainDialog] : []
+    },
     width () {
       // 一个图片100px，间隙20px，加上dialog外框4 * 20
       return (this.$dataJson.skills.length) * 100 + (this.$dataJson.skills.length) * 20 + 80
     }
   },
   watch: {
-    visible (val) {
-      if (val && this.$refs && this.$refs.mainDialog) {
-        this.$refs.mainDialog.setActive(true)
-      }
-    }
+    // visible (val) {
+    // }
   }
 }
 </script>
