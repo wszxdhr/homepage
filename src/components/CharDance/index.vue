@@ -11,14 +11,17 @@ const HANDLE_ANIMATE_LIST_DELAY = 10
 export default {
   name: 'CharDance',
   props: {
+    // 字符画数组
     rect: {
       default: () => ([]),
       type: Array
     },
+    // 是否在初始化时播放
     animateOnInit: {
       default: false,
       type: Boolean
     },
+    // 随机出现的字符集
     transChar: {
       default: '+',
       type: [String, Array]
@@ -29,6 +32,7 @@ export default {
     height: {
       default: 800
     },
+    // 字符颜色
     color: {
       type: String,
       default: '#000'
@@ -37,10 +41,12 @@ export default {
   data () {
     return {
       display: [],
+      // 渲染队列
       queue: [],
-      oldRect: this.rect,
+      // 正在播放的字符列表
       dancingList: [],
       focusList: [],
+      // 是否正在播放动画
       isDancing: false,
       ctx: null
     }
