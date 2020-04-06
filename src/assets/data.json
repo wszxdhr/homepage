@@ -45,13 +45,18 @@
     }]
   }],
   "works": [{
-    "company": "某某某有限公司",
+    "company": "个推",
+    "companyName": "每日互动网络科技股份有限公司",
     "address": {
       "title": "某某某有限公司大楼",
       "desc": "的3楼的一间小屋",
-      "image": "https://cn.vuejs.org/images/logo.png"
+      "image": "https://blog-file.anymelon.com/getui_address.mp4",
+      "markerStyle": {
+        "top": "33.6%",
+        "left": "18.5%"
+      }
     },
-    "timeRange": ["2017-02", "2017-08"],
+    "timeRange": ["2017.02", "2017.08"],
     "job": "前端开发工程师",
     "tags": ["Vue.js", "标签2", "标签3"],
     "mainWork": ["划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水", "划水划水划水划水划水划水划水", "划水划水划水划水划水划水划水划水划水划水划水"],
@@ -65,13 +70,18 @@
     }],
     "companyLink": "https://github.com"
   }, {
-    "company": "某某某有限公司",
+    "company": "心书",
+    "companyName": "每日互动网络科技股份有限公司2",
     "address": {
       "title": "某某某有限公司大楼",
       "desc": "的3楼的一间小屋",
-      "image": "https://cn.vuejs.org/images/logo.png"
+      "image": "https://blog-file.anymelon.com/getui_address.mp4",
+      "markerStyle": {
+        "top": "10%",
+        "left": "20%"
+      }
     },
-    "timeRange": ["2017-02", "2017-08"],
+    "timeRange": ["2017.09", "2020.04"],
     "job": "前端开发工程师",
     "tags": ["Vue.js", "标签2", "标签3"],
     "mainWork": ["划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水", "划水划水划水划水划水划水划水", "划水划水划水划水划水划水划水划水划水划水划水"],

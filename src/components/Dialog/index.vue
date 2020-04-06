@@ -259,7 +259,6 @@ export default {
       const closeBtnX4 = parseInt(this.cssVariables['header-stand-out-offset-x']) + this.headerStandOutRealWidth + (parseInt(this.headerSubBlockWidth) || parseInt(this.cssVariables['header-stand-out-sub-block-width']))
       const closeBtnX2 = closeBtnX4 - parseInt(this.cssVariables['header-stand-out-sub-block-width'])
       const closeBtnX1 = closeBtnX3 - parseInt(this.cssVariables['header-stand-out-sub-block-width'])
-      console.log(evt.target)
       this.isCloseBtnHover = pointInPolygon({ x, y },
         [
           { x: closeBtnX1, y: closeBtnTop },

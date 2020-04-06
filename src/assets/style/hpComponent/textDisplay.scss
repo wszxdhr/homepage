@@ -24,6 +24,13 @@
         line-height: 40px;
       }
     }
+    &-common {
+      font-size: 30px;
+      line-height: 30px;
+      & > * {
+        line-height: 30px;
+      }
+    }
     &-small {
       font-size: 20px;
       line-height: 20px;
@@ -31,9 +38,25 @@
         line-height: 20px;
       }
     }
+    &-very-small {
+      font-size: 14px;
+      line-height: 14px;
+      & > * {
+        line-height: 14px;
+      }
+    }
     &-mini {
       font-size: 12px;
       line-height: 12px;
+      & > * {
+        line-height: 12px;
+      }
+    }
+    &-ultra-mini {
+      font-size: 12px;
+      line-height: 12px;
+      transform: scale(.8);
+      transform-origin: left;
       & > * {
         line-height: 12px;
       }
@@ -54,6 +77,9 @@
     }
     &-gray-light {
       background-color: $base-gray-light;
+    }
+    &-gray-very-light {
+      background-color: $base-gray-very-light;
     }
     &-gray-dark {
       background-color: $base-gray-dark;
@@ -94,6 +120,12 @@
       color: $base-gray-light;
       & > * {
         color: $base-gray-light;
+      }
+    }
+    &-gray-very-light {
+      color: $base-gray-very-light;
+      & > * {
+        color: $base-gray-very-light;
       }
     }
     &-gray-dark {

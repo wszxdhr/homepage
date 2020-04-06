@@ -59,3 +59,63 @@ html {
 .tac {
   text-align: center;
 }
+
+@keyframes marker-out-in-rotate {
+  0% {
+    transform: rotate(45deg);
+  }
+  20% {
+    transform: rotate(45deg);
+  }
+  40% {
+    transform: rotate(0);
+    margin-left: -15px;
+    margin-top: -15px;
+    width: 30px;
+    height: 30px;
+  }
+  50% {
+    transform: rotate(0);
+    margin-left: -25px;
+    margin-top: -25px;
+    width: 50px;
+    height: 50px;
+  }
+  52% {
+    transform: rotate(0);
+    margin-left: -25px;
+    margin-top: -25px;
+    width: 50px;
+    height: 50px;
+  }
+  62% {
+    transform: rotate(0);
+    margin-left: -15px;
+    margin-top: -15px;
+    width: 30px;
+    height: 30px;
+  }
+  100% {
+    transform: rotate(-180deg);
+  }
+}
+
+@keyframes delay {
+  0% {
+    opacity: 0;
+  }
+  99.9999% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.marker-animation-common {
+  animation: marker-out-in-rotate 1s;
+}
+
+.marker-text {
+  animation: delay 1s;
+}

@@ -121,6 +121,7 @@
   &_content {
     padding: 20px;
     background: $base-gray-common-dark;
+    min-height: calc(100% - 60px);
   }
 }
 
