@@ -9,12 +9,14 @@
              title="振兴中华">
     <div class="work-dialog_row">
       <hp-sub-dialog title="MY WORK EXPERIENCES" class="work-dialog_column work-list">
+      <!--左侧菜单-->
         <hp-block transparent>
           <div class="work-list-item work-list-item_list-header">
             <hp-text-display class="work-list-item_company" size="mini" background="white" text="BRAND" type="gray-dark"></hp-text-display>
             <div class="work-list-item_split-dot" style="opacity: 0;"></div>
             <hp-text-display class="work-list-item_detail" size="mini" background="gray-light" text="DETAIL" type="gray-dark"></hp-text-display>
           </div>
+          <!--公司列表-->
           <div :class="['work-list-item', {active: active === workItem.company}]" v-for="workItem in $dataJson.works" :key="workItem.company" @click="active = workItem.company">
             <hp-text-display size="small" :text="workItem.company" class="work-list-item_company" background="transparent" :type="active === workItem.company ? 'primary' : 'white'"></hp-text-display>
             <div class="work-list-item_split-dot"></div>
@@ -26,7 +28,9 @@
           </div>
         </hp-block>
       </hp-sub-dialog>
+      <!--详情-->
       <hp-sub-dialog title="WORK DETAIL" class="work-dialog_column work-detail">
+        <!--详情标题-->
         <hp-block class="work-detail_title">
           <div>
             <hp-text-display background="transparent" type="primary" :text="detail.company" size="large"></hp-text-display>
@@ -34,9 +38,14 @@
           </div>
           <hp-text-display background="transparent" type="gray-very-light" size="common" :text="detail.timeRange.join(' - ')"></hp-text-display>
         </hp-block>
+        <!--标签-->
+        <hp-block class="work-detail_tag-list" transparent :has-dot="false">
+          <hp-text-display class="work-detail_tag" :text="tag" v-for="tag in detail.tags" :key="tag" size="mini" type="gray" background="primary"></hp-text-display>
+        </hp-block>
         <hp-block>
           <hp-text-display text="ADDRESS" size="mini" type="white" background="gray-light"></hp-text-display>
         </hp-block>
+        <!--动画地址-->
         <hp-block class="work-detail_address">
           <video :src="detail.address.image" ref="workAddressVideo" alt="" @canplaythrough="playWorkAddress" @ended="showAddressInfo = true"/>
           <div class="work-detail_address-info">
@@ -52,6 +61,18 @@
             </div>
           </div>
         </hp-block>
+        <!--工作内容-->
+        <hp-block transparent>
+          <hp-radio-group v-model="activeExperience">
+            <hp-radio :value="$index" :key="$index" v-for="(experience, $index) in detail.experience">{{experience.name}}</hp-radio>
+          </hp-radio-group>
+        </hp-block>
+        <hp-block :has-dot="false" transparent>
+          <hp-text-display class="work-detail_experience-content" size="very-small" type="white" background="transparent" :text="experienceDetail.content"></hp-text-display>
+          <span>
+            <span class="text-color-primary">项目链接：</span><hp-text-display class="work-detail_experience-link" size="mini" type="white" background="transparent" :text="experienceDetail.link" v-if="experienceDetail.link"></hp-text-display>
+          </span>
+        </hp-block>
       </hp-sub-dialog>
     </div>
   </hp-dialog>
@@ -66,7 +87,8 @@ export default {
     return {
       width: 1000,
       active: this.$dataJson.works[0].company,
-      showAddressInfo: false
+      showAddressInfo: false,
+      activeExperience: 0
     }
   },
   methods: {
@@ -86,10 +108,14 @@ export default {
     },
     detail () {
       return this.$dataJson.works.find(item => item.company === this.active) || {}
+    },
+    experienceDetail () {
+      return this.detail.experience[this.activeExperience]
     }
   },
   watch: {
     detail () {
+      this.activeExperience = 0
       this.playWorkAddress()
     },
     visible (val) {
@@ -152,7 +178,7 @@ export default {
         &:last-of-type {
           // margin-bottom: -10px;
         }
-        &:hover {
+        &:not(.work-list-item_list-header):hover {
           background-color: rgba($base-gray-light, .8);
         }
         &.active {
@@ -171,6 +197,18 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+      }
+      &_tag-list {
+        display: flex;
+        .work-detail_tag {
+          opacity: .9;
+          & + .work-detail_tag {
+            margin-left: 10px;
+          }
+          &:hover {
+            opacity: 1;
+          }
+        }
       }
       &_address {
         position: relative;
@@ -233,6 +271,11 @@ export default {
             margin-top: -15px;
             margin-left: 30px;
           }
+        }
+      }
+      .work-detail_experience-content {
+        .hp-text-display_text {
+          line-height: 1.6;
         }
       }
     }
