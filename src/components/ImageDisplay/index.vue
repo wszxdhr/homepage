@@ -1,5 +1,5 @@
 <template>
-  <div class="hp-image-display" :style="{backgroundImage: `url(${src})`, backgroundSize}">
+  <div class="hp-image-display" :style="{backgroundImage: `url(${src})`, backgroundSize, width, height}">
 <!--    <img :src="src" alt="" v-if="src"/>-->
     <div class="empty" v-if="!src"></div>
     <ul class="corner-list">
@@ -20,6 +20,14 @@ export default {
       default: ''
     },
     backgroundSize: {
+      type: String,
+      default: ''
+    },
+    width: {
+      type: String,
+      default: ''
+    },
+    height: {
       type: String,
       default: ''
     }

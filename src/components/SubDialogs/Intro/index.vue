@@ -9,19 +9,19 @@
       <hp-sub-dialog title="PERSONAL INFORMATION">
         <div class="intro-dialog-inner">
           <p class="text-color-primary text-size-common tac">
-            张 潇
+            {{$dataJson.self.name}}
           </p>
           <img src="@/assets/images/Person.jpg" alt="" class="person-image"/>
           <p class="gender-and-age">
-            <span class="text-color-gray-very-light text-size-common">男</span>
-            <span class="text-color-gray-very-light text-size-small age">26岁</span>
+            <span class="text-color-gray-very-light text-size-common">{{$dataJson.self.gender}}</span>
+            <span class="text-color-gray-very-light text-size-small age">{{new Date().getFullYear() - $dataJson.self.bornYear}}岁</span>
           </p>
-          <p class="text-color-gray-very-light text-size-small">本科统招（网络工程）</p>
-          <p class="text-color-gray-very-light text-size-small">4年工作经验</p>
+          <p class="text-color-gray-very-light text-size-small">{{$dataJson.self.school}}</p>
+          <p class="text-color-gray-very-light text-size-small">{{$moment().format('YYYY') - $moment($dataJson.self.workStart, 'YYYY.MM').format('YYYY')}}年工作经验</p>
           <p class="text-color-gray-very-light text-size-small">EMAIL ADDRESS</p>
           <img src="@/assets/images/NameBarcode.png" alt="" class="name-barcode-image"/>
           <p class="text-color-gray-very-light text-size-small tac">
-            <a href="mailto:jobs@anymelon.com">job@anymelon.com</a>
+            <a :href="`mailto:${$dataJson.self.email}`">{{$dataJson.self.email}}</a>
           </p>
         </div>
       </hp-sub-dialog>
@@ -33,24 +33,14 @@
                :left="`calc(50vw - (${mainDialogWidth}px + ${detailDialogWidth}px) / 2 + ${mainDialogWidth}px + 20px)`" top="calc((50vh - 160px) / 2)" :width="`${detailDialogWidth}px`"
                title="爱我中华">
       <hp-sub-dialog title="PERSONAL INFORMATION">
-        <h2 class="text-size-common text-color-primary intro-detail-title">
-          技能
-        </h2>
-        <p class="text-size-small text-color-gray-very-light intro-detail-content">
-          划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水，划水划水划水划水划水划水划水划水划水划水划水划水划水。划水划水划水划水划水划水划水划水划水。
-        </p>
-        <h2 class="text-size-common text-color-primary intro-detail-title">
-          技能
-        </h2>
-        <p class="text-size-small text-color-gray-very-light intro-detail-content">
-          划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水，划水划水划水划水，划水划水划水划水，划水划水划水划水，划水划水划水划水划水划水划水划水划水划水划水划水划水。划水划水划水划水划水划水划水划水划水。
-        </p>
-        <h2 class="text-size-common text-color-primary intro-detail-title">
-          技能
-        </h2>
-        <p class="text-size-small text-color-gray-very-light intro-detail-content">
-          划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水，划水划水水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水，划水划水水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水，划水划水划水划水划水划水划水划水划水划水划水划水划水。划水划水划水划水划水划水划水划水划水。
-        </p>
+        <template v-for="info in $dataJson.self.info">
+          <h2 class="text-size-common text-color-primary intro-detail-title" :key="`detail-title-${info.title}`">
+            {{info.title}}
+          </h2>
+          <p class="text-size-small text-color-gray-very-light intro-detail-content" :key="`detail-content-${info.title}`">
+            {{info.content}}
+          </p>
+        </template>
       </hp-sub-dialog>
     </hp-dialog>
   </div>

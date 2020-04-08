@@ -33,7 +33,7 @@
     <hp-dialog class="menu-dialog" left="40px" top="164px" width="400px" title="MENU" header-min-width="80px" header-sub-block-width="50">
       <hp-sub-dialog title="CHOOSE A INTRO">
         <hp-menu>
-          <hp-menu-item title="吃吃喝喝" content="吃吃喝喝吃吃喝喝" @click="$refs.introDialog.setActive()">
+          <hp-menu-item title="吃吃喝喝" content="" @click="$refs.introDialog.setActive()">
             <i class="iconfont icon-github" slot="icon"></i>
           </hp-menu-item>
           <hp-menu-item title="吃吃喝喝2" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝" @click="$refs.skillDialog.setActive()">
@@ -42,7 +42,13 @@
           <hp-menu-item title="吃吃喝喝3" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝" @click="$refs.workDialog.setActive()">
             <i class="iconfont icon-github" slot="icon"></i>
           </hp-menu-item>
-          <hp-menu-item title="吃吃喝喝4" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝">
+          <hp-menu-item title="吃吃喝喝4" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝" @click="$refs.schoolDialog.setActive()">
+            <i class="iconfont icon-github" slot="icon"></i>
+          </hp-menu-item>
+          <hp-menu-item title="吃吃喝喝5" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝" @click="$refs.projectDialog.setActive()">
+            <i class="iconfont icon-github" slot="icon"></i>
+          </hp-menu-item>
+          <hp-menu-item title="吃吃喝喝6" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝" @click="$refs.prizeDialog.setActive()">
             <i class="iconfont icon-github" slot="icon"></i>
           </hp-menu-item>
         </hp-menu>
@@ -53,6 +59,9 @@
     <intro-dialog ref="introDialog"></intro-dialog>
     <skill-dialog ref="skillDialog"></skill-dialog>
     <work-dialog ref="workDialog"></work-dialog>
+    <school-dialog ref="schoolDialog"></school-dialog>
+    <project-dialog ref="projectDialog"></project-dialog>
+    <prize-dialog ref="prizeDialog"></prize-dialog>
   </div>
 </template>
 
@@ -64,6 +73,9 @@ import TimeDisplay from '@/components/Time/index'
 import IntroDialog from '@/components/SubDialogs/Intro/index'
 import SkillDialog from '@/components/SubDialogs/Skill/index'
 import WorkDialog from '@/components/SubDialogs/Work/index'
+import SchoolDialog from '@/components/SubDialogs/School/index'
+import ProjectDialog from '@/components/SubDialogs/Project/index'
+import PrizeDialog from '@/components/SubDialogs/Prize/index'
 import chars from '@/assets/chars.json'
 
 export default {
@@ -91,7 +103,10 @@ export default {
     TimeDisplay,
     IntroDialog,
     SkillDialog,
-    WorkDialog
+    WorkDialog,
+    SchoolDialog,
+    ProjectDialog,
+    PrizeDialog
   }
 }
 </script>

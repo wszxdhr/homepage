@@ -69,8 +69,8 @@
         </hp-block>
         <hp-block :has-dot="false" transparent>
           <hp-text-display class="work-detail_experience-content" size="very-small" type="white" background="transparent" :text="experienceDetail.content"></hp-text-display>
-          <span>
-            <span class="text-color-primary">项目链接：</span><hp-text-display class="work-detail_experience-link" size="mini" type="white" background="transparent" :text="experienceDetail.link" v-if="experienceDetail.link"></hp-text-display>
+          <span v-if="experienceDetail.link">
+            <span class="text-color-primary">项目链接：</span><a target="_blank" v-if="experienceDetail.link" :href="experienceDetail.link"><hp-text-display class="work-detail_experience-link" size="mini" type="white" background="transparent" :text="experienceDetail.link"></hp-text-display></a>
           </span>
         </hp-block>
       </hp-sub-dialog>
