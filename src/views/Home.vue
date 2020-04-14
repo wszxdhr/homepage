@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <hp-dialog class="main-dialog" content-wrapper-class="main-dialog_content-wrapper" is-static width="calc(100vw - 40px)" height="calc(100vh - 40px)" title="张潇的个人主页">
+    <hp-dialog class="main-dialog" content-wrapper-class="main-dialog_content-wrapper" is-static width="calc(100vw - 40px)" height="calc(100vh - 40px)" title="HOMEPAGE OF XIAO BRO">
       <div class="icp-info">
         <p>Copyright © 2020-{{new Date().getFullYear()}} 张潇</p>
         <p><a href="http://beian.miit.gov.cn/" target="_blank">黑ICP备17005381号-2</a> <a href="http://www.beian.gov.cn/portal/registerSystemInfo" target="_blank">xxx</a></p>
@@ -13,8 +13,8 @@
                   :width="600"
                   :height="600"
                   animate-on-init></char-dance>
-      <hp-text-display text="哈呵吼呼" type="gray" size="small" class="title"></hp-text-display>
-      <hp-text-display type="white" size="large" text="HAHAHEHEHOHO" class="sub-title" background="gray-dark"></hp-text-display>
+      <hp-text-display text="张潇的个人主页" type="gray" size="small" class="title"></hp-text-display>
+      <hp-text-display type="white" size="large" text="HOMEPAGE OF XIAO BRO" class="sub-title" background="gray-dark"></hp-text-display>
     </hp-dialog>
     <hp-dialog class="time-dialog" content-class="time-dialog_content" left="calc(100vw - 400px - 40px)" top="70px" width="400px" title="TIME" header-min-width="80px" header-sub-block-width="50">
       <hp-sub-dialog title="TIME IN CURRENT TIME ZONE">
@@ -33,23 +33,23 @@
     <hp-dialog class="menu-dialog" left="40px" top="164px" width="400px" title="MENU" header-min-width="80px" header-sub-block-width="50">
       <hp-sub-dialog title="CHOOSE A INTRO">
         <hp-menu>
-          <hp-menu-item title="吃吃喝喝" content="" @click="$refs.introDialog.setActive()">
-            <i class="iconfont icon-github" slot="icon"></i>
+          <hp-menu-item title="个人简介" content="" @click="$refs.introDialog.setActive()">
+            <i class="iconfont icon-intro" slot="icon"></i>
           </hp-menu-item>
-          <hp-menu-item title="吃吃喝喝2" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝" @click="$refs.skillDialog.setActive()">
+          <hp-menu-item title="打工技能" content="最常用的一些技能" @click="$refs.skillDialog.setActive()">
+            <i class="iconfont icon-skills" slot="icon"></i>
+          </hp-menu-item>
+          <hp-menu-item title="工作经历" content="实习和毕业后的工作" @click="$refs.workDialog.setActive()">
             <i class="iconfont icon-work" slot="icon"></i>
           </hp-menu-item>
-          <hp-menu-item title="吃吃喝喝3" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝" @click="$refs.workDialog.setActive()">
-            <i class="iconfont icon-github" slot="icon"></i>
+          <hp-menu-item title="教育经历" content="东华理工大学" @click="$refs.schoolDialog.setActive()">
+            <i class="iconfont icon-education" slot="icon"></i>
           </hp-menu-item>
-          <hp-menu-item title="吃吃喝喝4" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝" @click="$refs.schoolDialog.setActive()">
-            <i class="iconfont icon-github" slot="icon"></i>
+          <hp-menu-item title="项目经历" content="工作项目和开源项目" @click="$refs.projectDialog.setActive()">
+            <i class="iconfont icon-xiangmu" slot="icon"></i>
           </hp-menu-item>
-          <hp-menu-item title="吃吃喝喝5" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝" @click="$refs.projectDialog.setActive()">
-            <i class="iconfont icon-github" slot="icon"></i>
-          </hp-menu-item>
-          <hp-menu-item title="吃吃喝喝6" content="吃吃喝喝吃吃喝喝吃吃喝喝吃吃喝喝" @click="$refs.prizeDialog.setActive()">
-            <i class="iconfont icon-github" slot="icon"></i>
+          <hp-menu-item title="个人奖项" content="" @click="$refs.prizeDialog.setActive()">
+            <i class="iconfont icon-awards" slot="icon"></i>
           </hp-menu-item>
         </hp-menu>
       </hp-sub-dialog>

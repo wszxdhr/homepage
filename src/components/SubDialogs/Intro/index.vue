@@ -5,7 +5,7 @@
                closeable
                class="intro-dialog"
                :left="`calc(50vw - (${mainDialogWidth}px + ${detailDialogWidth}px) / 2)`" top="calc((50vh - 160px) / 2)" :width="`${mainDialogWidth}px`"
-               title="爱我中华">
+               title="PERSONAL INFORMATION">
       <hp-sub-dialog title="PERSONAL INFORMATION">
         <div class="intro-dialog-inner">
           <p class="text-color-primary text-size-common tac">
@@ -31,7 +31,7 @@
                class="intro-dialog-detail"
                closeable
                :left="`calc(50vw - (${mainDialogWidth}px + ${detailDialogWidth}px) / 2 + ${mainDialogWidth}px + 20px)`" top="calc((50vh - 160px) / 2)" :width="`${detailDialogWidth}px`"
-               title="爱我中华">
+               title="PERSONAL INFORMATION">
       <hp-sub-dialog title="PERSONAL INFORMATION">
         <template v-for="info in $dataJson.self.info">
           <h2 class="text-size-common text-color-primary intro-detail-title" :key="`detail-title-${info.title}`">

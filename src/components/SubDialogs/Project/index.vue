@@ -2,7 +2,7 @@
   <hp-dialog :visible.sync="visible"
              closeable
              :left="`calc(50vw - ${width}px / 2)`"
-             top="calc(50vh - 600px / 2)"
+             top="40px"
              :width="`${width}px`"
              ref="mainDialog"
              class="project-dialog"
@@ -83,6 +83,9 @@ export default {
       }
       .project-detail {
         flex: 1;
+        .hp-sub-dialog_content {
+          max-height: calc(100vh - #{$dialog-header-line-height} - 200px);
+        }
         &_tag-list {
           display: flex;
           .project-detail_tag {

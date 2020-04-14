@@ -1,6 +1,6 @@
 <template>
   <div :class="['hp-dialog', `header-position-${headerPosition}`]" v-show="visible" :style="{
-    top: moveInfo && typeof moveInfo.y === 'number' ? moveInfo.y + 'px' : top,
+    top: displayTop,
     left: moveInfo && typeof moveInfo.x === 'number' ? moveInfo.x + 'px' : left,
     width, height,
     position: (isStatic ? 'static' : 'fixed'), zIndex
@@ -20,7 +20,7 @@
         <slot name="title"></slot>
       </div>
     </div>
-    <div :class="['hp-dialog_content-wrapper', contentWrapperClass]" :style="{}">
+    <div :class="['hp-dialog_content-wrapper', contentWrapperClass]" :style="{maxHeight}">
       <div :class="['hp-dialog_content', contentClass]">
         <slot></slot>
       </div>
@@ -113,7 +113,8 @@ export default {
       isCloseBtnHover: false,
       callbackOnResize: null,
       titleWidth: 0,
-      headerStandOutRealWidth: 0
+      headerStandOutRealWidth: 0,
+      maxHeight: window.innerHeight + 'px'
     }
   },
   methods: {
@@ -123,6 +124,7 @@ export default {
       const erd = resizeDetector()
       erd.listenTo(this.$el, (el) => {
         this.refreshBackground()
+        this.resetMaxHeight()
       })
       erd.listenTo(this.$refs.header, (el) => {
         this.refreshBackground()
@@ -212,6 +214,7 @@ export default {
         // moveInfo.startMouseX - moveInfo.startX === evt.pageX - moveInfo.x
         this.moveInfo.x = evt.pageX - (this.moveInfo.startMouseX - this.moveInfo.startX)
         this.moveInfo.y = evt.pageY - (this.moveInfo.startMouseY - this.moveInfo.startY)
+        this.resetMaxHeight()
       }
       const moveEnd = (evt) => {
         this.endMove(evt)
@@ -269,19 +272,19 @@ export default {
     },
     fixDialogPos () {
       if (!this.isStatic) {
-        const dialogWidth = this.$el.offsetWidth
+        // const dialogWidth = this.$el.offsetWidth
         this.moveInfo = {
           x: this.$el.offsetLeft,
           y: this.$el.offsetTop
         }
-        if (this.$el.offsetLeft + 50 > window.innerWidth) {
-          this.moveInfo.x = window.innerWidth - 50
+        if (this.$el.offsetLeft + 200 > window.innerWidth) {
+          this.moveInfo.x = window.innerWidth - 200
         }
-        if (this.$el.offsetLeft + dialogWidth < 50) {
-          this.moveInfo.x = -(dialogWidth - 50)
+        if (this.$el.offsetLeft < 0) {
+          this.moveInfo.x = 0
         }
-        if (this.$el.offsetTop + 50 > window.innerHeight) {
-          this.moveInfo.y = window.innerHeight - 50
+        if (this.$el.offsetTop + 100 > window.innerHeight) {
+          this.moveInfo.y = window.innerHeight - 100
         }
         if (this.$el.offsetTop < 0) {
           this.moveInfo.y = 0
@@ -310,6 +313,16 @@ export default {
         }
         this.refreshBackground()
       }
+    },
+    resetMaxHeight () {
+      console.log((this.$el ? this.$el.offsetTop : 0), this.$el ? this.$el.offsetHeight : 0, Math.min((this.$el ? this.$el.offsetTop : 0) + (this.$el ? this.$el.offsetHeight : 0), window.innerHeight))
+      const offsetTop = this.$el ? this.$el.offsetTop : 0
+      this.maxHeight = Math.max(window.innerHeight - offsetTop - parseInt(this.cssVariables['header-line-height']), 200) + 'px'
+    }
+  },
+  computed: {
+    displayTop () {
+      return this.moveInfo && typeof this.moveInfo.y === 'number' ? this.moveInfo.y + 'px' : this.top
     }
   },
   mounted () {
@@ -322,8 +335,10 @@ export default {
     }
     this.callbackOnResize = () => {
       this.fixDialogPos()
+      this.resetMaxHeight()
     }
     window.addEventListener('resize', this.callbackOnResize)
+    this.resetMaxHeight()
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.callbackOnResize)

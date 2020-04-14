@@ -6,7 +6,7 @@
     <div class="hp-menu-item_inner">
       <slot></slot>
       <div class="hp-menu-item_title" v-if="($slots.title && $slots.title.length) || title">
-        <hp-text-display :text="title" type="gray" v-if="!($slots.title && $slots.title.length)"></hp-text-display>
+        <hp-text-display :text="title" size="common-small" type="gray" v-if="!($slots.title && $slots.title.length)"></hp-text-display>
         <slot name="title"></slot>
       </div>
       <p class="hp-menu-item_content" v-if="($slots.content && $slots.content.length) || content">
