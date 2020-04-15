@@ -3,13 +3,13 @@
     <hp-dialog :visible.sync="visible"
                closeable
                :left="`calc(50vw - ${width}px / 2)`"
-               top="calc(50vh - 600px / 2)"
+               top="calc(50vh - 800px / 2)"
                :width="`${width}px`"
                ref="mainDialog"
-               title="伟大复兴">
+               title="CODE FARMER SKILLS">
       <hp-sub-dialog title="MY SKILLS" class="skill-dialog-content">
         <hp-block>
-          <hp-text-display text="个人技能" size="large" type="white" right-type="primary" right-text="SKILLS" background="gray-dark"></hp-text-display>
+          <hp-text-display text="打工技能" size="large" type="white" right-type="primary" right-text="SKILLS" background="gray-dark"></hp-text-display>
         </hp-block>
         <hp-block>
           <hp-text-display text="SELECT A SKILL TO VIEW DETAILS" size="mini" type="white" background="gray-light"></hp-text-display>
@@ -90,6 +90,8 @@ export default {
       display: flex;
       justify-content: space-between;
       .skill-item {
+        flex: 1;
+        max-width: 100px;
         position: relative;
         &_icon {
           filter: grayscale(0.76);
@@ -109,6 +111,9 @@ export default {
           font-size: 12px;
           transform: scale(.7) translateX(-10px);
           transform-origin: left;
+          & > div {
+            width: 150px;
+          }
         }
         &:before {
           content: '';
@@ -155,6 +160,7 @@ export default {
       .skill-detail-item {
         display: flex;
         margin: 30px 0 30px 4px;
+        align-items: center;
         &_label {
           flex: 1;
         }

@@ -4,7 +4,7 @@
                ref="mainDialog"
                closeable
                class="intro-dialog"
-               :left="`calc(50vw - (${mainDialogWidth}px + ${detailDialogWidth}px) / 2)`" top="calc((50vh - 160px) / 2)" :width="`${mainDialogWidth}px`"
+               :left="`calc(50vw - (${mainDialogWidth}px + ${detailDialogWidth}px) / 2)`" top="calc((50vh - 240px) / 2)" :width="`${mainDialogWidth}px`"
                title="PERSONAL INFORMATION">
       <hp-sub-dialog title="PERSONAL INFORMATION">
         <div class="intro-dialog-inner">
@@ -30,16 +30,16 @@
                ref="detailDialog"
                class="intro-dialog-detail"
                closeable
-               :left="`calc(50vw - (${mainDialogWidth}px + ${detailDialogWidth}px) / 2 + ${mainDialogWidth}px + 20px)`" top="calc((50vh - 160px) / 2)" :width="`${detailDialogWidth}px`"
+               :left="`calc(50vw - (${mainDialogWidth}px + ${detailDialogWidth}px) / 2 + ${mainDialogWidth}px + 20px)`" top="calc((50vh - 240px) / 2)" :width="`${detailDialogWidth}px`"
                title="PERSONAL INFORMATION">
       <hp-sub-dialog title="PERSONAL INFORMATION">
         <template v-for="info in $dataJson.self.info">
           <h2 class="text-size-common text-color-primary intro-detail-title" :key="`detail-title-${info.title}`">
             {{info.title}}
           </h2>
-          <p class="text-size-small text-color-gray-very-light intro-detail-content" :key="`detail-content-${info.title}`">
-            {{info.content}}
-          </p>
+          <div class="text-size-small text-color-gray-very-light intro-detail-content" :key="`detail-content-${info.title}`">
+            <p v-for="(row, rowIndex) of (info.content || '').split('\n')" :key="`row-${rowIndex}-row`">{{row}}</p>
+          </div>
         </template>
       </hp-sub-dialog>
     </hp-dialog>
@@ -126,6 +126,9 @@ export default {
       }
     }
     .intro-detail-content {
+      p + p {
+        margin-top: 4px;
+      }
       & + .intro-detail-title {
         margin-top: 20px;
       }

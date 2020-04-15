@@ -1,22 +1,23 @@
 <template>
   <div class="home">
-    <hp-dialog class="main-dialog" content-wrapper-class="main-dialog_content-wrapper" is-static width="calc(100vw - 40px)" height="calc(100vh - 40px)" title="HOMEPAGE OF XIAO BRO">
+    <char-dance :rect="chars[charsIndex].map(item => item.split(''))"
+                :color="cssBase['base-font-color']"
+                @finish="changeCharsIndex"
+                :trans-char="['!', '@', '#', '$', '%']"
+                class="char-dance"
+                :width="600"
+                :height="600"
+                animate-on-init></char-dance>
+    <background></background>
+    <div class="main-dialog">
       <div class="icp-info">
         <p>Copyright © 2020-{{new Date().getFullYear()}} 张潇</p>
-        <p><a href="http://beian.miit.gov.cn/" target="_blank">黑ICP备17005381号-2</a> <a href="http://www.beian.gov.cn/portal/registerSystemInfo" target="_blank">xxx</a></p>
+        <p><a href="http://beian.miit.gov.cn/" target="_blank">黑ICP备17005381号-2</a> <a href="http://www.beian.gov.cn/portal/registerSystemInfo" target="_blank"></a></p>
       </div>
-      <char-dance :rect="chars[charsIndex].map(item => item.split(''))"
-                  :color="cssBase['base-font-color']"
-                  @finish="changeCharsIndex"
-                  :trans-char="['!', '@', '#', '$', '%']"
-                  class="char-dance"
-                  :width="600"
-                  :height="600"
-                  animate-on-init></char-dance>
       <hp-text-display text="张潇的个人主页" type="gray" size="small" class="title"></hp-text-display>
       <hp-text-display type="white" size="large" text="HOMEPAGE OF XIAO BRO" class="sub-title" background="gray-dark"></hp-text-display>
-    </hp-dialog>
-    <hp-dialog class="time-dialog" content-class="time-dialog_content" left="calc(100vw - 400px - 40px)" top="70px" width="400px" title="TIME" header-min-width="80px" header-sub-block-width="50">
+    </div>
+    <hp-dialog class="time-dialog" content-class="time-dialog_content" left="calc(100vw - 400px - 60px)" top="40px" width="400px" title="TIME" header-min-width="80px" header-sub-block-width="50">
       <hp-sub-dialog title="TIME IN CURRENT TIME ZONE">
         <hp-block transparent>
           <hp-radio-group v-model="timeType">
@@ -30,7 +31,7 @@
         <p class="time-display-desc"><span class="time-display-desc_label">CURRENT TIME ZONE: </span><span class="time-display-desc_value">{{Intl ? Intl.DateTimeFormat().resolvedOptions().timeZone : 'Unknown'}}</span></p>
       </hp-sub-dialog>
     </hp-dialog>
-    <hp-dialog class="menu-dialog" left="40px" top="164px" width="400px" title="MENU" header-min-width="80px" header-sub-block-width="50">
+    <hp-dialog class="menu-dialog" left="60px" top="124px" width="360px" title="MENU" header-min-width="80px" header-sub-block-width="50">
       <hp-sub-dialog title="CHOOSE A INTRO">
         <hp-menu>
           <hp-menu-item title="个人简介" content="" @click="$refs.introDialog.setActive()">
@@ -67,6 +68,7 @@
 
 <script>
 // @ is an alias to /src
+import Background from '@/components/Background'
 import cssBase from '@/assets/style/base.scss'
 import CharDance from '@/components/CharDance/index'
 import TimeDisplay from '@/components/Time/index'
@@ -106,7 +108,8 @@ export default {
     WorkDialog,
     SchoolDialog,
     ProjectDialog,
-    PrizeDialog
+    PrizeDialog,
+    Background
   }
 }
 </script>
@@ -118,27 +121,31 @@ export default {
     justify-content: center;
     .title {
       position: fixed;
-      top: 77px;
-      left: 40px;
+      top: 42px;
+      left: 60px;
     }
     .sub-title {
       position: fixed;
-      top: 101px;
-      left: 40px;
+      top: 66px;
+      left: 60px;
+    }
+    .char-dance {
+      pointer-events: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: .8;
     }
     .main-dialog {
-      margin: 20px;
-      min-width: 800px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       .main-dialog_content-wrapper {
         position: relative;
         height: 100%;
-      }
-      .char-dance {
-        pointer-events: none;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
       }
     }
     .time-dialog {

@@ -21,9 +21,9 @@
             <hp-text-display size="small" :text="workItem.company" class="work-list-item_company" background="transparent" :type="active === workItem.company ? 'primary' : 'white'"></hp-text-display>
             <div class="work-list-item_split-dot"></div>
             <div class="work-list-item_detail">
-              <hp-text-display background="transparent" :type="active === workItem.company ? 'primary' : 'white'" :text="'每日互动网络科技股份有限公司'" size="mini" class="work-list-item_company-real-name"></hp-text-display>
-              <hp-text-display background="transparent" type="white" :text="'2019.03 ~ 2020.04'" size="ultra-mini" class="work-list-item_time"></hp-text-display>
-              <hp-text-display background="transparent" type="white" :text="'前端工程师'" size="ultra-mini" class="work-list-item_title"></hp-text-display>
+              <hp-text-display background="transparent" :type="active === workItem.company ? 'primary' : 'white'" :text="workItem.companyName" size="mini" class="work-list-item_company-real-name"></hp-text-display>
+              <hp-text-display background="transparent" type="white" :text="workItem.timeRange.join(' ~ ')" size="ultra-mini" class="work-list-item_time"></hp-text-display>
+              <hp-text-display background="transparent" type="white" :text="workItem.job" size="ultra-mini" class="work-list-item_title"></hp-text-display>
             </div>
           </div>
         </hp-block>
@@ -38,16 +38,12 @@
           </div>
           <hp-text-display background="transparent" type="gray-very-light" size="common" :text="detail.timeRange.join(' - ')"></hp-text-display>
         </hp-block>
-        <!--标签-->
-        <hp-block class="work-detail_tag-list" transparent :has-dot="false">
-          <hp-text-display class="work-detail_tag" :text="tag" v-for="tag in detail.tags" :key="tag" size="mini" type="gray" background="primary"></hp-text-display>
-        </hp-block>
         <hp-block>
           <hp-text-display text="ADDRESS" size="mini" type="white" background="gray-light"></hp-text-display>
         </hp-block>
         <!--动画地址-->
         <hp-block class="work-detail_address">
-          <video :src="detail.address.image" ref="workAddressVideo" alt="" @canplaythrough="playWorkAddress" @ended="showAddressInfo = true"/>
+          <video :src="detail.address.video" ref="workAddressVideo" alt="" @canplaythrough="playWorkAddress" @ended="showAddressInfo = true"/>
           <div class="work-detail_address-info">
             <div class="address-info_marker marker-animation-common" :style="detail.address.markerStyle" v-show="showAddressInfo">
               <div class="marker-corner marker-top-left"></div>
@@ -61,14 +57,24 @@
             </div>
           </div>
         </hp-block>
+        <!--标签-->
+        <hp-block class="work-detail_tag-list" transparent :has-dot="false">
+          <hp-text-display class="work-detail_tag" :text="tag" v-for="tag in detail.tags" :key="tag" size="mini" type="gray" background="primary"></hp-text-display>
+        </hp-block>
+<!--        主要工作-->
+        <hp-text-display text="主要工作" type="primary" background="transparent" size="small" class="work-inner-block-title"></hp-text-display>
+        <hp-block transparent>
+          <hp-text-display class="work-content-text" v-for="mainWorkRow in detail.mainWork" :key="`main-work-${mainWorkRow}`" :text="mainWorkRow" type="white" background="transparent" size="very-small"></hp-text-display>
+        </hp-block>
         <!--工作内容-->
+        <hp-text-display text="主要项目" type="primary" background="transparent" size="small" class="work-inner-block-title"></hp-text-display>
         <hp-block transparent>
           <hp-radio-group v-model="activeExperience">
             <hp-radio :value="$index" :key="$index" v-for="(experience, $index) in detail.experience">{{experience.name}}</hp-radio>
           </hp-radio-group>
         </hp-block>
         <hp-block :has-dot="false" transparent>
-          <hp-text-display class="work-detail_experience-content" size="very-small" type="white" background="transparent" :text="experienceDetail.content"></hp-text-display>
+          <hp-text-display class="work-detail_experience-content work-content-text" size="very-small" type="white" background="transparent" :text="experienceDetail.content"></hp-text-display>
           <span v-if="experienceDetail.link">
             <span class="text-color-primary">项目链接：</span><a target="_blank" v-if="experienceDetail.link" :href="experienceDetail.link"><hp-text-display class="work-detail_experience-link" size="mini" type="white" background="transparent" :text="experienceDetail.link"></hp-text-display></a>
           </span>
@@ -85,7 +91,7 @@ export default {
   mixins: [Mixin],
   data () {
     return {
-      width: 1000,
+      width: 1060,
       active: this.$dataJson.works[0].company,
       showAddressInfo: false,
       activeExperience: 0
@@ -139,7 +145,7 @@ export default {
       }
     }
     .work-list {
-      width: 380px;
+      width: 370px;
       &-item {
         display: flex;
         align-items: center;
@@ -159,7 +165,7 @@ export default {
           }
         }
         &_detail {
-          width: 220px;
+          width: 230px;
         }
         &_company-real-name {}
         &_time {
@@ -195,6 +201,9 @@ export default {
       .hp-sub-dialog_content {
         max-height: calc(100vh - #{$dialog-header-line-height} - 200px);
       }
+      .work-inner-block-title {
+        margin: 10px 0 4px;
+      }
       &_title {
         padding: 4px 0;
         display: flex;
@@ -219,6 +228,21 @@ export default {
           width: 100%;
           display: block;
           filter: grayscale(1);
+        }
+        &:before {
+          content: '';
+          position: absolute;
+          display: block;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 2;
+          background: {
+            image: url(~@/assets/images/WorkAddressFrame.png);
+            size: cover;
+          }
         }
         &-info {
           .address-info_marker {
@@ -276,7 +300,10 @@ export default {
           }
         }
       }
-      .work-detail_experience-content {
+      .work-content-text {
+        & + .work-content-text {
+          margin-top: 12px;
+        }
         .hp-text-display_text {
           line-height: 1.6;
         }

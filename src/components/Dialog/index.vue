@@ -1,5 +1,5 @@
 <template>
-  <div :class="['hp-dialog', `header-position-${headerPosition}`]" v-show="visible" :style="{
+  <div :class="['hp-dialog', `header-position-${headerPosition}`, {'is-modal': isModal}]" v-show="visible" :style="{
     top: displayTop,
     left: moveInfo && typeof moveInfo.x === 'number' ? moveInfo.x + 'px' : left,
     width, height,
@@ -57,6 +57,11 @@ export default {
       default: ''
     },
     isStatic: {
+      type: Boolean,
+      default: false
+    },
+    // 是否为模态框，模态框后面的东西不能点
+    isModal: {
       type: Boolean,
       default: false
     },
@@ -315,7 +320,6 @@ export default {
       }
     },
     resetMaxHeight () {
-      console.log((this.$el ? this.$el.offsetTop : 0), this.$el ? this.$el.offsetHeight : 0, Math.min((this.$el ? this.$el.offsetTop : 0) + (this.$el ? this.$el.offsetHeight : 0), window.innerHeight))
       const offsetTop = this.$el ? this.$el.offsetTop : 0
       this.maxHeight = Math.max(window.innerHeight - offsetTop - parseInt(this.cssVariables['header-line-height']), 200) + 'px'
     }

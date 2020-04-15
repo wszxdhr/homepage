@@ -4,15 +4,16 @@
 * {
   margin: 0;
   padding: 0;
-  color: $base-font-color;
   user-select: none;
 }
 
 html {
+  color: $base-font-color;
 }
 
 a {
   text-decoration: none;
+  color: $base-font-color;
 }
 
 li {

@@ -5,7 +5,7 @@
 <script>
 import Char from './char'
 const RENDER_ONCE = 200
-const DISPLAY_IMAGE_DELAY = 20000
+const DISPLAY_IMAGE_DELAY = 3000
 const DISPLAY_EMPTY_DELAY = 0
 const HANDLE_ANIMATE_LIST_DELAY = 10
 export default {
@@ -82,8 +82,8 @@ export default {
         const row = (rowItem instanceof Array) ? rowItem : rowItem.split('')
         const result = []
         row.map((char, charIndex) => {
-          const charW = this.width / 100
-          const charH = this.width / 57
+          const charW = this.width / 101
+          const charH = this.width / 53
           const charX = charIndex * charW
           const charY = (rowIndex + 1) * charH
           const charText = char
@@ -166,7 +166,9 @@ export default {
       const renderList = this.queue.splice(0, RENDER_ONCE)
       if (renderList && renderList.length) {
         renderList.map(([rowIndex = 0, charIndex = 0]) => {
-          this.display[rowIndex][charIndex].render()
+          if (this.display[rowIndex]) {
+            this.display[rowIndex][charIndex].render()
+          }
         })
       }
       this.ctx.restore()

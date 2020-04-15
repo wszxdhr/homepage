@@ -1,28 +1,27 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view :class="{'page-is-lock': !isReady}"/>
+    <div :class="['page-loading-mask', {hide: isReady}]" :style="{zIndex: maxZIndex + 2}"></div>
+    <page-loading @ready="isReady = true"></page-loading>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import PageLoading from '@/components/PageLoading'
+import activeManage from '@/components/Dialog/activeManage'
+export default {
+  name: 'App',
+  data () {
+    return {
+      isReady: false,
+      maxZIndex: activeManage.maxZIndex
     }
+  },
+  components: {
+    PageLoading
   }
 }
+</script>
+
+<style lang="scss">
 </style>

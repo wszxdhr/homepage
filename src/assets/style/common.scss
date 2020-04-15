@@ -1,6 +1,9 @@
 @import './base.scss';
 
 html {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background: {
     color: $base-background-color;
   };
@@ -34,6 +37,9 @@ html {
     }
     &-black {
       color: $base-black;
+    }
+    &-danger {
+      color: $base-danger;
     }
   }
 
@@ -124,10 +130,42 @@ html {
   }
 }
 
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .marker-animation-common {
   animation: marker-out-in-rotate 1s;
 }
 
 .marker-text {
   animation: delay 1s;
+}
+
+
+
+.page-loading-mask{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: grayscale(0.9) blur(10px);
+  transition: .5s all;
+  pointer-events: none;
+  &.hide {
+    backdrop-filter: none;
+  }
+}
+
+.page-is-lock {
+  pointer-events: none;
 }

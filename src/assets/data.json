@@ -7,77 +7,122 @@
     "workStart": "2016.05",
     "email": "job@anymelon.com",
     "info": [{
-      "title": "技能",
-      "content": "划水划水划水划水划水划水划水划水划水划水划水划水划水"
+      "title": "个人简介",
+      "content": "一个热爱生活的程序员\n小学时期被计算机老师收进计算机小组，每天中午偷师学艺，学习一些基础计算机知识（Web，Fireworks，Office三件套操作等）\n大学时期自学过 QT 以及一点 MFC\n熟悉各操作系统的操作（Windows、Linux（Debian、RedHat）、MacOS）\n执行力强，喜欢解决难题，热爱技术，喜欢团队协作，对项目认真负责"
     }, {
-      "title": "技能2",
-      "content": "划水划水划3水划水划水划水划334水划水划水划水划水划水划水"
-    }, {
-      "title": "技能3",
-      "content": "划水划4水划水划水划水划水划水划水划水划水划水划水划水"
+      "title": "技能简介",
+      "content": "熟悉ES6/7\n非常熟悉Vue.js开发\n熟悉Webpack的常见配置，熟悉loader、plugin工作方式\n有D3、Canvas开发经验\n对其他MVVM框架有所了解，熟悉NodeJs，熟悉koa2的使用，熟悉ORM和ODM的基本操作\n熟悉Linux/Unix基础操作，有自己的服务器\n熟悉Git基础操作和理念"
     }, {
       "title": "个人爱好",
-      "content": "划水划水划55水划水划水划水划水划水划水划水划水划水划水"
+      "content": "喜欢折腾电子设备，自己搭建黑群晖NAS，DIY台式机，喜欢折腾智能家居设备\n喜欢弹吉他，曾以双人弹唱组合形式和搭档一起获学校弹唱大赛二等奖"
     }]
   },
   "skills": [{
     "name": "Vue.js",
-    "image": "https://cn.vuejs.org/images/logo.png",
-    "text": "作者：尤雨溪",
+    "image": "https://blog-file.anymelon.com/vue-logo.png",
+    "text": "大多数项目使用",
     "list": [{
-      "label": "熟悉情况",
-      "value": "比较熟悉"
-    }, {
       "label": "项目使用情况",
       "value": "绝大多数项目"
+    }, {
+      "label": "整体熟悉情况",
+      "value": "比较熟悉"
+    }, {
+      "label": "是否熟悉原理",
+      "value": "略懂一二"
+    }, {
+      "label": "是否熟悉Vuex、VueRouter",
+      "value": "是"
     }]
   }, {
     "name": "NodeJs",
-    "image": "https://nodejs.org/static/images/logo.svg",
-    "text": "作者：尤雨溪",
+    "image": "https://blog-file.anymelon.com/node-logo.svg",
+    "text": "自己的项目中经常使用",
     "list": [{
       "label": "熟悉情况",
       "value": "比较熟悉"
     }, {
       "label": "项目使用情况",
-      "value": "绝大多数项目"
+      "value": "绝大多数为自用项目"
+    }, {
+      "label": "ORM、ODM熟悉情况",
+      "value": "熟悉增删改查"
+    }, {
+      "label": "常用框架熟悉情况",
+      "value": "熟悉使用KOA和Express及其Router和中间件"
+    }, {
+      "label": "其他",
+      "value": "熟悉制作命令行工具"
     }]
   }, {
     "name": "Electron.js",
-    "image": "https://cn.vuejs.org/images/logo.png",
-    "text": "作者：尤雨溪",
+    "image": "https://blog-file.anymelon.com/electron-logo.png?t=2",
+    "text": "",
     "list": [{
       "label": "熟悉情况",
-      "value": "比较熟悉"
+      "value": "能使用基本API"
     }, {
       "label": "项目使用情况",
-      "value": "绝大多数项目"
+      "value": "均为自己的项目"
     }]
   }, {
-    "name": "其他",
-    "image": "https://cn.vuejs.org/images/logo.png",
-    "text": "作者：尤雨溪",
+    "name": "Webpack",
+    "image": "https://blog-file.anymelon.com/webpack-icon.svg",
+    "text": "熟悉常用配置和loader、plugin",
     "list": [{
       "label": "熟悉情况",
       "value": "比较熟悉"
     }, {
-      "label": "项目使用情况",
-      "value": "绝大多数项目"
+      "label": "loader和plugin熟悉情况",
+      "value": "熟悉基本原理，可以自行制作"
     }]
   }],
   "works": [{
     "company": "个推",
-    "companyName": "每日互动网络科技股份有限公司",
+    "companyName": "浙江每日互动网络科技股份有限公司",
     "address": {
-      "title": "某某某有限公司大楼",
-      "desc": "的3楼的一间小屋",
-      "image": "https://blog-file.anymelon.com/getui_address.mp4",
+      "title": "杭州市西湖区 福地创业园",
+      "desc": "一号楼4楼",
+      "video": "https://blog-file.anymelon.com/getui_address.mp4",
       "markerStyle": {
         "top": "33.6%",
         "left": "18.5%"
       }
     },
-    "timeRange": ["2017.02", "2017.08"],
+    "timeRange": ["2017.09", "2020.04"],
+    "job": "前端开发工程师",
+    "tags": ["Vue.js", "Nuxt.js", "D3", "Canvas", "组件库", "SEO"],
+    "mainWork": ["主要负责公司对外的开发者中心的子项目开发（消息推送，个像，个验，短信开发者中心），项目均由Vue.js开发，曾负责个像开发者中心架构换新、UI改版重构工作（接入前端微服务架构），负责推送开发者中心部分页面改版重构。",
+      "参与个推公共组件库的二次开发，负责一些业务组件的开发。",
+      "参与个推会议中心展示大屏幕开发（项目结构初始化，性能优化，部分组件封装，动效制作，图表封装），项目使用Vue.js+D3开发，动效使用css3和D3配合开发，图表部分使用D3+VueComponent封装，优化了一些动效卡顿丢帧的问题。",
+      "负责文档中心日常文档收集整理并上线，工作内容涉及公司推送相关的各部门的文档及SDK文件的收集和整理，以及活动页的开发和上线。", "负责个验验证码，一键登录功能开发，其中个验验证码功能使用手动配置的webpack打包和canvas实现。",
+      "负责个验验证码，一键登录功能开发，其中个验验证码功能使用手动配置的webpack打包和canvas实现。"],
+    "experience": [{
+      "name": "开发者中心",
+      "content": "用于接入个推SDK的用户（企业）进行操作的平台。项目由Vue.js全家桶组成。我主要负责其中 首页以及子项目（消息推送，个像，个验，短信开发者中心）的开发。",
+      "link": "https://dev.getui.com"
+    }, {
+      "name": "个推首页",
+      "content": "主要负责首页轮播图部分动效开发。",
+      "link": "https://www.getui.com"
+    }, {
+      "name": "个推会议中心展示大屏幕",
+      "content": "一个可视化大屏幕项目，部分图表由D3实现。主要负责项目架构搭建，D3调研、使用，以及其他一些特效的实现。"
+    }],
+    "companyLink": "https://github.com"
+  }, {
+    "company": "心书",
+    "companyName": "杭州心书网络科技有限公司",
+    "address": {
+      "title": "某某某有限公司大楼",
+      "desc": "的3楼的一间小屋",
+      "video": "https://blog-file.anymelon.com/xinshu_address.mp4",
+      "markerStyle": {
+        "top": "48%",
+        "left": "38%"
+      }
+    },
+    "timeRange": ["2017.09", "2020.04"],
     "job": "前端开发工程师",
     "tags": ["Vue.js", "标签2", "标签3"],
     "mainWork": ["划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水划水", "划水划水划水划水划水划水划水", "划水划水划水划水划水划水划水划水划水划水划水"],
@@ -91,15 +136,15 @@
     }],
     "companyLink": "https://github.com"
   }, {
-    "company": "心书",
+    "company": "来店",
     "companyName": "每日互动网络科技股份有限公司2",
     "address": {
       "title": "某某某有限公司大楼",
       "desc": "的3楼的一间小屋",
-      "image": "https://blog-file.anymelon.com/getui_address.mp4",
+      "video": "https://blog-file.anymelon.com/laidian_address.mp4",
       "markerStyle": {
-        "top": "10%",
-        "left": "20%"
+        "top": "37%",
+        "left": "18%"
       }
     },
     "timeRange": ["2017.09", "2020.04"],
