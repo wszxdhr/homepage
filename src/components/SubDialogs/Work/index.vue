@@ -57,18 +57,22 @@
             </div>
           </div>
         </hp-block>
+<!--        主要工作-->
+        <hp-block>
+          <hp-text-display text="MAIN WORK" size="mini" type="white" background="gray-light"></hp-text-display>
+        </hp-block>
         <!--标签-->
         <hp-block class="work-detail_tag-list" transparent :has-dot="false">
           <hp-text-display class="work-detail_tag" :text="tag" v-for="tag in detail.tags" :key="tag" size="mini" type="gray" background="primary"></hp-text-display>
         </hp-block>
-<!--        主要工作-->
-        <hp-text-display text="主要工作" type="primary" background="transparent" size="small" class="work-inner-block-title"></hp-text-display>
-        <hp-block transparent>
+        <hp-block transparent :has-dot="false">
           <hp-text-display class="work-content-text" v-for="mainWorkRow in detail.mainWork" :key="`main-work-${mainWorkRow}`" :text="mainWorkRow" type="white" background="transparent" size="very-small"></hp-text-display>
         </hp-block>
         <!--工作内容-->
-        <hp-text-display text="主要项目" type="primary" background="transparent" size="small" class="work-inner-block-title"></hp-text-display>
-        <hp-block transparent>
+        <hp-block>
+          <hp-text-display text="MAIN PROJECT" size="mini" type="white" background="gray-light"></hp-text-display>
+        </hp-block>
+        <hp-block transparent :has-dot="false">
           <hp-radio-group v-model="activeExperience">
             <hp-radio :value="$index" :key="$index" v-for="(experience, $index) in detail.experience">{{experience.name}}</hp-radio>
           </hp-radio-group>
