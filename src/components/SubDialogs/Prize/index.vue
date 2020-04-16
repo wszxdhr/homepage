@@ -27,7 +27,7 @@ export default {
   mixins: [Mixin],
   data () {
     return {
-      width: 500
+      width: 600
     }
   },
   computed: {
@@ -64,9 +64,13 @@ export default {
         }
       }
       .prize-image {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
+        max-width: 120px;
+        max-height: 120px;
         flex: 1;
+        filter: grayscale(0.6);
+        transition: .3s all;
       }
       .prize-name {
         text-align: left;
@@ -76,6 +80,11 @@ export default {
       }
       .prize-time {
         text-align: left;
+      }
+      &:hover {
+        .prize-image {
+          filter: grayscale(0);
+        }
       }
     }
   }

@@ -66,7 +66,7 @@
           <hp-text-display class="work-detail_tag" :text="tag" v-for="tag in detail.tags" :key="tag" size="mini" type="gray" background="primary"></hp-text-display>
         </hp-block>
         <hp-block transparent :has-dot="false">
-          <hp-text-display class="work-content-text" v-for="mainWorkRow in detail.mainWork" :key="`main-work-${mainWorkRow}`" :text="mainWorkRow" type="white" background="transparent" size="very-small"></hp-text-display>
+          <hp-text-display class="work-content-text" v-for="(mainWorkRow, mainWorkIndex) in detail.mainWork" :key="`main-work-${mainWorkRow}-${mainWorkIndex}`" :text="mainWorkRow" type="white" background="transparent" size="very-small"></hp-text-display>
         </hp-block>
         <!--工作内容-->
         <hp-block>

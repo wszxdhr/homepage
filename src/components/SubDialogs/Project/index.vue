@@ -22,7 +22,7 @@
         <hp-block class="project-detail_tag-list" transparent :has-dot="false">
           <hp-text-display class="project-detail_tag" :text="tag" v-for="tag in detail.tags" :key="tag" size="mini" type="gray" background="primary"></hp-text-display>
         </hp-block>
-        <hp-block transparent :has-dot="false">
+        <hp-block transparent :has-dot="false" v-if="detail.image">
           <img class="project-detail_image" :src="detail.image" alt=""/>
         </hp-block>
         <hp-block transparent :has-dot="false">
@@ -88,11 +88,11 @@ export default {
         }
         &_tag-list {
           display: flex;
+          flex-wrap: wrap;
           .project-detail_tag {
             opacity: .9;
-            & + .project-detail_tag {
-              margin-left: 10px;
-            }
+            margin-bottom: 10px;
+            margin-right: 10px;
             &:hover {
               opacity: 1;
             }

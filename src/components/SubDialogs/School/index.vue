@@ -6,7 +6,7 @@
              :width="`${width}px`"
              ref="mainDialog"
              class="school-dialog"
-             title="地大物博">
+             title="WHERE AM I FROM">
     <hp-sub-dialog title="SCHOOL INFO">
       <div class="school-dialog_row">
         <hp-image-display class="school-dialog_image" :src="$dataJson.school.image"></hp-image-display>
@@ -40,11 +40,13 @@ export default {
 </script>
 
 <style lang="scss">
+  @import '~@/assets/style/base';
   .school-dialog {
     &_row {
       display: flex;
     }
     &_image {
+      background-color: lighten($base-gray-very-light, 50%)!important;
     }
     &_info {
       margin-left: 10px;

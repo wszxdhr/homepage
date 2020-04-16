@@ -15,7 +15,7 @@
           <div class="page-loading_bar-percent text-size-common darken">{{parseInt(percent)}}%</div>
         </div>
       </div>
-      <div class="page-loading_loading-text text-size-large">
+      <div :class="['page-loading_loading-text', 'text-size-large', {blink: percent >= 100}]">
         <span v-show="percent < 100">LOADING</span>
         <span class="text-color-primary" v-show="percent >= 100 && !hasError">COMPLETE</span>
         <span class="text-color-danger" v-show="percent >= 100 && hasError">FAILED BUT FINISHED</span>
@@ -64,7 +64,7 @@ export default {
           }
         } else if (typeof item === 'object') {
           for (const key in item) {
-            if (key === 'image' || key === 'video') {
+            if ((key === 'image' || key === 'video') && item[key]) {
               this.resources.push({
                 type: key,
                 value: item[key]
@@ -138,7 +138,9 @@ export default {
       }
     }
     &_loading-text {
-      animation: blink 2s infinite;
+      &.blink {
+        animation: blink 2s infinite;
+      }
       font-weight: bold;
     }
     .hide {
