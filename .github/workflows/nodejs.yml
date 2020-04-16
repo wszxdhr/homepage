@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Use puppeteer
-        uses: ianwalter/puppeteer@v2.0.0
+        uses: mujo-code/puppeteer-headful@master
       - run: npm install
       - run: npm ci
       - run: npm run build-both
