@@ -7,6 +7,7 @@
     "build": "vue-cli-service build",
     "dev-build": "vue-cli-service build --mode development",
     "gen-pdf": "node genPdf.js",
+    "build-both": "npm run dev-build && npm run gen-pdf && npm run build",
     "deploy": "pm2 deploy pm2.json production",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
