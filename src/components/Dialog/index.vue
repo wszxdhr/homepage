@@ -1,5 +1,5 @@
 <template>
-  <div :class="['hp-dialog', `header-position-${headerPosition}`, {'is-modal': isModal}]" v-show="visible" :style="{
+  <div :class="['hp-dialog', `header-position-${headerPosition}`, {'is-modal': isModal, 'is-closeable': closeable}]" v-show="visible" :style="{
     top: displayTop,
     left: moveInfo && typeof moveInfo.x === 'number' ? moveInfo.x + 'px' : left,
     width, height,
@@ -16,7 +16,10 @@
          @click="onHeaderClick"
          :style="{width: headerWidth, minWidth: headerMinWidth, paddingRight: this.headerSubBlockWidth ? parseInt(headerSubBlockWidth) + parseInt(cssVariables['header-stand-out-outer-and-inner-subtract']) / 2 + 'px' : ''}">
       <div class="hp-dialog_header">
-        <h2>{{title}}</h2>
+        <h2>
+          <span class="header-text">{{title}}</span>
+          <span class="close-btn" @click="handleClose"></span>
+        </h2>
         <slot name="title"></slot>
       </div>
     </div>
@@ -248,9 +251,12 @@ export default {
     },
     onHeaderClick () {
       if (this.isCloseBtnHover) {
-        this.$emit('close')
-        this.$emit('update:visible', false)
+        this.handleClose()
       }
+    },
+    handleClose () {
+      this.$emit('close')
+      this.$emit('update:visible', false)
     },
     refreshIsCloseBtnHover ({ x, y }, evt) {
       const closeBtnBottom = parseInt(this.cssVariables['header-stand-out-height'])
