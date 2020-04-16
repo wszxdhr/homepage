@@ -52,6 +52,9 @@
           <hp-menu-item title="个人奖项" content="" @click="$refs.prizeDialog.setActive()">
             <i class="iconfont icon-awards" slot="icon"></i>
           </hp-menu-item>
+          <hp-menu-item title="获取PDF简历" content="" @click="window.open('https://wszxdhr.github.io/homepage/张潇的简历.pdf')">
+            <i class="iconfont icon-jianli" slot="icon"></i>
+          </hp-menu-item>
         </hp-menu>
       </hp-sub-dialog>
     </hp-dialog>
@@ -63,11 +66,14 @@
     <school-dialog ref="schoolDialog"></school-dialog>
     <project-dialog ref="projectDialog"></project-dialog>
     <prize-dialog ref="prizeDialog"></prize-dialog>
+    <div :class="['page-loading-mask', {hide: isReady}]" :style="{zIndex: maxZIndex + 2}"></div>
+    <page-loading @ready="isReady = true"></page-loading>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import PageLoading from '@/components/PageLoading'
 import Background from '@/components/Background'
 import cssBase from '@/assets/style/base.scss'
 import CharDance from '@/components/CharDance/index'
@@ -79,16 +85,19 @@ import SchoolDialog from '@/components/SubDialogs/School/index'
 import ProjectDialog from '@/components/SubDialogs/Project/index'
 import PrizeDialog from '@/components/SubDialogs/Prize/index'
 import chars from '@/assets/chars.json'
+import activeManage from '@/components/Dialog/activeManage'
 
 export default {
-  name: 'Home',
+  name: 'HomePage',
   data () {
     return {
       cssBase,
       chars,
       window,
       charsIndex: 0,
-      timeType: '24'
+      isReady: false,
+      timeType: '24',
+      maxZIndex: activeManage.maxZIndex
     }
   },
   methods: {
@@ -109,7 +118,8 @@ export default {
     SchoolDialog,
     ProjectDialog,
     PrizeDialog,
-    Background
+    Background,
+    PageLoading
   }
 }
 </script>

@@ -160,7 +160,6 @@ html {
   height: 100%;
   backdrop-filter: grayscale(0.9) blur(10px);
   transition: .5s all;
-  pointer-events: none;
   &.hide {
     backdrop-filter: none;
   }
