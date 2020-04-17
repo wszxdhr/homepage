@@ -52,7 +52,7 @@
           <hp-menu-item title="个人奖项" content="" @click="$refs.prizeDialog.setActive()">
             <i class="iconfont icon-awards" slot="icon"></i>
           </hp-menu-item>
-          <hp-menu-item title="获取PDF简历" content="" @click="window.open('https://wszxdhr.github.io/homepage/张潇的简历.pdf')">
+          <hp-menu-item title="查看文字简历" content="" @click="$router.push({name: 'Pdf'})">
             <i class="iconfont icon-jianli" slot="icon"></i>
           </hp-menu-item>
         </hp-menu>
