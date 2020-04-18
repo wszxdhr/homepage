@@ -11,6 +11,7 @@ Vue.config.productionTip = false
 
 Vue.prototype.$dataJson = DataJson
 Vue.prototype.$moment = moment
+Vue.prototype.$bus = new Vue()
 
 new Vue({
   router,

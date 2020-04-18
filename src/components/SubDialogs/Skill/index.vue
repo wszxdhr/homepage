@@ -57,7 +57,7 @@ export default {
   },
   data () {
     return {
-      activeSkill: null
+      activeSkill: 0
     }
   },
   methods: {

@@ -140,6 +140,7 @@ export default {
     },
     refreshBackground () {
       const canvas = this.$refs.background
+      if (!canvas) return false
       const ctx = this.backgroundCtx
       const width = this.headerPosition === 'top' || this.headerPosition === 'bottom' ? this.$el.offsetWidth : this.$el.offsetHeight
       const height = this.headerPosition === 'top' || this.headerPosition === 'bottom' ? this.$el.offsetHeight : this.$el.offsetWidth

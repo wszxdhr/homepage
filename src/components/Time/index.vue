@@ -31,13 +31,22 @@ export default {
       this.timeCategory = hour > 12 ? 'PM' : 'AM'
       this.minute = date.getMinutes().toString()
       this.second = date.getSeconds().toString()
+    },
+    setTimer () {
+      this.timer = setInterval(() => {
+        this.refreshTime()
+      }, 1000)
     }
   },
   created () {
     this.refreshTime()
-    this.timer = setInterval(() => {
-      this.refreshTime()
-    }, 1000)
+    this.setTimer()
+    this.$bus.$on('windowBlur', () => {
+      clearInterval(this.timer)
+    })
+    this.$bus.$on('windowActive', () => {
+      this.setTimer()
+    })
   },
   beforeDestroy () {
     clearInterval(this.timer)

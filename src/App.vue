@@ -11,6 +11,15 @@ export default {
     return {
     }
   },
+  created () {
+    document.addEventListener('visibilitychange', evt => {
+      if (document.visibilityState === 'hidden') {
+        this.$bus.$emit('windowBlur')
+      } else if (document.visibilityState === 'visible') {
+        this.$bus.$emit('windowActive')
+      }
+    })
+  },
   components: {
   }
 }

@@ -48,7 +48,8 @@ export default {
       focusList: [],
       // 是否正在播放动画
       isDancing: false,
-      ctx: null
+      ctx: null,
+      timer: null
     }
   },
   mounted () {
@@ -58,6 +59,14 @@ export default {
         this.play()
       }, DISPLAY_EMPTY_DELAY)
     }
+    this.$bus.$on('windowBlur', () => {
+      clearInterval(this.timer)
+    })
+    this.$bus.$on('windowActive', () => {
+      if (this.isDancing) {
+        this.play()
+      }
+    })
   },
   methods: {
     init () {
@@ -123,7 +132,10 @@ export default {
     play () {
       this.isDancing = true
       const randomDisplayList = this.randomList(this.display.flat())
-      const timer = setInterval(() => {
+      if (this.timer) {
+        clearInterval(this.timer)
+      }
+      this.timer = setInterval(() => {
         const danceChar = randomDisplayList.splice(0, 20)
         danceChar.map(char => {
           char.stopDance()
@@ -131,7 +143,7 @@ export default {
         this.dancingList.push(...danceChar)
         this.queue.push(...danceChar.map(item => item.index))
         if (!randomDisplayList.length) {
-          clearInterval(timer)
+          clearInterval(this.timer)
           setTimeout(() => {
             this.stop()
           }, DISPLAY_IMAGE_DELAY)
@@ -140,7 +152,10 @@ export default {
     },
     stop () {
       const randomDisplayList = this.randomList(this.display.flat())
-      const timer = setInterval(() => {
+      if (this.timer) {
+        clearInterval(this.timer)
+      }
+      this.timer = setInterval(() => {
         const danceChar = randomDisplayList.splice(0, 20)
         danceChar.map(char => {
           char.startDance()
@@ -149,7 +164,7 @@ export default {
         if (!randomDisplayList.length) {
           this.dancingList = []
           this.isDancing = false
-          clearInterval(timer)
+          clearInterval(this.timer)
           setTimeout(() => {
             this.$emit('finish')
           }, DISPLAY_EMPTY_DELAY)
