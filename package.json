@@ -6,8 +6,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "dev-build": "vue-cli-service build --mode development",
+    "build-pdf": "npm run dev-build && npm run gen-pdf",
     "gen-pdf": "node genPdf.js",
-    "build-both": "npm run dev-build && npm run gen-pdf && npm run build",
+    "build-both": "npm run build-pdf && npm run build",
     "deploy": "pm2 deploy pm2.json production",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
@@ -37,6 +38,7 @@
     "eslint-plugin-vue": "^6.1.2",
     "koa": "^2.11.0",
     "koa-static": "^5.0.0",
+    "puppeteer": "^3.0.0",
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
