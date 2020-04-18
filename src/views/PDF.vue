@@ -1,6 +1,6 @@
 <template>
   <div class="pdf-page">
-    <div class="pdf-page-content">
+    <div class="pdf-page-content" ref="screenshot-playground">
       <section class="header pdf-section">
         <h2 class="header-name">{{$dataJson.self.name}}</h2>
         <div class="header-content">{{$dataJson.self.school}}</div>
@@ -104,10 +104,11 @@ export default {
     min-height: 100vh;
     color: $dark-gray;
     font-size: 14px;
-    padding: 20px;
+    display: flex;
+    justify-content: center;
     .pdf-page-content {
       width: 800px;
-      margin: 0 auto;
+      margin: 20px;
       border: 1px solid $light-gray;
       border-radius: 4px;
     }
@@ -130,7 +131,7 @@ export default {
         margin: 20px 0 30px;
       }
       &_content-item {
-        list-style-type: square;
+        list-style-type: disc;
         list-style-position: inside;
         margin: 6px 0;
       }
@@ -151,6 +152,11 @@ export default {
       }
       &_content-title {
         margin: 30px 0 10px;
+      }
+      &_content-row {
+        & + .pdf-section_content-row {
+          margin-top: 10px;
+        }
       }
     }
     .header {

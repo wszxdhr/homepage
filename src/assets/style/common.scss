@@ -162,6 +162,7 @@ html {
   transition: .5s all;
   &.hide {
     backdrop-filter: none;
+    pointer-events: none;
   }
 }
 

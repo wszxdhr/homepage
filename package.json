@@ -37,7 +37,6 @@
     "eslint-plugin-vue": "^6.1.2",
     "koa": "^2.11.0",
     "koa-static": "^5.0.0",
-    "puppeteer": "^3.0.0",
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
