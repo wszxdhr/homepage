@@ -23,11 +23,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Use puppeteer
-        uses: mujo-code/puppeteer-headful@master
       - run: npm install
       - run: npm ci
-      - run: npm run build-both
+      - run: npm run build
      # - run: npm test
         env:
           CI: true
