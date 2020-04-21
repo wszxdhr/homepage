@@ -6,7 +6,7 @@
              :width="`${width}px`"
              ref="mainDialog"
              class="prize-dialog"
-             title="伟大复兴">
+             title="PRICES">
     <ul class="prize-dialog-list">
       <li class="prize-dialog-item" v-for="prize in $dataJson.prize" :key="prize.name">
         <img :src="prize.image" alt="" class="prize-image"/>

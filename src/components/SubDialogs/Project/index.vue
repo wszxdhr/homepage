@@ -6,7 +6,7 @@
              :width="`${width}px`"
              ref="mainDialog"
              class="project-dialog"
-             title="太棒啦">
+             title="FARM OF CODE FARMER">
     <div class="project-dialog_row">
       <hp-sub-dialog title="PROJECT LIST" class="project-dialog_column project-list">
         <hp-text-display size="very-small" :text="project.name" class="project-list-item" @click="active = project.name" background="transparent" :type="active === project.name ? 'primary' : 'white'" :key="project.name" v-for="project in $dataJson.projects"></hp-text-display>

@@ -6,7 +6,7 @@
              :width="`${width}px`"
              ref="mainDialog"
              class="work-dialog"
-             title="振兴中华">
+             title="WORKS">
     <div class="work-dialog_row">
       <hp-sub-dialog title="MY WORK EXPERIENCES" class="work-dialog_column work-list">
       <!--左侧菜单-->
