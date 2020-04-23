@@ -1,0 +1,13 @@
+// 高度
+@media (max-height: 860px) {
+  .home-page {
+    .main-menu {
+      .hp-menu-item_content {
+        display: none;
+      }
+    }
+  }
+}
+
+// 宽度
+@media (max-width: 1280px) {}

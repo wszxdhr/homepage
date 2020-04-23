@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home-page">
     <char-dance :rect="chars[charsIndex].map(item => item.split(''))"
                 :color="cssBase['base-font-color']"
                 @finish="changeCharsIndex"
@@ -33,7 +33,7 @@
     </hp-dialog>
     <hp-dialog class="menu-dialog" left="60px" top="124px" width="360px" title="MENU" header-min-width="80px" header-sub-block-width="50">
       <hp-sub-dialog title="CHOOSE A INTRO">
-        <hp-menu>
+        <hp-menu class="main-menu">
           <hp-menu-item title="个人简介" content="" @click="$refs.introDialog.setActive()">
             <i class="iconfont icon-intro" slot="icon"></i>
           </hp-menu-item>
@@ -43,11 +43,14 @@
           <hp-menu-item title="工作经历" content="实习和毕业后的工作" @click="$refs.workDialog.setActive()">
             <i class="iconfont icon-work" slot="icon"></i>
           </hp-menu-item>
-          <hp-menu-item title="教育经历" content="东华理工大学" @click="$refs.schoolDialog.setActive()">
+          <hp-menu-item title="教育经历" content="" @click="$refs.schoolDialog.setActive()">
             <i class="iconfont icon-education" slot="icon"></i>
           </hp-menu-item>
           <hp-menu-item title="项目经历" content="工作项目和开源项目" @click="$refs.projectDialog.setActive()">
             <i class="iconfont icon-xiangmu" slot="icon"></i>
+          </hp-menu-item>
+          <hp-menu-item title="Github" content="" @click="$refs.githubDialog.setActive()">
+            <i class="iconfont icon-github" slot="icon"></i>
           </hp-menu-item>
           <hp-menu-item title="个人奖项" content="" @click="$refs.prizeDialog.setActive()">
             <i class="iconfont icon-awards" slot="icon"></i>
@@ -66,6 +69,7 @@
     <school-dialog ref="schoolDialog"></school-dialog>
     <project-dialog ref="projectDialog"></project-dialog>
     <prize-dialog ref="prizeDialog"></prize-dialog>
+    <github-dialog ref="githubDialog"></github-dialog>
     <div :class="['page-loading-mask', {hide: isReady}]" :style="{zIndex: maxZIndex + 2}"></div>
     <page-loading @ready="isReady = true"></page-loading>
   </div>
@@ -83,6 +87,7 @@ import SkillDialog from '@/components/SubDialogs/Skill/index'
 import WorkDialog from '@/components/SubDialogs/Work/index'
 import SchoolDialog from '@/components/SubDialogs/School/index'
 import ProjectDialog from '@/components/SubDialogs/Project/index'
+import GithubDialog from '@/components/SubDialogs/Github/index'
 import PrizeDialog from '@/components/SubDialogs/Prize/index'
 import chars from '@/assets/chars.json'
 import activeManage from '@/components/Dialog/activeManage'
@@ -119,6 +124,7 @@ export default {
     ProjectDialog,
     PrizeDialog,
     Background,
+    GithubDialog,
     PageLoading
   }
 }
@@ -126,7 +132,7 @@ export default {
 
 <style lang="scss">
   @import '~@/assets/style/hpComponent/base.scss';
-  .home {
+  .home-page {
     display: flex;
     justify-content: center;
     .title {
