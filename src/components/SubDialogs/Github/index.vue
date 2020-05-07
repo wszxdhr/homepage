@@ -127,14 +127,14 @@ export default {
           font-size: 16px;
         }
         .wday {
-          display: none;
+          font-size: 12px;
+          /*display: none;*/
         }
         .day {
-          /*transform: */
-          height: 4px;
-          width: 4px;
-          fill: darken($base-color, 10%);
-          transform: translate(3px, 3px);
+          height: 8px;
+          width: 8px;
+          transform: translate(0, 0);
+          fill: $base-color;
           &[data-count='0'] {
             fill: $base-gray-very-light;
             height: 8px;
@@ -144,8 +144,14 @@ export default {
           }
           &[data-count='1'] {
             fill: $base-white;
+            height: 4px;
+            width: 4px;
+            transform: translate(3px, 3px);
           }
           &[data-count='2'] {
+            height: 5px;
+            width: 5px;
+            transform: translate(1px, 1px);
             fill: lighten($base-color, 30%);
           }
           &[data-count='3'] {
@@ -158,7 +164,7 @@ export default {
             height: 8px;
             width: 8px;
             transform: translate(0, 0);
-            fill: darken($base-color, 5%);
+            fill: $base-color;
           }
         }
       }
