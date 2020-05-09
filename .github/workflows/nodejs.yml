@@ -26,10 +26,7 @@ jobs:
       - run: npm install
       - run: npm ci
       - run: npm run build
-        env:
-          ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      - run: npm run deploy:qiniu
+      - run: npm run deploy:qiniu -- --ak ${{ secrets.ACCESS_KEY }} --sk ${{ secrets.SECRET_KEY }}
      # - run: npm test
         env:
           CI: true

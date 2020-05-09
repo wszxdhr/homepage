@@ -2,14 +2,24 @@ const qiniu = require('qiniu')
 
 const process = require('process')
 
+const md5 = require('md5')
+
+const { Command } = require('commander')
+
 const path = require('path')
 
 const fs = require('fs')
 
-const md5 = require('md5')
+// 获取命令行参数
+const program = new Command()
+program
+  .option('--ak <ak>', 'Qiniu AccessKey.')
+  .option('--sk <sk>', 'Qiniu SecretKey.')
+  .parse(process.argv)
 
-const accessKey = process.env.ACCESS_KEY
-const secretKey = process.env.SECRET_KEY
+const accessKey = program.ak
+const secretKey = program.sk
+
 console.log('key md5: ' + md5(accessKey + secretKey))
 
 const mac = new qiniu.auth.digest.Mac(accessKey, secretKey)
@@ -31,7 +41,7 @@ const distDir = path.join(__dirname, 'dist')
 const uploadFile = (filePath, fileName) => {
   const uploadToken = getUploadToken(filePath, fileName)
   if (uploadToken) {
-    console.log('uploadToken获取成功：' + filePath)
+    console.log('uploadToken获取成功：' + fileName)
   }
   const config = new qiniu.conf.Config()
   // 空间对应的机房
@@ -46,7 +56,6 @@ const uploadFile = (filePath, fileName) => {
   formUploader.putFile(uploadToken, fileName, filePath, putExtra, (respErr,
     respBody, respInfo) => {
     if (respErr) {
-      console.log(respErr)
       throw respErr
     }
     if (respInfo.statusCode === 200) {
