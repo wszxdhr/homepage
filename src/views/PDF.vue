@@ -9,10 +9,10 @@
           <a :href="`mailto:${$dataJson.self.email}`">Email: {{$dataJson.self.email}}</a>
         </div>
         <div class="header-content">
-          <a :href="$dataJson.self.github">Github: {{$dataJson.self.github}}</a>
+          <a target="_blank" :href="$dataJson.self.github">Github: {{$dataJson.self.github}}</a>
         </div>
         <div class="header-content">
-          个人主页: <a href="https://张潇.com">https://张潇.com</a>
+          个人主页: <a target="_blank" href="https://张潇.com">https://张潇.com</a>
         </div>
       </section>
       <section class="pdf-section">
@@ -70,7 +70,7 @@
         <h2 class="pdf-section_title">个人主页</h2>
         <div class="pdf-section_content">
           <h3 class="pdf-section_content-title">
-            <a href="https://张潇.com">点击进入（https://张潇.com）</a>
+            <a target="_blank" href="https://张潇.com">点击进入（https://张潇.com）</a>
           </h3>
         </div>
       </section>
@@ -78,7 +78,7 @@
         <h2 class="pdf-section_title">线上简历</h2>
         <div class="pdf-section_content">
           <h3 class="pdf-section_content-title">
-            <a href="https://张潇.com/#/pdf">点击查看（https://张潇.com/#/pdf）</a>
+            <a target="_blank" href="https://张潇.com/#/pdf">点击查看（https://张潇.com/#/pdf）</a>
           </h3>
         </div>
       </section>
