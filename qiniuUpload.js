@@ -52,14 +52,15 @@ const uploadFile = (filePath, fileName) => {
   formUploader.putFile(uploadToken, fileName, filePath, putExtra, (respErr,
     respBody, respInfo) => {
     if (respErr) {
+      console.log(respErr)
       throw respErr
     }
     if (respInfo.statusCode === 200) {
       // console.log(respBody)
       console.log('文件上传成功：' + fileName)
     } else {
-      // console.log(respInfo.statusCode)
-      // console.log(respBody)
+      console.log(respInfo.statusCode)
+      console.log(respBody)
     }
   })
 }
