@@ -188,6 +188,9 @@
     min-height: calc(100% - 60px);
     overflow: auto;
   }
+  & + .hp-sub-dialog {
+    margin-top: 20px;
+  }
 }
 
 .hp-block {

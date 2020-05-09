@@ -44,3 +44,7 @@ $dialog-header-stand-out-sub-block-background-color-hover: $base-danger;
 $dialog-header-stand-out-sub-block-width: 60px;
 $dialog-header-stand-out-sub-block-height: 10px;
 $dialog-content-padding: 20px;
+
+:export {
+  base-color: $base-color
+}
