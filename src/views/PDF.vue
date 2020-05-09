@@ -26,7 +26,7 @@
         </template>
       </section>
       <section class="pdf-section">
-        <h2 class="pdf-section_title">工作经历</h2>
+        <h2 class="pdf-section_title" style="margin-top: 50px;">工作经历</h2>
         <div class="pdf-section_content" v-for="(work, $workIndex) in $dataJson.works" :key="`work-item-${$workIndex}`">
           <h3 class="pdf-section_content-title">
             {{work.company}}（{{work.companyName}}）
@@ -37,9 +37,7 @@
           </ul>
           <p class="pdf-section_content-row" v-for="(workRow, $workRowIndex) in work.mainWork" :key="`work-${$workIndex}-main-work-${$workRowIndex}`">{{workRow}}</p>
         </div>
-      </section>
-      <section class="pdf-section">
-        <h2 class="pdf-section_title">项目经历</h2>
+        <h2 class="pdf-section_title" style="margin-top: 230px;">典型项目</h2>
         <div class="pdf-section_content" v-for="(project, $projectIndex) in $dataJson.projects" :key="`project-item-${$projectIndex}`">
           <h3 class="pdf-section_content-title">
             {{project.name}}
@@ -49,9 +47,31 @@
           </ul>
           <p class="pdf-section_content-row">{{project.desc}}</p>
           <p class="pdf-section_content-row">{{project.subDesc}}</p>
+          <div class="pdf-section_content">
+            <ul class="pdf-section_content-list">
+              <li class="pdf-section_content-item" v-for="(projectContentRow, projectContentIndex) in project.content || []" :key="`project-content-${projectContentIndex}`">{{projectContentRow}}</li>
+            </ul>
+          </div>
+          <p class="pdf-section_content-row" v-if="project.link">
+            <span>链接：</span>
+            <a target="_blank" :href="project.link">{{project.link}}</a>
+          </p>
         </div>
       </section>
       <section class="pdf-section">
+        <h2 class="pdf-section_title">获得奖项</h2>
+        <div class="pdf-section_content horizontal" v-for="(prize, $prizeIndex) in $dataJson.prize" :key="`prize-${$prizeIndex}`">
+          <div class="column">
+            <img class="school-logo" :src="prize.image" alt=""/>
+          </div>
+          <div class="column school-info">
+            <h3 class="pdf-section_content-title">
+              {{prize.name}}
+            </h3>
+            <p class="pdf-section_content-row">{{prize.desc}}</p>
+            <p class="pdf-section_content-row">{{prize.time}}</p>
+          </div>
+        </div>
         <h2 class="pdf-section_title">教育经历</h2>
         <div class="pdf-section_content horizontal">
           <div class="column">
@@ -65,16 +85,12 @@
             <p class="pdf-section_content-row">{{$dataJson.school.major}}</p>
           </div>
         </div>
-      </section>
-      <section class="pdf-section">
         <h2 class="pdf-section_title">个人主页</h2>
         <div class="pdf-section_content">
           <h3 class="pdf-section_content-title">
             <a target="_blank" href="https://张潇.com">点击进入（https://张潇.com）</a>
           </h3>
         </div>
-      </section>
-      <section class="pdf-section">
         <h2 class="pdf-section_title">线上简历</h2>
         <div class="pdf-section_content">
           <h3 class="pdf-section_content-title">
@@ -113,7 +129,7 @@ export default {
       border-radius: 4px;
     }
     .pdf-section {
-      padding: 50px 80px;
+      padding: 56px 80px;
       &:not(.header) + .pdf-section {
         padding-top: 0;
       }

@@ -12,7 +12,7 @@
       "content": "一个热爱生活的程序员\n小学时期被计算机老师收进计算机小组，每天中午偷师学艺，学习一些基础计算机知识（Web，Fireworks，Office三件套操作等）\n大学时期自学过 QT 以及一点 MFC\n熟悉各操作系统的操作（Windows、Linux（Debian、RedHat）、MacOS）\n执行力强，喜欢解决难题，热爱技术，喜欢团队协作，对项目认真负责"
     }, {
       "title": "技能简介",
-      "content": "熟悉ES6/7\n非常熟悉Vue.js开发\n熟悉Webpack的常见配置，熟悉loader、plugin工作方式\n有D3、Canvas开发经验\n对其他MVVM框架有所了解，熟悉NodeJs，熟悉koa2的使用，熟悉ORM和ODM的基本操作\n熟悉Linux/Unix基础操作，有自己的服务器\n熟悉Git基础操作和理念"
+      "content": "熟悉ES6/7\n非常熟悉Vue.js开发\n熟悉Webpack的常见配置，熟悉loader、plugin工作方式\n有D3、Canvas开发经验\n对其他MVVM框架有所了解，熟悉NodeJs，熟悉koa2的使用，熟悉ORM和ODM的基本操作\n熟悉Linux/Unix基础操作，有自己的服务器\n了解Git基础操作"
     }, {
       "title": "个人爱好",
       "content": "喜欢折腾电子设备，自己搭建黑群晖NAS，DIY台式机，喜欢折腾智能家居设备\n喜欢弹吉他，曾以双人弹唱组合形式和搭档一起获学校弹唱大赛二等奖"
@@ -95,8 +95,9 @@
     "tags": ["Vue.js", "Nuxt.js", "D3", "Canvas", "组件库", "SEO", "HyBrid"],
     "mainWork": ["主要负责公司对外的开发者中心的子项目开发（消息推送，个像，个验，短信开发者中心），项目均由Vue.js开发，曾负责个像开发者中心架构换新、UI改版重构工作（接入前端微服务架构），负责推送开发者中心部分页面改版重构。",
       "参与个推公共组件库的二次开发，负责一些业务组件的开发。",
+      "参与个推官网首页banner中部分动画的开发，抽象动画函数给其他动画使用，参与官网SEO调研和实施。",
       "参与个推会议中心展示大屏幕开发（项目结构初始化，性能优化，部分组件封装，动效制作，图表封装），项目使用Vue.js+D3开发，动效使用css3和D3配合开发，图表部分使用D3+VueComponent封装，优化了一些动效卡顿丢帧的问题。",
-      "负责文档中心日常文档收集整理并上线，工作内容涉及公司推送相关的各部门的文档及SDK文件的收集和整理，以及活动页的开发和上线。", "负责个验验证码，一键登录功能开发，其中个验验证码功能使用手动配置的webpack打包和canvas实现。",
+      "负责文档中心日常文档收集整理并上线，工作内容涉及公司推送相关的各部门的文档及SDK文件的收集和整理，以及活动页的开发和上线。",
       "负责个验验证码，一键登录功能开发，其中个验验证码功能使用手动配置的webpack打包和canvas实现。"],
     "experience": [{
       "name": "个推开发者中心",
@@ -179,20 +180,56 @@
   "projects": [{
     "name": "个推开发者中心",
     "tags": ["Vue.js"],
-    "desc": "用于接入个推SDK的用户（企业）进行操作的平台。项目由Vue.js全家桶组成。",
+    "desc": "用于接入个推SDK的用户（企业）进行操作的平台。",
     "subDesc": "",
-    "content": ["负责开发者中心子产品（消息推送，个像，个验，短信）的日常开发、迭代和重构，参与讨论并实施公司微前端架构，关注并解决性能问题（加载性能和图表性能）"],
+    "content": [
+      "使用Vue.js全家桶开发",
+      "负责开发者中心子产品（消息推送，个像，个验，短信）的日常开发、迭代和重构，参与讨论并实施公司微前端架构，关注并解决性能问题（加载性能和图表性能等）",
+      "负责多个主要子产品的逻辑重构和UI改版工作",
+      "负责一些公共部分的抽象和迭代开发"
+    ],
     "image": "",
     "link": "https://dev.getui.com"
   }, {
-    "name": "摸鱼助手-Proxy",
+    "name": "个推会议中心可视化大屏幕",
+    "tags": ["Vue.js", "D3.js", "可视化"],
+    "desc": "用于向外来参观人士展示公司业务、数据实力等的可视化大屏幕",
+    "subDesc": "",
+    "content": [
+      "主要使用Vue.js和D3.js开发",
+      "负责搭建框架，抽象部分页面和公共组件，以及D3.js的调研与使用",
+      "负责开发页面绝大部分D3写的图表及动效",
+      "参与项目技术选型、产品规划、页面优化等会议讨论"
+    ],
+    "image": "",
+    "link": ""
+  }, {
+    "name": "个验验证码",
+    "tags": ["Vue.js", "Canvas", "Hybrid"],
+    "desc": "嵌入在个验SDK中，用户通过文字指示滑动屏幕通过图灵测试",
+    "subDesc": "",
+    "content": [
+      "负责项目的初始化和日常开发",
+      "使用Canvas绘制页面主要视图部分及动画",
+      "优化性能以达到低端设备也能流畅播放动画并能流畅采集滑动轨迹",
+      "手写Webpack打包配置以达到更小的打包大小",
+      "涉及到一些简单的混合开发（初始化JSBridge，与安卓、iOS端通信）",
+      "根据需求封装Web SDK"
+    ],
+    "image": "",
+    "link": ""
+  }, {
+    "name": "魔鱼助手-Proxy",
     "tags": ["VueJs", "Mofish", "NodeJs", "命令行工具", "发布NPM包", "代理工具", "开源项目"],
-    "desc": "一款代理工具，覆盖Proxy、Mock、Interceptor等功能",
-    "subDesc": "真的真的很好用的一款工具",
-    "content": ["个人开源项目",
+    "desc": "一款有界面的代理工具，覆盖Proxy、Mock、Interceptor等功能，帮助前端开发者快速Mock数据、拦截并篡改请求、代理请求",
+    "subDesc": "很好用的一款工具，帮我节约了大量的联调和Mock时间",
+    "content": [
+      "个人开源项目",
       "使用NodeJs + VueJs开发",
       "通过创建子进程控制独立Server进行代理",
-      "发布到NPM，可以使用npm install mofish -g安装平台，并通过npm install mofish-plugin-proxy -g安装proxy插件"],
+      "发布到NPM，可以使用npm install mofish -g安装平台，并通过npm install mofish-plugin-proxy -g安装proxy插件",
+      "目前正在用Electron重构"
+    ],
     "image": "",
     "link": "https://github.com/mofishteam/mofish-plugin-proxy"
   }]
