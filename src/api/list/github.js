@@ -1,7 +1,7 @@
 import axios from '../index'
 
 window.handleProfilePage = () => {
-  console.log('2123')
+  // console.log('2123')
 }
 
 export default {

@@ -69,7 +69,7 @@
     <school-dialog ref="schoolDialog"></school-dialog>
     <project-dialog ref="projectDialog"></project-dialog>
     <prize-dialog ref="prizeDialog"></prize-dialog>
-    <github-dialog ref="githubDialog"></github-dialog>
+<!--    <github-dialog ref="githubDialog"></github-dialog>-->
     <div :class="['page-loading-mask', {hide: isReady}]" :style="{zIndex: maxZIndex + 2}"></div>
     <page-loading @ready="isReady = true"></page-loading>
   </div>
@@ -87,7 +87,7 @@ import SkillDialog from '@/components/SubDialogs/Skill/index'
 import WorkDialog from '@/components/SubDialogs/Work/index'
 import SchoolDialog from '@/components/SubDialogs/School/index'
 import ProjectDialog from '@/components/SubDialogs/Project/index'
-import GithubDialog from '@/components/SubDialogs/Github/index'
+// import GithubDialog from '@/components/SubDialogs/Github/index'
 import PrizeDialog from '@/components/SubDialogs/Prize/index'
 import chars from '@/assets/chars.json'
 import activeManage from '@/components/Dialog/activeManage'
@@ -124,7 +124,7 @@ export default {
     ProjectDialog,
     PrizeDialog,
     Background,
-    GithubDialog,
+    // GithubDialog,
     PageLoading
   }
 }

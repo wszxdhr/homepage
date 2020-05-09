@@ -63,7 +63,6 @@ export default {
         this.$apiList.github.getRepoInfo(data.repos_url).then(repoData => {
           if (repoData) {
             this.repoList = repoData || []
-            console.log(this.repoList)
           }
         })
       }
