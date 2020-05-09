@@ -37,7 +37,7 @@ const distDir = path.join(__dirname, 'dist')
 const uploadFile = (filePath, fileName) => {
   const uploadToken = getUploadToken(filePath, fileName)
   if (uploadToken) {
-    console.log('uploadToken获取成功：' + fileName)
+    console.log('uploadToken获取成功：' + filePath)
   }
   const config = new qiniu.conf.Config()
   // 空间对应的机房
