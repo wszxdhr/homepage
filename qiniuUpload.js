@@ -6,8 +6,11 @@ const path = require('path')
 
 const fs = require('fs')
 
+const md5 = require('md5')
+
 const accessKey = process.env.ACCESS_KEY
 const secretKey = process.env.SECRET_KEY
+console.log('key md5: ' + md5(accessKey + secretKey))
 
 const mac = new qiniu.auth.digest.Mac(accessKey, secretKey)
 const bucket = 'blog'

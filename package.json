@@ -41,6 +41,7 @@
     "eslint-plugin-vue": "^6.1.2",
     "koa": "^2.11.0",
     "koa-static": "^5.0.0",
+    "md5": "^2.2.1",
     "puppeteer": "^3.0.0",
     "qiniu": "^7.3.1",
     "sass": "^1.25.0",
