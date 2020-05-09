@@ -36,6 +36,9 @@ const distDir = path.join(__dirname, 'dist')
 
 const uploadFile = (filePath, fileName) => {
   const uploadToken = getUploadToken(filePath, fileName)
+  if (uploadToken) {
+    console.log('uploadToken获取成功：' + fileName)
+  }
   const config = new qiniu.conf.Config()
   // 空间对应的机房
   config.zone = qiniu.zone.Zone_z0
@@ -53,6 +56,7 @@ const uploadFile = (filePath, fileName) => {
     }
     if (respInfo.statusCode === 200) {
       // console.log(respBody)
+      console.log('文件上传成功：' + fileName)
     } else {
       // console.log(respInfo.statusCode)
       // console.log(respBody)
@@ -82,6 +86,7 @@ function fileDisplay (filePath) {
             const isFile = stats.isFile() // 是文件
             const isDir = stats.isDirectory() // 是文件夹
             if (isFile) {
+              console.log('正在尝试上传：' + filename)
               uploadFile(filedir, filedir.replace(distDir + '/', ''))
             }
             if (isDir) {

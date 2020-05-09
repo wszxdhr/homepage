@@ -49,9 +49,9 @@
           <hp-menu-item title="项目经历" content="工作项目和开源项目" @click="$refs.projectDialog.setActive()">
             <i class="iconfont icon-xiangmu" slot="icon"></i>
           </hp-menu-item>
-          <hp-menu-item title="Github" content="" @click="$refs.githubDialog.setActive()">
-            <i class="iconfont icon-github" slot="icon"></i>
-          </hp-menu-item>
+<!--          <hp-menu-item title="Github" content="" @click="$refs.githubDialog.setActive()">-->
+<!--            <i class="iconfont icon-github" slot="icon"></i>-->
+<!--          </hp-menu-item>-->
           <hp-menu-item title="个人奖项" content="" @click="$refs.prizeDialog.setActive()">
             <i class="iconfont icon-awards" slot="icon"></i>
           </hp-menu-item>
