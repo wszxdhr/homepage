@@ -53,4 +53,4 @@ jobs:
               IdentityFile ~/.ssh/id_rsa-deploy
       - name: Deploy
         run: |
-          rsync -rv $GITHUB_WORKSPACE/dist/ ${{ ECS_USER }}@anymelon.com:${{ ECS_WORKSPACE }}
+          rsync -rv $GITHUB_WORKSPACE/dist/ ${{ secrets.ECS_USER }}@anymelon.com:${{ secrets.ECS_WORKSPACE }}
