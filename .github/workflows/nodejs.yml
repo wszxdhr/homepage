@@ -26,11 +26,12 @@ jobs:
       - run: npm install
       - run: npm ci
       - run: npm run build
+     # 发布到七牛
       - run: npm run deploy:qiniu -- --ak ${{ secrets.ACCESS_KEY }} --sk ${{ secrets.SECRET_KEY }}
      # - run: npm test
         env:
           CI: true
-     # Deploy
+     # 发布到GitHub Pages
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
@@ -38,3 +39,18 @@ jobs:
           # REPOSITORY_NAME: wszxdhr.github.io
           BRANCH: gh-pages
           FOLDER: dist
+     # 发布到服务器
+      - name: Install SSH key for deploy
+        uses: shimataro/ssh-key-action@v1
+        with:
+          name: id_rsa-deploy
+          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known-hosts: ${{ secrets.KNOWN_HOSTS }}
+          config: |
+            Host deploy
+              HostName anymelon.com
+              User user-of-deploy
+              IdentityFile ~/.ssh/id_rsa-deploy
+      - name: Deploy
+        run: |
+          rsync -rv $GITHUB_WORKSPACE/dist/ ${{ ECS_USER }}@anymelon.com:${{ ECS_WORKSPACE }}
