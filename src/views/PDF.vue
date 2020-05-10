@@ -25,8 +25,8 @@
           </div>
         </template>
       </section>
-      <section class="pdf-section">
-        <h2 class="pdf-section_title" style="margin-top: 50px;">工作经历</h2>
+      <section class="pdf-section" style="page-break-before: always">
+        <h2 class="pdf-section_title">工作经历</h2>
         <div class="pdf-section_content" v-for="(work, $workIndex) in $dataJson.works" :key="`work-item-${$workIndex}`">
           <h3 class="pdf-section_content-title">
             {{work.company}}（{{work.companyName}}）
@@ -37,7 +37,9 @@
           </ul>
           <p class="pdf-section_content-row" v-for="(workRow, $workRowIndex) in work.mainWork" :key="`work-${$workIndex}-main-work-${$workRowIndex}`">{{workRow}}</p>
         </div>
-        <h2 class="pdf-section_title" style="margin-top: 230px;">典型项目</h2>
+      </section>
+      <section class="pdf-section" style="page-break-before: always">
+        <h2 class="pdf-section_title">典型项目</h2>
         <div class="pdf-section_content" v-for="(project, $projectIndex) in $dataJson.projects" :key="`project-item-${$projectIndex}`">
           <h3 class="pdf-section_content-title">
             {{project.name}}
@@ -57,8 +59,6 @@
             <a target="_blank" :href="project.link">{{project.link}}</a>
           </p>
         </div>
-      </section>
-      <section class="pdf-section">
         <h2 class="pdf-section_title">获得奖项</h2>
         <div class="pdf-section_content horizontal" v-for="(prize, $prizeIndex) in $dataJson.prize" :key="`prize-${$prizeIndex}`">
           <div class="column">
@@ -85,16 +85,13 @@
             <p class="pdf-section_content-row">{{$dataJson.school.major}}</p>
           </div>
         </div>
-        <h2 class="pdf-section_title">个人主页</h2>
+        <h2 class="pdf-section_title">其他</h2>
         <div class="pdf-section_content">
           <h3 class="pdf-section_content-title">
-            <a target="_blank" href="https://张潇.com">点击进入（https://张潇.com）</a>
+            <a target="_blank" href="https://张潇.com">个人主页（https://张潇.com）</a>
           </h3>
-        </div>
-        <h2 class="pdf-section_title">线上简历</h2>
-        <div class="pdf-section_content">
           <h3 class="pdf-section_content-title">
-            <a target="_blank" href="https://张潇.com/#/pdf">点击查看（https://张潇.com/#/pdf）</a>
+            <a target="_blank" href="https://张潇.com/#/pdf">线上简历（https://张潇.com/#/pdf）</a>
           </h3>
         </div>
       </section>
@@ -129,34 +126,41 @@ export default {
       border-radius: 4px;
     }
     .pdf-section {
-      padding: 56px 80px;
+      padding: 40px 80px;
       &:not(.header) + .pdf-section {
         padding-top: 0;
       }
       &_title {
+        page-break-after: avoid;
+        page-break-inside: avoid;
         border-left: 4px solid $primary-color;
         padding-left: 10px;
-        margin: 20px 0 30px;
+        margin: 30px 0 20px;
       }
       &_content {
+        page-break-inside: avoid;
         &.horizontal {
           display: flex;
         }
       }
       &_content-list {
-        margin: 20px 0 30px;
+        page-break-inside: avoid;
+        margin: 20px 0 14px;
       }
       &_content-item {
+        page-break-inside: avoid;
         list-style-type: disc;
         list-style-position: inside;
         margin: 6px 0;
       }
       &_content-tag-list {
+        page-break-inside: avoid;
         display: flex;
         flex-wrap: wrap;
         margin: 8px 0 16px;
       }
       &_content-tag-item {
+        page-break-inside: avoid;
         margin-right: 10px;
         line-height: 20px;
         border-radius: 100px;
@@ -167,9 +171,11 @@ export default {
         margin-top: 10px;
       }
       &_content-title {
-        margin: 30px 0 10px;
+        margin: 20px 0 10px;
       }
       &_content-row {
+        page-break-before: avoid;
+        page-break-inside: avoid;
         & + .pdf-section_content-row {
           margin-top: 10px;
         }

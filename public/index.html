@@ -9,6 +9,10 @@
     <title>张潇的个人主页</title>
   </head>
   <body>
+    <script>
+      // 向window输出version，用来检测七牛到底能缓存多少
+      window.homepageVersion = '<%= htmlWebpackPlugin.options.version %>'
+    </script>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
