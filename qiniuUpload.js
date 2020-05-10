@@ -71,10 +71,8 @@ const uploadFile = (filePath, fileName) => {
           if (err) {
             throw err
           }
-          console.log(respInfo.statusCode)
           if (respInfo.statusCode === 200) {
-            const jsonBody = JSON.parse(respBody)
-            console.log('缓存已更新：' + jsonBody.code)
+            console.log('缓存已更新：' + respInfo.statusCode)
           }
         })
       }
