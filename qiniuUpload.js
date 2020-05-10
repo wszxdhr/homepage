@@ -61,6 +61,23 @@ const uploadFile = (filePath, fileName) => {
     if (respInfo.statusCode === 200) {
       // console.log(respBody)
       console.log('文件上传成功：' + fileName)
+      // 刷新缓存
+      if (fileName === 'index.html') {
+        const cdnManager = new qiniu.cdn.CdnManager(mac)
+        const urlsToRefresh = [
+          'https://blog-file.anymelon.com/'
+        ]
+        cdnManager.refreshUrls(urlsToRefresh, function (err, respBody, respInfo) {
+          if (err) {
+            throw err
+          }
+          console.log(respInfo.statusCode)
+          if (respInfo.statusCode === 200) {
+            const jsonBody = JSON.parse(respBody)
+            console.log('缓存已更新：' + jsonBody.code)
+          }
+        })
+      }
     } else {
       console.log(respInfo.statusCode)
       console.log(respBody)
