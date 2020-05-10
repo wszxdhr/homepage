@@ -48,9 +48,9 @@ jobs:
           known-hosts: ${{ secrets.KNOWN_HOSTS }}
           config: |
             Host deploy
-              HostName anymelon.com
+              HostName ${{ secrets.SSH_HOST_IP }}
               User user-of-deploy
               IdentityFile ~/.ssh/id_rsa-deploy
       - name: Deploy
         run: |
-          rsync -rv $GITHUB_WORKSPACE/dist/ ${{ secrets.ECS_USER }}@anymelon.com:${{ secrets.ECS_WORKSPACE }}
+          rsync -rv $GITHUB_WORKSPACE/dist/ ${{ secrets.ECS_USER }}@${{ secrets.SSH_HOST_IP }}:${{ secrets.ECS_WORKSPACE }}
