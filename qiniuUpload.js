@@ -65,7 +65,8 @@ const uploadFile = (filePath, fileName) => {
       if (fileName === 'index.html') {
         const cdnManager = new qiniu.cdn.CdnManager(mac)
         const urlsToRefresh = [
-          'https://blog-file.anymelon.com/'
+          'https://blog-file.anymelon.com/',
+          'https://xn--e1tn37a.com/'
         ]
         cdnManager.refreshUrls(urlsToRefresh, function (err, respBody, respInfo) {
           if (err) {
