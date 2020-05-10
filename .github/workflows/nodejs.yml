@@ -26,19 +26,6 @@ jobs:
       - run: npm install
       - run: npm ci
       - run: npm run build
-     # 发布到七牛
-      - run: npm run deploy:qiniu -- --ak ${{ secrets.ACCESS_KEY }} --sk ${{ secrets.SECRET_KEY }}
-     # - run: npm test
-        env:
-          CI: true
-     # 发布到GitHub Pages
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          # REPOSITORY_NAME: wszxdhr.github.io
-          BRANCH: gh-pages
-          FOLDER: dist
      # 发布到服务器
       - name: Install SSH key for deploy
         uses: shimataro/ssh-key-action@v1
@@ -54,3 +41,16 @@ jobs:
       - name: Deploy
         run: |
           rsync -rv $GITHUB_WORKSPACE/dist/ ${{ secrets.ECS_USER }}@${{ secrets.SSH_HOST_IP }}:${{ secrets.ECS_WORKSPACE }}
+     # 发布到七牛
+      - run: npm run deploy:qiniu -- --ak ${{ secrets.ACCESS_KEY }} --sk ${{ secrets.SECRET_KEY }}
+     # - run: npm test
+        env:
+          CI: true
+     # 发布到GitHub Pages
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          # REPOSITORY_NAME: wszxdhr.github.io
+          BRANCH: gh-pages
+          FOLDER: dist
