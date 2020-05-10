@@ -28,19 +28,13 @@ jobs:
       - run: npm run build
      # 发布到服务器
       - name: Install SSH key for deploy
-        uses: shimataro/ssh-key-action@v1
-        with:
-          name: id_rsa-deploy
-          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known-hosts: ${{ secrets.KNOWN_HOSTS }}
-          config: |
-            Host deploy
-              HostName ${{ secrets.SSH_HOST_IP }}
-              User ${{ secrets.ECS_USER }}
-              IdentityFile ~/.ssh/id_rsa
-      - name: Deploy
-        run: |
-          rsync -rv $GITHUB_WORKSPACE/dist/ ${{ secrets.ECS_USER }}@${{ secrets.SSH_HOST_IP }}:${{ secrets.ECS_WORKSPACE }}
+        uses: easingthemes/ssh-deploy@v2.1.1
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.SSH_HOST_IP }}
+          REMOTE_USER: ${{ secrets.ECS_USER }}
+          TARGET: ${{ secrets.ECS_WORKSPACE }}
      # 发布到七牛
       - run: npm run deploy:qiniu -- --ak ${{ secrets.ACCESS_KEY }} --sk ${{ secrets.SECRET_KEY }}
      # - run: npm test
