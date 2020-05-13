@@ -9,7 +9,7 @@
              title="PRICES">
     <ul class="prize-dialog-list">
       <li class="prize-dialog-item" v-for="prize in $dataJson.prize" :key="prize.name">
-        <img :src="prize.image" alt="" class="prize-image"/>
+        <img :src="$handleResource(prize.image)" alt="" class="prize-image"/>
         <div class="prize-dialog-item_info">
           <hp-text-display class="prize-name" type="primary" background="transparent" :text="prize.name" size="common"></hp-text-display>
           <hp-text-display class="prize-desc" type="white" background="transparent" :text="prize.desc" size="small"></hp-text-display>

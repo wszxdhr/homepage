@@ -18,7 +18,7 @@
           <ul class="skill-list">
             <li :class="['skill-item', {active: activeSkill === $skillIndex}]" @click="activeSkill = $skillIndex" v-for="(skill, $skillIndex) in $dataJson.skills" :key="skill.name">
               <div class="skill-item_icon">
-                <hp-image-display :src="skill.image" background-size="60%"></hp-image-display>
+                <hp-image-display :src="$handleResource(skill.image)" background-size="60%"></hp-image-display>
               </div>
               <p class="skill-item_name">
                 <hp-text-display class="skill-item_name-inner" :text="skill.name" size="mini" background="white" type="gray-dark"></hp-text-display>

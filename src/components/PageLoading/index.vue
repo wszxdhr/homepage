@@ -22,13 +22,14 @@
       </div>
     </div>
     <div v-for="(res, resIndex) of resources" class="hide" :key="`page-loading-wrap-${res.value}-${resIndex}`">
-      <img :src="res.value" alt="" v-if="res.type === 'image'" :key="`page-loading-image-${res.value}-${resIndex}`" @load="loadComplete" @error="loadComplete(false)"/>
-      <video :src="res.value" alt="" v-if="res.type === 'video'" :key="`page-loading-video-${res.value}-${resIndex}`" @canplaythrough="loadComplete" @error="loadComplete(false)"/>
+      <img :src="$handleResource(res.value)" alt="" v-if="res.type === 'image'" :key="`page-loading-image-${res.value}-${resIndex}`" @load="loadComplete" @error="loadComplete(false)"/>
+      <video :src="$handleResource(res.value)" alt="" v-if="res.type === 'video'" :key="`page-loading-video-${res.value}-${resIndex}`" @canplaythrough="loadComplete" @error="loadComplete(false)"/>
     </div>
   </hp-dialog>
 </template>
 
 <script>
+import traverseFindResource from '@/utils/traverseFindResource'
 export default {
   name: 'PageLoading',
   data () {
@@ -56,26 +57,7 @@ export default {
   },
   methods: {
     getResourceList () {
-      // 遍历查找image和video字段
-      const traverseFindResource = (item = []) => {
-        if (item instanceof Array) {
-          for (const sub of item) {
-            traverseFindResource(sub)
-          }
-        } else if (typeof item === 'object') {
-          for (const key in item) {
-            if ((key === 'image' || key === 'video') && item[key]) {
-              this.resources.push({
-                type: key,
-                value: item[key]
-              })
-            } else if (typeof item[key] === 'object') {
-              traverseFindResource(item[key])
-            }
-          }
-        }
-      }
-      traverseFindResource(this.$dataJson)
+      traverseFindResource(this.$dataJson, this.resources, this.$locationSearch.emptyResource)
     },
     loadComplete (successed = true) {
       this.percent += 1 / (this.resources || []).length * 100

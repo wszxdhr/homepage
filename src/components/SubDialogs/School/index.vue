@@ -9,7 +9,7 @@
              title="WHERE AM I FROM">
     <hp-sub-dialog title="SCHOOL INFO">
       <div class="school-dialog_row">
-        <hp-image-display class="school-dialog_image" :src="$dataJson.school.image"></hp-image-display>
+        <hp-image-display class="school-dialog_image" :src="$handleResource($dataJson.school.image)"></hp-image-display>
         <div class="school-dialog_info">
           <hp-text-display type="primary" background="transparent" size="common" :text="$dataJson.school.name"></hp-text-display>
           <hp-text-display type="white" background="transparent" size="small" :text="`${$dataJson.school.timeRange[0]} - ${$dataJson.school.timeRange[1]}`"></hp-text-display>

@@ -70,8 +70,8 @@
     <project-dialog ref="projectDialog"></project-dialog>
     <prize-dialog ref="prizeDialog"></prize-dialog>
 <!--    <github-dialog ref="githubDialog"></github-dialog>-->
-    <div :class="['page-loading-mask', {hide: isReady}]" :style="{zIndex: maxZIndex + 2}"></div>
-    <page-loading @ready="isReady = true"></page-loading>
+    <div :class="['page-loading-mask', {hide: isReady}]" :style="{zIndex: maxZIndex + 2}" v-if="!$locationSearch.emptyResource"></div>
+    <page-loading @ready="isReady = true" v-if="!$locationSearch.emptyResource"></page-loading>
   </div>
 </template>
 

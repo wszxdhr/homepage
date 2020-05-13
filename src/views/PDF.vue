@@ -5,6 +5,9 @@
         <h2 class="header-name">{{$dataJson.self.name}}</h2>
         <div class="header-content">{{$dataJson.self.school}}</div>
         <div class="header-content">{{new Date().getFullYear() - $moment($dataJson.self.workStart).year()}}年工作经验 / {{new Date().getFullYear() - $dataJson.self.bornYear}}岁</div>
+        <div class="header-content" v-if="$locationSearch && $locationSearch.phone">
+          手机号: {{$locationSearch.phone}}
+        </div>
         <div class="header-content">
           <a :href="`mailto:${$dataJson.self.email}`">Email: {{$dataJson.self.email}}</a>
         </div>
@@ -62,7 +65,7 @@
         <h2 class="pdf-section_title">获得奖项</h2>
         <div class="pdf-section_content horizontal" v-for="(prize, $prizeIndex) in $dataJson.prize" :key="`prize-${$prizeIndex}`">
           <div class="column">
-            <img class="school-logo" :src="prize.image" alt=""/>
+            <img class="school-logo" :src="$handleResource(prize.image)" alt=""/>
           </div>
           <div class="column school-info">
             <h3 class="pdf-section_content-title">
@@ -75,7 +78,7 @@
         <h2 class="pdf-section_title">教育经历</h2>
         <div class="pdf-section_content horizontal">
           <div class="column">
-            <img class="school-logo" :src="$dataJson.school.image" alt=""/>
+            <img class="school-logo" :src="$handleResource($dataJson.school.image)" alt=""/>
           </div>
           <div class="column school-info">
             <h3 class="pdf-section_content-title">

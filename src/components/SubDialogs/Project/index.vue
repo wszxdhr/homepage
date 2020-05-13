@@ -23,7 +23,7 @@
           <hp-text-display class="project-detail_tag" :text="tag" v-for="tag in detail.tags" :key="tag" size="mini" type="gray" background="primary"></hp-text-display>
         </hp-block>
         <hp-block transparent :has-dot="false" v-if="detail.image">
-          <img class="project-detail_image" :src="detail.image" alt=""/>
+          <img class="project-detail_image" :src="$handleResource(detail.image)" alt=""/>
         </hp-block>
         <hp-block transparent :has-dot="false">
           <hp-text-display background="transparent" type="white" size="small" :text="content" class="project-detail_content" :key="content" v-for="content in detail.content"></hp-text-display>

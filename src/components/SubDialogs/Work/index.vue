@@ -43,7 +43,7 @@
         </hp-block>
         <!--动画地址-->
         <hp-block class="work-detail_address">
-          <video :src="detail.address.video" ref="workAddressVideo" alt="" @canplaythrough="playWorkAddress" @ended="showAddressInfo = true"/>
+          <video :src="$handleResource(detail.address.video)" ref="workAddressVideo" alt="" @canplaythrough="playWorkAddress" @ended="showAddressInfo = true"/>
           <div class="work-detail_address-info">
             <div class="address-info_marker marker-animation-common" :style="detail.address.markerStyle" v-show="showAddressInfo">
               <div class="marker-corner marker-top-left"></div>
