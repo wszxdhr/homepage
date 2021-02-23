@@ -1,6 +1,6 @@
 {
   "name": "homepage",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -15,7 +15,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.4",
     "element-resize-detector": "^1.2.1",
     "github-calendar": "^2.1.1",
@@ -47,6 +47,7 @@
     "qiniu": "^7.3.1",
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
+    "vue-loader": "^15.9.6",
     "vue-template-compiler": "^2.6.11"
   }
 }
