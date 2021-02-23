@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [11.15]
+        node-version: [12.18.2]
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -35,11 +35,6 @@ jobs:
           REMOTE_HOST: ${{ secrets.SSH_HOST_IP }}
           REMOTE_USER: ${{ secrets.ECS_USER }}
           TARGET: ${{ secrets.ECS_WORKSPACE }}
-     # 发布到七牛
-      - run: npm run deploy:qiniu -- --ak ${{ secrets.ACCESS_KEY }} --sk ${{ secrets.SECRET_KEY }}
-     # - run: npm test
-        env:
-          CI: true
      # 发布到GitHub Pages
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
@@ -48,3 +43,8 @@ jobs:
           # REPOSITORY_NAME: wszxdhr.github.io
           BRANCH: gh-pages
           FOLDER: dist
+     # 发布到七牛
+      - run: npm run deploy:qiniu -- --ak ${{ secrets.ACCESS_KEY }} --sk ${{ secrets.SECRET_KEY }}
+     # - run: npm test
+        env:
+          CI: true
